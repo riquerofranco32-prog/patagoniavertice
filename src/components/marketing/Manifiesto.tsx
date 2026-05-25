@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, useRef } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Manifiesto() {
   const ref = useRef<HTMLElement>(null);
@@ -18,7 +19,7 @@ export default function Manifiesto() {
         style={{ fontSize: "clamp(10rem, 25vw, 20rem)", y }}
         aria-hidden="true"
       >
-        "
+        &ldquo;
       </motion.div>
 
       <div className="relative max-w-5xl mx-auto px-8 lg:px-16 text-center">

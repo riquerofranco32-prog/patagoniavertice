@@ -106,8 +106,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.05, duration: 0.7 }}
         >
-          Proyectos inmobiliarios que crecen con la región más dinámica
-          de Argentina. Donde el paisaje define el valor.
+          Invertí en la región con mayor crecimiento inmobiliario de Argentina.
+          Lotes, departamentos y viviendas con respaldo real.
         </motion.p>
 
         {/* CTAs */}

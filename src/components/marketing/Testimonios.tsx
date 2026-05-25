@@ -1,46 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Shield, Clock, MapPin, TrendingUp, Users, CheckCircle } from "lucide-react";
 
-const testimonios = [
+const diferenciadores = [
   {
-    quote:
-      "Invertimos en uno de sus proyectos y fue la mejor decisión que tomamos. El proceso fue transparente de principio a fin, con comunicación constante durante toda la obra.",
-    autor: "Martín R.",
-    rol: "Inversor — Neuquén Capital",
-    iniciales: "MR",
+    icon: MapPin,
+    titulo: "Empresa 100% neuquina",
+    descripcion:
+      "Nacimos y crecimos en la Patagonia. Conocemos el territorio, el mercado y los barrios mejor que nadie. No somos una inversora de afuera.",
   },
   {
-    quote:
-      "La atención personalizada y el seguimiento de obra superaron todas nuestras expectativas. Hoy vivimos en nuestro departamento soñado con vista al Limay.",
-    autor: "Lucía y Diego F.",
-    rol: "Propietarios — Neuquén",
-    iniciales: "LF",
+    icon: Shield,
+    titulo: "Transparencia total",
+    descripcion:
+      "Contratos claros, plazo de entrega garantizado y comunicación constante durante toda la obra. Sin letra chica.",
   },
   {
-    quote:
-      "Como inversor desde Buenos Aires necesitaba confianza y respaldo local. Patagonia Vértice me dio exactamente eso — y los números hablan solos.",
-    autor: "Carolina M.",
-    rol: "Inversora — Buenos Aires",
-    iniciales: "CM",
+    icon: TrendingUp,
+    titulo: "Financiamiento sin banco",
+    descripcion:
+      "Planes de pago directos con la empresa. Sin trámites bancarios, sin burocracia. Adaptados a tu situación.",
+  },
+  {
+    icon: Clock,
+    titulo: "15 años de trayectoria",
+    descripcion:
+      "Más de una década desarrollando proyectos en Neuquén. Nuestra historia habla por nosotros.",
+  },
+  {
+    icon: Users,
+    titulo: "Acompañamiento real",
+    descripcion:
+      "Desde la primera consulta hasta la escritura. Estela y el equipo están disponibles, no una central de atención.",
+  },
+  {
+    icon: CheckCircle,
+    titulo: "Postventa activa",
+    descripcion:
+      "El vínculo no termina con la entrega. Seguimos acompañándote con gestión de garantías y lo que necesites.",
   },
 ];
 
-function Stars() {
+export default function PorQueElegirnos() {
   return (
-    <div className="flex gap-1">
-      {[...Array(5)].map((_, i) => (
-        <svg key={i} className="w-3.5 h-3.5 fill-dorado" viewBox="0 0 24 24">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
-export default function Testimonios() {
-  return (
-    <section className="bg-humo py-28 lg:py-36 overflow-hidden">
+    <section className="bg-crema py-28 lg:py-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* Header */}
@@ -54,7 +58,7 @@ export default function Testimonios() {
               transition={{ duration: 0.6 }}
             >
               <div className="h-px w-10 bg-dorado" />
-              <span className="eyebrow">Lo que dicen nuestros clientes</span>
+              <span className="eyebrow">Por qué elegirnos</span>
             </motion.div>
 
             <motion.h2
@@ -65,8 +69,8 @@ export default function Testimonios() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              Confianza que se{" "}
-              <em className="not-italic italic text-dorado">construye</em>
+              Lo que nos hace{" "}
+              <em className="not-italic italic text-dorado">diferentes</em>
             </motion.h2>
           </div>
 
@@ -77,61 +81,42 @@ export default function Testimonios() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Más de 200 familias ya eligieron invertir con nosotros en la Patagonia.
+            No somos la única desarrolladora en Neuquén. Pero sí la que más te acompaña.
           </motion.p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {testimonios.map((t, i) => (
-            <motion.div
-              key={t.autor}
-              className="relative bg-crema border border-tierra/6 p-8 lg:p-10 group"
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Decorative quote mark */}
-              <div
-                className="absolute top-4 right-6 font-display text-tierra/5 font-light leading-none select-none pointer-events-none group-hover:text-dorado/8 transition-colors duration-700"
-                style={{ fontSize: "6rem", lineHeight: 1 }}
-                aria-hidden="true"
-              >
-                "
-              </div>
-
-              {/* Stars */}
-              <Stars />
-
-              {/* Quote */}
-              <blockquote className="font-body text-tierra/60 text-[15px] leading-relaxed my-6 relative">
-                "{t.quote}"
-              </blockquote>
-
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-5 border-t border-tierra/8">
-                <div className="w-9 h-9 rounded-full bg-dorado/15 flex items-center justify-center shrink-0">
-                  <span className="font-body text-dorado text-[10px] tracking-wider font-semibold">
-                    {t.iniciales}
-                  </span>
-                </div>
-                <div>
-                  <p className="font-body text-tierra text-sm font-medium leading-tight">{t.autor}</p>
-                  <p className="font-body text-tierra/35 text-[11px] tracking-[0.1em] uppercase mt-0.5">{t.rol}</p>
-                </div>
-              </div>
-
-              {/* Bottom accent line */}
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "rgba(28,25,22,0.07)" }}>
+          {diferenciadores.map((d, i) => {
+            const Icon = d.icon;
+            return (
               <motion.div
-                className="absolute bottom-0 left-0 h-0.5 bg-dorado"
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              />
-            </motion.div>
-          ))}
+                key={d.titulo}
+                className="bg-crema p-8 lg:p-10 group relative overflow-hidden"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                {/* Hover background */}
+                <div className="absolute inset-0 bg-tierra opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div className="relative">
+                  <div className="text-dorado mb-6 transition-transform duration-300 group-hover:scale-110 origin-left">
+                    <Icon size={24} strokeWidth={1.25} />
+                  </div>
+
+                  <h3 className="font-display text-tierra group-hover:text-crema text-xl font-light leading-tight mb-3 transition-colors duration-500">
+                    {d.titulo}
+                  </h3>
+
+                  <p className="font-body text-tierra/50 group-hover:text-crema/50 text-sm leading-relaxed transition-colors duration-500">
+                    {d.descripcion}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
       </div>

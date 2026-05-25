@@ -106,8 +106,8 @@ export default function Servicios() {
                   {s.titulo}
                 </h3>
 
-                {/* Description — hidden on mobile, visible lg+ */}
-                <p className="hidden lg:block font-body text-tierra/40 text-sm leading-relaxed">
+                {/* Description — visible on all sizes */}
+                <p className="font-body text-tierra/40 text-sm leading-relaxed hidden lg:block">
                   {s.descripcion}
                 </p>
 

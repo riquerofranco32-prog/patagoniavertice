@@ -144,8 +144,8 @@ export default function Nosotros() {
         <div className="flex whitespace-nowrap marquee-track-slow">
           {[...valores, ...valores, ...valores, ...valores].map((v, i) => (
             <span key={i} className="inline-flex items-center gap-6 px-8 py-5">
-              <span className="font-display text-tierra/20 font-light italic text-xl">{v}</span>
-              <span className="text-dorado/20 text-sm">·</span>
+              <span className="font-display text-tierra/40 font-light italic text-xl">{v}</span>
+              <span className="text-dorado/40 text-sm">·</span>
             </span>
           ))}
         </div>

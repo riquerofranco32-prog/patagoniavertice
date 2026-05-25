@@ -127,7 +127,7 @@ export default function CTAFinal() {
           transition={{ duration: 0.7, delay: 0.6 }}
         >
           <p className="font-display text-crema/60 font-light italic leading-snug" style={{ fontSize: "clamp(1rem, 1.8vw, 1.3rem)" }}>
-            "Donde el paisaje define el valor."
+            &ldquo;Donde el paisaje define el valor.&rdquo;
           </p>
           <p className="font-body text-crema/25 text-[10px] tracking-[0.25em] uppercase mt-2">
             — Patagonia Vértice

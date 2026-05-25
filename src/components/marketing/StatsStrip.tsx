@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 type Stat = { value: number; suffix?: string; label: string; sub?: string; delay: number };
 
 const stats: Stat[] = [
-  { value: 15,  suffix: "+", label: "Años de trayectoria",       sub: "en el mercado neuquino", delay: 0    },
-  { value: 47,              label: "Unidades en construcción",   sub: "en ejecución activa",    delay: 0.1  },
-  { value: 200, suffix: "+", label: "Familias acompañadas",      sub: "que confían en nosotros", delay: 0.2 },
-  { value: 3,               label: "Proyectos activos",          sub: "disponibles hoy",        delay: 0.3  },
+  { value: 200, suffix: "+", label: "Familias acompañadas",      sub: "a lo largo de 15 años",  delay: 0    },
+  { value: 15,  suffix: "+", label: "Años de trayectoria",       sub: "en el mercado neuquino", delay: 0.1  },
+  { value: 47,              label: "Unidades en obra",           sub: "en ejecución activa",    delay: 0.2  },
+  { value: 3,               label: "Proyectos en desarrollo",    sub: "disponibles para invertir", delay: 0.3 },
 ];
 
 function Counter({ value, suffix = "", label, sub, delay }: Stat) {
