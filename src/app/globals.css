@@ -4,129 +4,110 @@
 
 /* ── CSS custom properties ─────────────────── */
 :root {
-  --background: #F0EBE1;
-  --foreground: #1C1A17;
+  --background:   #F5EFE6;
+  --foreground:   #1C1916;
 
-  /* Earth palette */
-  --earth-950: #0D0B08;
-  --earth-900: #1A1610;
-  --earth-800: #2C2418;
-  --earth-700: #3D3322;
-  --earth-400: #8B7355;
-  --earth-200: #C4A882;
-
-  /* Gold palette */
-  --gold-400: #D4A853;
-  --gold-300: #E8C47A;
-  --gold-100: #F5E6C8;
-
-  /* Neutrals */
-  --patagonia-stone: #F0EDE8;
-  --patagonia-white: #FAFAF8;
+  /* Core */
+  --tierra:   #1C1916;
+  --crema:    #F5EFE6;
+  --dorado:   #C49555;
+  --arena:    #EAD9C4;
+  --salvia:   #7A9E7E;
+  --piedra:   #9E8E80;
+  --humo:     #F0E8DC;
 }
 
 /* ── Keyframes ─────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes zoomBg {
   from { transform: scale(1); }
-  to   { transform: scale(1.05); }
+  to   { transform: scale(1.06); }
 }
-
 @keyframes pulseScale {
   0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.05); }
+  50%       { transform: scale(1.06); }
 }
-
 @keyframes scrollDown {
   0%   { transform: translateY(-100%); }
   100% { transform: translateY(200%); }
 }
-
 @keyframes shake {
   0%, 100% { transform: rotate(0deg); }
-  25%       { transform: rotate(-12deg); }
-  75%       { transform: rotate(12deg); }
+  25%       { transform: rotate(-14deg); }
+  75%       { transform: rotate(14deg); }
 }
-
 @keyframes badgePulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+  50%       { opacity: 0.35; }
+}
+@keyframes lineGrow {
+  from { width: 0; }
+  to   { width: 2.5rem; }
 }
 
-/* ── FadeIn utility classes (used by FadeIn.tsx) ── */
+/* ── Legacy FadeIn classes (fallback only) ─── */
 .fi-up    { opacity: 0; transform: translateY(24px); }
-.fi-left  { opacity: 0; transform: translateX(-60px); }
-.fi-right { opacity: 0; transform: translateX(60px); }
+.fi-left  { opacity: 0; transform: translateX(-56px); }
+.fi-right { opacity: 0; transform: translateX(56px); }
 .fi-none  { opacity: 0; }
-
 .fi-visible {
   opacity: 1 !important;
   transform: none !important;
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-/* ── Custom cursor (desktop only) ─────────── */
+/* ── Custom cursor ─────────────────────────── */
 @media (pointer: fine) {
   html, body, a, button { cursor: none !important; }
 }
-
 .cursor-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #B8965A;
-  transition: width 0.2s ease, height 0.2s ease,
-              background-color 0.2s ease, border 0.2s ease;
+  background-color: #C49555;
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease;
 }
 .cursor-dot.is-hovered {
   width: 32px;
   height: 32px;
   background-color: transparent;
-  border: 1.5px solid #B8965A;
+  border: 1.5px solid #C49555;
 }
 
+/* ── Scroll progress ───────────────────────── */
+/* (component handles it inline) */
+
 /* ── Nav underline from center ─────────────── */
-.nav-link {
-  position: relative;
-}
+.nav-link { position: relative; }
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -3px;
-  left: 50%;
-  right: 50%;
+  bottom: -3px; left: 50%; right: 50%;
   height: 1px;
-  background: #B8965A;
+  background: #C49555;
   transition: left 0.3s ease, right 0.3s ease;
 }
 .nav-link:hover::after,
-.nav-link.active::after {
-  left: 0;
-  right: 0;
-}
+.nav-link.active::after { left: 0; right: 0; }
 
 /* ── Shimmer button ─────────────────────────── */
 .btn-shimmer {
-  background-image: linear-gradient(
-    110deg,
-    #B8965A 0%,
-    #d4b06a 40%,
-    #B8965A 80%
-  );
+  background-image: linear-gradient(110deg, #C49555 0%, #D4B070 40%, #C49555 80%);
   background-size: 200% auto;
   transition: background-position 0.5s ease;
 }
-.btn-shimmer:hover {
-  background-position: right center;
-}
+.btn-shimmer:hover { background-position: right center; }
 
 /* ── Badge pulse ────────────────────────────── */
-.badge-pulse {
-  animation: badgePulse 2s ease-in-out infinite;
+.badge-pulse { animation: badgePulse 2s ease-in-out infinite; }
+
+/* ── Section separator ──────────────────────── */
+.sep-gold {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C49555, transparent);
 }
 
 /* ── Reduced motion ─────────────────────────── */
@@ -136,17 +117,42 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .fi-up, .fi-left, .fi-right, .fi-none {
-    opacity: 1;
-    transform: none;
-  }
+  .fi-up, .fi-left, .fi-right, .fi-none { opacity: 1; transform: none; }
 }
 
 @layer base {
   * { box-sizing: border-box; }
-  body { @apply bg-crema text-tierra; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-crema text-tierra;
+    font-feature-settings: "ss01", "cv05";
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  /* Better selection color */
+  ::selection {
+    background: #C49555;
+    color: #1C1916;
+  }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
+
+  /* Eyebrow utility */
+  .eyebrow {
+    @apply font-body text-dorado text-[11px] tracking-[0.3em] uppercase;
+  }
+
+  /* Section separator */
+  .gold-line {
+    background: linear-gradient(to right, transparent, #C49555, transparent);
+  }
 }

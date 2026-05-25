@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/marketing/Navbar";
 import Footer from "@/components/marketing/Footer";
@@ -13,10 +13,10 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
 });
 
-const dmSans = DM_Sans({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
-  variable: "--font-dm-sans",
+  variable: "--font-jakarta",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://patagoniavertice.vercel.app";
@@ -48,44 +48,27 @@ export const metadata: Metadata = {
     title: "Patagonia Vértice — Desarrollos Inmobiliarios en Neuquén",
     description:
       "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina. Donde el paisaje define el valor.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Patagonia Vértice — Desarrollos Inmobiliarios",
-      },
-    ],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Patagonia Vértice" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Patagonia Vértice — Desarrollos Inmobiliarios en Neuquén",
-    description:
-      "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina.",
+    description: "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina.",
     images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
-  alternates: {
-    canonical: siteUrl,
-  },
+  alternates: { canonical: siteUrl },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
   name: "Patagonia Vértice",
-  description:
-    "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina.",
+  description: "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina.",
   url: siteUrl,
   telephone: "+54-299-466-8428",
   address: {
@@ -94,25 +77,11 @@ const jsonLd = {
     addressRegion: "Neuquén",
     addressCountry: "AR",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: -38.9516,
-    longitude: -68.0591,
-  },
-  areaServed: {
-    "@type": "State",
-    name: "Patagonia, Argentina",
-  },
-  sameAs: [],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang="es" className={`${cormorant.variable} ${jakarta.variable}`}>
       <head>
         <script
           type="application/ld+json"

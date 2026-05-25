@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export type ProyectoCard = {
   id: string;
@@ -12,25 +13,22 @@ export type ProyectoCard = {
   imagen: string | null;
 };
 
-const estadoBadge: Record<string, { label: string; color: string }> = {
-  disponible:     { label: "EN PREVENTA",  color: "bg-dorado text-tierra" },
-  en_construccion:{ label: "EN EJECUCIÓN", color: "bg-[#2563EB] text-white" },
-  reservado:      { label: "RESERVADO",    color: "bg-tierra/60 text-crema" },
-  vendido:        { label: "ENTREGADO",    color: "bg-[#16A34A] text-white" },
+const estadoBadge: Record<string, { label: string; bg: string; text: string }> = {
+  disponible:      { label: "EN PREVENTA",   bg: "bg-dorado",        text: "text-tierra" },
+  en_construccion: { label: "EN EJECUCIÓN",  bg: "bg-[#2563EB]",     text: "text-white"  },
+  reservado:       { label: "RESERVADO",     bg: "bg-piedra/60",     text: "text-crema"  },
+  vendido:         { label: "ENTREGADO",     bg: "bg-salvia",        text: "text-white"  },
 };
 
 export default function ProyectosSliderClient({ proyectos }: { proyectos: ProyectoCard[] }) {
   const [current, setCurrent] = useState(0);
-  const [fading, setFading] = useState(false);
+  const [direction, setDirection] = useState(1);
   const total = proyectos.length;
 
   const navigate = useCallback((idx: number) => {
     if (idx === current) return;
-    setFading(true);
-    setTimeout(() => {
-      setCurrent(idx);
-      setFading(false);
-    }, 350);
+    setDirection(idx > current ? 1 : -1);
+    setCurrent(idx);
   }, [current]);
 
   const prev = () => navigate((current - 1 + total) % total);
@@ -49,85 +47,109 @@ export default function ProyectosSliderClient({ proyectos }: { proyectos: Proyec
   const p = proyectos[current];
   const badge = p.estado ? (estadoBadge[p.estado] ?? estadoBadge.disponible) : estadoBadge.disponible;
 
+  const variants = {
+    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 40 : -40 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -40 : 40 }),
+  };
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px]">
+    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[520px] border border-tierra/8">
       {/* Image */}
-      <div className="relative overflow-hidden bg-tierra/50 aspect-[4/3] lg:aspect-auto">
-        <img
-          key={p.id}
-          src={p.imagen ?? `https://placehold.co/800x600/1C1A17/B8965A?text=${encodeURIComponent(p.titulo)}`}
-          alt={p.titulo}
-          className="w-full h-full object-cover transition-opacity duration-500"
-          style={{ opacity: fading ? 0 : 0.85 }}
-          loading="lazy"
-        />
-        <div className="absolute top-6 left-6 font-display text-crema/20 text-8xl font-light leading-none select-none">
+      <div className="relative overflow-hidden bg-arena aspect-[4/3] lg:aspect-auto">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.img
+            key={p.id + "-img"}
+            src={p.imagen ?? `https://placehold.co/800x600/EAD9C4/C49555?text=${encodeURIComponent(p.titulo)}`}
+            alt={p.titulo}
+            className="absolute inset-0 w-full h-full object-cover"
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+          />
+        </AnimatePresence>
+
+        {/* Overlay */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(28,25,22,0.6) 0%, transparent 50%)" }} />
+
+        {/* Counter overlay */}
+        <div className="absolute top-6 left-6 font-display text-crema/15 font-light leading-none select-none" style={{ fontSize: "clamp(5rem, 12vw, 8rem)", letterSpacing: "-0.05em" }}>
           {String(current + 1).padStart(2, "0")}
         </div>
-        <div className="absolute bottom-4 right-4 font-body text-crema/30 text-xs tracking-widest">
+        <div className="absolute bottom-5 right-5 font-body text-crema/30 text-xs tracking-widest">
           / {String(total).padStart(2, "0")}
         </div>
       </div>
 
       {/* Content */}
-      <div
-        className="bg-[#232018] flex flex-col justify-between p-10 lg:p-14 transition-opacity duration-350"
-        style={{ opacity: fading ? 0 : 1, transform: fading ? "translateX(10px)" : "translateX(0)", transition: "opacity 0.35s ease, transform 0.35s ease" }}
-      >
-        <div>
-          {/* Badge */}
-          <div className="mb-8 flex items-center gap-3">
-            <span className={`font-body text-[11px] tracking-[0.2em] px-3 py-1.5 ${badge.color}`}>
-              {badge.label}
-            </span>
-            {p.estado === "en_construccion" && (
-              <span className="inline-block w-2 h-2 rounded-full bg-[#2563EB] badge-pulse" />
-            )}
-            {p.estado === "disponible" && (
-              <span className="inline-block w-2 h-2 rounded-full bg-dorado badge-pulse" />
-            )}
-          </div>
-
-          <div className="font-body text-dorado/40 text-[11px] tracking-[0.25em] uppercase mb-4">
-            Proyecto {String(current + 1).padStart(2, "0")}
-          </div>
-
-          <h3 className="font-display text-crema text-4xl lg:text-5xl font-light leading-[1.1] mb-4" style={{ letterSpacing: "-0.02em" }}>
-            {p.titulo}
-          </h3>
-
-          {p.ubicacion && (
-            <div className="flex items-center gap-2 mb-6">
-              <svg className="w-3.5 h-3.5 text-dorado shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="font-body text-crema/50 text-sm">{p.ubicacion}</span>
-            </div>
-          )}
-
-          {p.descripcion && (
-            <p className="font-body text-crema/40 text-sm leading-relaxed line-clamp-3 mb-8">
-              {p.descripcion}
-            </p>
-          )}
-
-          <Link
-            href={`/proyectos/${p.id}`}
-            className="inline-flex items-center gap-3 font-body text-[11px] tracking-[0.12em] font-medium uppercase text-crema border border-crema/20 px-6 py-3 hover:bg-dorado hover:text-tierra hover:border-dorado transition-all duration-300"
+      <div className="bg-tierra flex flex-col justify-between p-10 lg:p-14">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={p.id + "-content"}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            Ver Proyecto
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
+            {/* Badge */}
+            <div className="mb-8 flex items-center gap-3">
+              <span className={`font-body text-[10px] tracking-[0.25em] px-3 py-1.5 ${badge.bg} ${badge.text}`}>
+                {badge.label}
+              </span>
+              {(p.estado === "en_construccion" || p.estado === "disponible") && (
+                <span className={`inline-block w-2 h-2 rounded-full badge-pulse ${p.estado === "en_construccion" ? "bg-[#2563EB]" : "bg-dorado"}`} />
+              )}
+            </div>
+
+            <div className="eyebrow text-dorado/40 mb-4">
+              Proyecto {String(current + 1).padStart(2, "0")}
+            </div>
+
+            <h3
+              className="font-display text-crema font-light leading-[1.05] mb-4"
+              style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
+            >
+              {p.titulo}
+            </h3>
+
+            {p.ubicacion && (
+              <div className="flex items-center gap-2 mb-5">
+                <svg className="w-3.5 h-3.5 text-dorado/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span className="font-body text-crema/40 text-sm">{p.ubicacion}</span>
+              </div>
+            )}
+
+            {p.descripcion && (
+              <p className="font-body text-crema/35 text-[15px] leading-relaxed line-clamp-3 mb-8">
+                {p.descripcion}
+              </p>
+            )}
+
+            <Link
+              href={`/proyectos/${p.id}`}
+              className="inline-flex items-center gap-3 font-body text-[11px] tracking-[0.15em] font-medium uppercase text-crema border border-crema/15 px-7 py-3.5 hover:bg-dorado hover:text-tierra hover:border-dorado transition-all duration-300"
+            >
+              Ver Proyecto
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Navigation */}
         <div className="flex items-center gap-4 mt-10">
           <button
             onClick={prev}
-            className="w-10 h-10 border border-crema/20 flex items-center justify-center text-crema/60 hover:border-dorado hover:text-dorado hover:scale-110 transition-all duration-200"
+            className="w-10 h-10 border border-crema/15 flex items-center justify-center text-crema/40 hover:border-dorado hover:text-dorado hover:scale-110 transition-all duration-200"
             aria-label="Anterior"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +158,7 @@ export default function ProyectosSliderClient({ proyectos }: { proyectos: Proyec
           </button>
           <button
             onClick={next}
-            className="w-10 h-10 border border-crema/20 flex items-center justify-center text-crema/60 hover:border-dorado hover:text-dorado hover:scale-110 transition-all duration-200"
+            className="w-10 h-10 border border-crema/15 flex items-center justify-center text-crema/40 hover:border-dorado hover:text-dorado hover:scale-110 transition-all duration-200"
             aria-label="Siguiente"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

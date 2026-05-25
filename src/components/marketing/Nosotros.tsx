@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
+import { SlideInLeft, SlideInRight, FadeUp } from "@/components/ui/AnimateOnScroll";
 
 function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -21,8 +21,7 @@ function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string })
           const start = performance.now();
           const tick = (now: number) => {
             const t = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - t, 3);
-            setCount(Math.floor(eased * value));
+            setCount(Math.floor((1 - Math.pow(1 - t, 3)) * value));
             if (t < 1) requestAnimationFrame(tick);
             else setCount(value);
           };
@@ -45,7 +44,7 @@ function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string })
 
 export default function Nosotros() {
   return (
-    <section className="py-28 bg-[#FAFAF8] overflow-hidden">
+    <section className="py-28 bg-crema overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -53,20 +52,15 @@ export default function Nosotros() {
           <SlideInLeft>
             <div className="flex items-center gap-4 mb-8">
               <div className="h-px w-10 bg-dorado" />
-              <span className="font-body text-dorado text-[11px] tracking-[0.25em] uppercase">
-                Quiénes somos
-              </span>
+              <span className="eyebrow">Quiénes somos</span>
             </div>
 
-            <h2
-              className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1] mb-8"
-              style={{ letterSpacing: "-0.02em" }}
-            >
+            <h2 className="font-display text-tierra font-light text-5xl lg:text-[3.5rem] leading-[1.05] mb-8">
               Raíces patagónicas,{" "}
-              <span className="italic text-dorado">visión de futuro</span>
+              <em className="not-italic italic text-dorado">visión de futuro</em>
             </h2>
 
-            <div className="space-y-5 font-body text-tierra/60 leading-relaxed mb-10">
+            <div className="space-y-4 font-body text-tierra/55 text-[15px] leading-relaxed mb-10">
               <p>
                 Somos una empresa neuquina con más de 15 años desarrollando
                 proyectos inmobiliarios que respetan el entorno patagónico y
@@ -79,16 +73,16 @@ export default function Nosotros() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 mb-10">
+            <div className="flex flex-col sm:flex-row gap-8 mb-10 py-8 border-y border-arena">
               {[
                 { value: 15, suffix: "+", label: "Años de experiencia" },
                 { value: 200, suffix: "+", label: "Familias acompañadas" },
               ].map((s) => (
-                <div key={s.label} className="flex items-center gap-4">
-                  <span className="font-display text-dorado text-4xl font-light">
+                <div key={s.label} className="flex items-center gap-5">
+                  <span className="font-display text-dorado font-light" style={{ fontSize: "clamp(2.5rem, 4vw, 3.5rem)" }}>
                     <MiniCounter value={s.value} suffix={s.suffix} />
                   </span>
-                  <span className="font-body text-tierra/40 text-[11px] tracking-[0.2em] uppercase leading-tight">
+                  <span className="font-body text-tierra/40 text-[11px] tracking-[0.2em] uppercase leading-tight max-w-[80px]">
                     {s.label}
                   </span>
                 </div>
@@ -97,7 +91,7 @@ export default function Nosotros() {
 
             <Link
               href="/nosotros"
-              className="inline-flex items-center gap-3 font-body text-[11px] tracking-[0.12em] font-medium uppercase bg-tierra text-crema px-7 py-3.5 hover:bg-dorado transition-colors duration-300"
+              className="inline-flex items-center gap-3 font-body text-[11px] tracking-[0.15em] font-medium uppercase bg-tierra text-crema px-8 py-4 hover:bg-dorado transition-colors duration-300"
             >
               Conocer más
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,26 +103,24 @@ export default function Nosotros() {
           {/* Right: image */}
           <SlideInRight delay={0.1}>
             <div className="relative">
+              {/* Background rectangle */}
+              <div className="absolute -top-6 -right-6 w-full h-full bg-arena/60 -z-10" />
               <div className="aspect-[4/5] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80"
-                  alt="Patagonia Vértice — obra"
+                  alt="Patagonia Vértice — obra en Neuquén"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
-              <div className="absolute -bottom-5 -right-5 w-40 h-40 border border-dorado/25 pointer-events-none" />
-              <div className="absolute -top-5 -left-5 w-24 h-24 border border-dorado/15 pointer-events-none" />
+              {/* Corner accent */}
+              <div className="absolute -bottom-5 -left-5 w-32 h-32 border border-dorado/30 pointer-events-none" />
             </div>
           </SlideInRight>
         </div>
       </div>
 
-      {/* Separator */}
-      <div
-        className="mt-28 h-px mx-6 lg:mx-12"
-        style={{ background: "linear-gradient(to right, transparent, #B8965A, transparent)" }}
-      />
+      <div className="mt-28 mx-6 lg:mx-12 sep-gold h-px" />
     </section>
   );
 }

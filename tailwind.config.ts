@@ -11,34 +11,37 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // Legacy brand tokens (keep for compatibility)
-        tierra: "#1C1A17",
-        crema: "#F0EBE1",
-        dorado: "#B8965A",
-        // Extended earth palette
+
+        // ── Core palette ──────────────────────────
+        tierra:  "#1C1916",   // deep warm charcoal (main dark)
+        crema:   "#F5EFE6",   // warm cream (main light bg)
+        dorado:  "#C49555",   // warm amber-gold (main accent)
+
+        // ── Pastel / mid-tones ────────────────────
+        arena:   "#EAD9C4",   // warm sand — secondary backgrounds
+        salvia:  "#7A9E7E",   // muted sage green — Patagonia landscape
+        piedra:  "#9E8E80",   // warm stone grey — mid tone
+        humo:    "#F0E8DC",   // very light warm smoke — card bg
+
+        // ── Extended earth palette (for fine control) ─
         earth: {
-          950: "#0D0B08",
-          900: "#1A1610",
-          800: "#2C2418",
-          700: "#3D3322",
-          400: "#8B7355",
-          200: "#C4A882",
+          950: "#0E0C09",
+          900: "#1C1916",
+          800: "#2E2923",
+          700: "#40372F",
+          400: "#8C7860",
+          200: "#C8B4A0",
         },
-        // Gold palette
         gold: {
-          400: "#D4A853",
-          300: "#E8C47A",
-          100: "#F5E6C8",
-        },
-        // Patagonia neutrals
-        patagonia: {
-          stone: "#F0EDE8",
-          white: "#FAFAF8",
+          500: "#C49555",
+          400: "#D4A868",
+          300: "#E2BF8A",
+          100: "#F5E6CC",
         },
       },
       fontFamily: {
         display: ["var(--font-cormorant)", "Georgia", "serif"],
-        body: ["var(--font-dm-sans)", "var(--font-jost)", "system-ui", "sans-serif"],
+        body:    ["var(--font-jakarta)", "system-ui", "sans-serif"],
       },
     },
   },
