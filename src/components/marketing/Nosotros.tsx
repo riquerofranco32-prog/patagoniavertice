@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { SlideInLeft, SlideInRight, FadeUp } from "@/components/ui/AnimateOnScroll";
+import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 
 function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
