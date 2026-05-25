@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F0EBE1;
+    --foreground: #1C1A17;
+    --border: #1C1A17;
+    --ring: #B8965A;
+    --radius: 0rem;
+  }
+
+  * {
+    @apply border-[#1C1A17]/10;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-crema text-tierra;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
