@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS custom properties ─────────────────── */
+:root {
+  --background: #F0EBE1;
+  --foreground: #1C1A17;
+
+  /* Earth palette */
+  --earth-950: #0D0B08;
+  --earth-900: #1A1610;
+  --earth-800: #2C2418;
+  --earth-700: #3D3322;
+  --earth-400: #8B7355;
+  --earth-200: #C4A882;
+
+  /* Gold palette */
+  --gold-400: #D4A853;
+  --gold-300: #E8C47A;
+  --gold-100: #F5E6C8;
+
+  /* Neutrals */
+  --patagonia-stone: #F0EDE8;
+  --patagonia-white: #FAFAF8;
+}
+
 /* ── Keyframes ─────────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -80,7 +103,8 @@
   background: #B8965A;
   transition: left 0.3s ease, right 0.3s ease;
 }
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   left: 0;
   right: 0;
 }
@@ -119,10 +143,6 @@
 }
 
 @layer base {
-  :root {
-    --background: #F0EBE1;
-    --foreground: #1C1A17;
-  }
   * { box-sizing: border-box; }
   body { @apply bg-crema text-tierra; }
 }

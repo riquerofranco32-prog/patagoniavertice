@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import FadeIn from "@/components/ui/FadeIn";
+import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 
 function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -49,8 +49,8 @@ export default function Nosotros() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left: text — slide from left */}
-          <FadeIn direction="left">
+          {/* Left: text */}
+          <SlideInLeft>
             <div className="flex items-center gap-4 mb-8">
               <div className="h-px w-10 bg-dorado" />
               <span className="font-body text-dorado text-[11px] tracking-[0.25em] uppercase">
@@ -58,7 +58,10 @@ export default function Nosotros() {
               </span>
             </div>
 
-            <h2 className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1] mb-8" style={{ letterSpacing: "-0.02em" }}>
+            <h2
+              className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1] mb-8"
+              style={{ letterSpacing: "-0.02em" }}
+            >
               Raíces patagónicas,{" "}
               <span className="italic text-dorado">visión de futuro</span>
             </h2>
@@ -101,10 +104,10 @@ export default function Nosotros() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
-          </FadeIn>
+          </SlideInLeft>
 
-          {/* Right: image — slide from right */}
-          <FadeIn direction="right">
+          {/* Right: image */}
+          <SlideInRight delay={0.1}>
             <div className="relative">
               <div className="aspect-[4/5] overflow-hidden">
                 <img
@@ -117,12 +120,15 @@ export default function Nosotros() {
               <div className="absolute -bottom-5 -right-5 w-40 h-40 border border-dorado/25 pointer-events-none" />
               <div className="absolute -top-5 -left-5 w-24 h-24 border border-dorado/15 pointer-events-none" />
             </div>
-          </FadeIn>
+          </SlideInRight>
         </div>
       </div>
 
       {/* Separator */}
-      <div className="mt-28 h-px mx-6 lg:mx-12" style={{ background: "linear-gradient(to right, transparent, #B8965A, transparent)" }} />
+      <div
+        className="mt-28 h-px mx-6 lg:mx-12"
+        style={{ background: "linear-gradient(to right, transparent, #B8965A, transparent)" }}
+      />
     </section>
   );
 }

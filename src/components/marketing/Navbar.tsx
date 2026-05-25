@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { WHATSAPP_URL } from "@/lib/constants";
 
 const links = [
@@ -14,12 +16,16 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
     <header
@@ -45,15 +51,20 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-8">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="nav-link font-body text-crema/70 text-[11px] tracking-[0.25em] uppercase hover:text-crema transition-colors duration-300"
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`nav-link font-body text-[11px] tracking-[0.25em] uppercase transition-colors duration-300 ${
+                  active ? "text-dorado active" : "text-crema/70 hover:text-crema"
+                }`}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right */}
@@ -89,28 +100,45 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      <div className={`lg:hidden bg-tierra border-t border-crema/10 overflow-hidden transition-all duration-300 ${open ? "max-h-80 pb-8" : "max-h-0"}`}>
-        <nav className="flex flex-col gap-5 px-6 pt-6">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="font-body text-crema/70 text-[11px] tracking-[0.25em] uppercase hover:text-dorado transition-colors"
-            >
-              {l.label}
-            </Link>
-          ))}
-          <Link
-            href="/contacto"
-            onClick={() => setOpen(false)}
-            className="mt-2 btn-shimmer font-body text-tierra text-[11px] tracking-[0.12em] font-medium uppercase px-5 py-3 text-center"
+      {/* Mobile menu — AnimatePresence for smooth open/close */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden bg-tierra border-t border-crema/10 overflow-hidden"
           >
-            Consultar Ahora
-          </Link>
-        </nav>
-      </div>
+            <nav className="flex flex-col gap-5 px-6 py-6">
+              {links.map((l, i) => (
+                <motion.div
+                  key={l.href}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.2 }}
+                >
+                  <Link
+                    href={l.href}
+                    className={`font-body text-[11px] tracking-[0.25em] uppercase transition-colors ${
+                      pathname === l.href ? "text-dorado" : "text-crema/70 hover:text-dorado"
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <Link
+                href="/contacto"
+                className="mt-2 btn-shimmer font-body text-tierra text-[11px] tracking-[0.12em] font-medium uppercase px-5 py-3 text-center"
+              >
+                Consultar Ahora
+              </Link>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
