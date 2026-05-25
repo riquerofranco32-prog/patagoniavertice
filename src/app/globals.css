@@ -64,10 +64,16 @@
 
 /* ── Marquee utility ────────────────────────── */
 .marquee-track {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
   animation: marquee 28s linear infinite;
   will-change: transform;
 }
 .marquee-track-slow {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
   animation: marqueeSlow 40s linear infinite;
   will-change: transform;
 }

@@ -158,10 +158,10 @@ export default function Hero() {
         <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(28,25,22,0.4), transparent)" }} />
         <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, rgba(28,25,22,0.4), transparent)" }} />
 
-        {/* Animating track — no padding on this element */}
-        <div className="flex items-center h-full marquee-track">
+        {/* Animating track */}
+        <div className="marquee-track items-center" style={{ height: "100%" }}>
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-5 px-6 shrink-0">
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "1.25rem", padding: "0 1.5rem", flexShrink: 0 }}>
               <span className="font-body text-crema/25 text-[9px] tracking-[0.4em] uppercase">{item}</span>
               <span className="text-dorado/30 text-[10px]">·</span>
             </span>
