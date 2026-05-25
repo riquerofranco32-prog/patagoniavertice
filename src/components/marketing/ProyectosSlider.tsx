@@ -17,7 +17,7 @@ const fallback: ProyectoCard[] = [
     ubicacion: "Centenario, Neuquén",
     descripcion: "Loteo premium en entorno natural. 80 lotes de entre 500 y 1.200 m² con acceso a áreas verdes y seguridad perimetral.",
     estado: "disponible",
-    imagen: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
+    imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80",
   },
   {
     id: "demo-3",
@@ -25,7 +25,7 @@ const fallback: ProyectoCard[] = [
     ubicacion: "Confluencia, Neuquén",
     descripcion: "Desarrollo de viviendas unifamiliares en el corazón residencial de Neuquén. Diseño contemporáneo con materiales de la región.",
     estado: "vendido",
-    imagen: "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=800&q=80",
+    imagen: "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=800&q=80",
   },
 ];
 
@@ -58,26 +58,36 @@ export default async function ProyectosSlider() {
   const items = proyectos.length > 0 ? proyectos : fallback;
 
   return (
-    <section className="py-0 bg-tierra">
+    <section className="bg-tierra">
       {/* Section header */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-14">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="flex items-center gap-4 mb-6">
               <div className="h-px w-10 bg-dorado" />
-              <span className="font-body text-dorado text-xs tracking-[0.4em] uppercase">
+              <span className="font-body text-dorado text-[11px] tracking-[0.35em] uppercase">
                 Portafolio
               </span>
             </div>
-            <h2 className="font-display text-crema text-5xl lg:text-6xl font-light leading-[1.1]">
-              Nuestros <span className="italic text-dorado">proyectos</span>
+            <h2
+              className="font-display text-crema font-light leading-[1.05]"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", letterSpacing: "-0.02em" }}
+            >
+              Nuestros{" "}
+              <span className="italic text-dorado">proyectos</span>
             </h2>
+            <p className="font-body text-crema/30 text-sm mt-4 max-w-sm">
+              Desarrollos que transforman regiones y generan valor real.
+            </p>
           </div>
           <Link
             href="/proyectos"
-            className="font-body text-crema/50 text-xs tracking-widest uppercase border-b border-crema/20 pb-1 hover:text-dorado hover:border-dorado transition-colors self-start md:self-auto"
+            className="inline-flex items-center gap-3 font-body text-crema/40 text-[11px] tracking-[0.2em] uppercase border-b border-crema/15 pb-1 hover:text-dorado hover:border-dorado transition-colors duration-200 self-start md:self-auto shrink-0"
           >
-            Ver todos →
+            Ver todos los proyectos
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </Link>
         </div>
       </div>
