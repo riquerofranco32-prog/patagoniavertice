@@ -75,7 +75,7 @@ export default function NosotrosPage() {
       </div>
 
       {/* Historia */}
-      <section className="py-28 bg-[#FAFAF8]">
+      <section className="py-28 bg-crema">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
@@ -127,7 +127,7 @@ export default function NosotrosPage() {
       <StatsStrip />
 
       {/* Valores */}
-      <section className="py-28 bg-[#FAFAF8]">
+      <section className="py-28 bg-crema">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-4 mb-6">
@@ -149,7 +149,7 @@ export default function NosotrosPage() {
               return (
                 <div
                   key={v.titulo}
-                  className="bg-[#FAFAF8] p-10 group hover:bg-tierra transition-colors duration-500 relative overflow-hidden"
+                  className="bg-crema p-10 group hover:bg-tierra transition-colors duration-500 relative overflow-hidden"
                 >
                   <div className="absolute left-0 top-0 w-0.5 bg-dorado h-0 group-hover:h-full transition-all duration-500" />
                   <div className="text-dorado mb-5 transition-transform duration-300 group-hover:scale-110 origin-left">

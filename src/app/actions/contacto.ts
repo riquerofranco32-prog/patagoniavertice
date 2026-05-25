@@ -14,9 +14,11 @@ export async function enviarConsulta(
   const nombre = formData.get("nombre") as string;
   const email = formData.get("email") as string;
   const telefono = formData.get("telefono") as string;
-  const mensaje = formData.get("mensaje") as string;
+  const asunto = formData.get("asunto") as string;
+  const mensajeRaw = formData.get("mensaje") as string;
+  const mensaje = asunto ? `Asunto: ${asunto}\n\n${mensajeRaw}` : mensajeRaw;
 
-  if (!nombre || !email || !mensaje) {
+  if (!nombre || !email || !mensajeRaw) {
     return { error: "Por favor completá los campos obligatorios." };
   }
 
