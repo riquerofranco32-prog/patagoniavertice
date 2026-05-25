@@ -7,7 +7,7 @@ export default function Hero() {
       {/* Video background — Unsplash como poster/fallback */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
-        src="/bg-hero.mp4"
+        src="https://sxfzjcumsflqfyubrlyq.supabase.co/storage/v1/object/public/media/bg-hero.mp4"
         autoPlay
         muted
         loop
