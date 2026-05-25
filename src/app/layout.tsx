@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/marketing/Navbar";
 import Footer from "@/components/marketing/Footer";
 import WhatsAppButton from "@/components/marketing/WhatsAppButton";
+import CustomCursor from "@/components/ui/CustomCursor";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -30,6 +32,8 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${cormorant.variable} ${jost.variable}`}>
       <body className="font-body antialiased bg-crema text-tierra">
+        <ScrollProgress />
+        <CustomCursor />
         <Navbar />
         <main>{children}</main>
         <Footer />
