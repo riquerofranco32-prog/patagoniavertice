@@ -141,14 +141,18 @@ export default function Nosotros() {
 
       {/* Valores strip */}
       <div className="border-t border-arena overflow-hidden">
-        <div className="flex whitespace-nowrap marquee-track-slow">
+        <motion.div
+          style={{ display: "flex", width: "max-content" }}
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+        >
           {[...valores, ...valores, ...valores, ...valores].map((v, i) => (
-            <span key={i} className="inline-flex items-center gap-6 px-8 py-5">
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "1.5rem", padding: "1.25rem 2rem", whiteSpace: "nowrap", flexShrink: 0 }}>
               <span className="font-display text-tierra/40 font-light italic text-xl">{v}</span>
               <span className="text-dorado/40 text-sm">·</span>
             </span>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
