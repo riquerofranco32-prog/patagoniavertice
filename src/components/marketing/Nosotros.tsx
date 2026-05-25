@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 
 function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
