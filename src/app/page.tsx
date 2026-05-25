@@ -1,17 +1,17 @@
 import Hero from "@/components/marketing/Hero";
 import Nosotros from "@/components/marketing/Nosotros";
+import ProyectosSlider from "@/components/marketing/ProyectosSlider";
 import Servicios from "@/components/marketing/Servicios";
-import PropiedadesDestacadas from "@/components/marketing/PropiedadesDestacadas";
-import FormularioContacto from "@/components/marketing/FormularioContacto";
+import CTAFinal from "@/components/marketing/CTAFinal";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Nosotros />
+      <ProyectosSlider />
       <Servicios />
-      <PropiedadesDestacadas />
-      <FormularioContacto />
+      <CTAFinal />
     </>
   );
 }

@@ -1,98 +1,89 @@
-"use client";
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
-
-const frases = [
-  "Desarrollamos proyectos en la Patagonia",
-  "Creamos espacios que definen el paisaje",
-  "Invertí en el futuro de Neuquén",
-  "Arquitectura y territorio en sintonía",
-];
+import StatCounter from "./StatCounter";
 
 export default function Hero() {
-  const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % frases.length);
-        setVisible(true);
-      }, 500);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative h-screen flex flex-col justify-center bg-tierra overflow-hidden">
-      {/* Subtle grain overlay */}
-      <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')]" />
+    <section className="relative min-h-screen flex flex-col justify-end bg-tierra overflow-hidden">
+      {/* Video background */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        src="/bg-hero.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="https://placehold.co/1920x1080/1C1A17/1C1A17"
+      />
 
-      {/* Left accent line */}
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-tierra via-tierra/70 to-tierra/40" />
+
+      {/* Left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-dorado/30 to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-12 w-full">
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-12 w-full pb-20 pt-40">
         {/* Eyebrow */}
-        <div className="flex items-center gap-4 mb-12">
+        <div className="flex items-center gap-4 mb-10">
           <div className="h-px w-10 bg-dorado" />
-          <span className="font-body text-dorado/80 text-xs tracking-[0.4em] uppercase">
-            Patagonia Vértice
+          <span className="font-body text-dorado text-xs tracking-[0.4em] uppercase">
+            6 Proyectos Activos en Neuquén
           </span>
         </div>
 
-        {/* Rotating headline */}
-        <div className="min-h-[7rem] md:min-h-[6rem] lg:min-h-[7rem] mb-8 flex items-start">
-          <h1
-            className="font-display text-crema font-light leading-[1.15] text-4xl md:text-5xl lg:text-[5rem] transition-opacity duration-500"
-            style={{ opacity: visible ? 1 : 0 }}
-          >
-            {frases[index]}
-          </h1>
-        </div>
+        {/* Title */}
+        <h1 className="font-display text-crema font-light leading-[1.1] text-5xl md:text-6xl lg:text-7xl max-w-4xl mb-8">
+          Construimos con{" "}
+          <span className="italic text-dorado">visión</span>,{" "}
+          compromiso{" "}
+          <span className="text-crema/60">y confianza</span>
+        </h1>
 
-        {/* Fixed subtitle */}
-        <p className="font-body text-crema/40 text-sm tracking-[0.3em] uppercase mb-14">
-          Desarrollos Inmobiliarios · Neuquén, Patagonia
+        {/* Subtitle */}
+        <p className="font-body text-crema/50 text-lg leading-relaxed max-w-xl mb-12">
+          Desarrollos inmobiliarios de primer nivel en Neuquén y la Patagonia.
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/proyectos"
-            className="inline-flex items-center justify-center px-8 py-4 bg-dorado text-tierra font-body text-sm font-medium tracking-widest uppercase hover:bg-dorado/90 transition-colors duration-300"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-dorado text-tierra font-body text-xs font-medium tracking-widest uppercase hover:bg-dorado/90 transition-colors duration-300"
           >
             Ver Proyectos
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </Link>
           <Link
             href="/contacto"
-            className="inline-flex items-center justify-center px-8 py-4 border border-crema/30 text-crema font-body text-sm font-medium tracking-widest uppercase hover:border-crema hover:text-crema transition-colors duration-300"
+            className="inline-flex items-center justify-center px-8 py-4 border border-crema/30 text-crema font-body text-xs font-medium tracking-widest uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
           >
             Contactar
           </Link>
         </div>
+
+        {/* Animated counters */}
+        <StatCounter />
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <div className="relative h-16 w-px overflow-hidden">
-          <div className="absolute top-0 left-0 w-full bg-dorado/60 animate-scroll-line" style={{ height: "100%" }} />
+      <div className="absolute bottom-6 right-12 flex flex-col items-center gap-1">
+        <div className="relative h-14 w-px overflow-hidden">
+          <div
+            className="absolute inset-0 bg-dorado/50"
+            style={{
+              animation: "scrollDown 1.8s ease-in-out infinite",
+            }}
+          />
         </div>
-        <span className="font-body text-crema/30 text-[10px] tracking-[0.3em] uppercase mt-1">
-          Scroll
-        </span>
+        <style>{`
+          @keyframes scrollDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(200%); }
+          }
+        `}</style>
       </div>
-
-      <style jsx>{`
-        @keyframes scrollLine {
-          0% { transform: translateY(-100%); opacity: 1; }
-          100% { transform: translateY(100%); opacity: 0; }
-        }
-        .animate-scroll-line {
-          animation: scrollLine 1.8s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }
