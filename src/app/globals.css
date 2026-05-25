@@ -6,8 +6,6 @@
 :root {
   --background:   #F5EFE6;
   --foreground:   #1C1916;
-
-  /* Core */
   --tierra:   #1C1916;
   --crema:    #F5EFE6;
   --dorado:   #C49555;
@@ -43,19 +41,48 @@
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.35; }
 }
-@keyframes lineGrow {
-  from { width: 0; }
-  to   { width: 2.5rem; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marqueeSlow {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes revealUp {
+  from { clip-path: inset(100% 0 0 0); opacity: 0; }
+  to   { clip-path: inset(0% 0 0 0); opacity: 1; }
+}
+@keyframes lineExpand {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
 }
 
-/* ── Legacy FadeIn classes (fallback only) ─── */
+/* ── Marquee utility ────────────────────────── */
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track-slow {
+  animation: marqueeSlow 40s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover,
+.marquee-track-slow:hover {
+  animation-play-state: paused;
+}
+
+/* ── FadeIn legacy classes ──────────────────── */
 .fi-up    { opacity: 0; transform: translateY(24px); }
 .fi-left  { opacity: 0; transform: translateX(-56px); }
 .fi-right { opacity: 0; transform: translateX(56px); }
 .fi-none  { opacity: 0; }
 .fi-visible {
-  opacity: 1 !important;
-  transform: none !important;
+  opacity: 1 !important; transform: none !important;
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
@@ -64,30 +91,21 @@
   html, body, a, button { cursor: none !important; }
 }
 .cursor-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
   background-color: #C49555;
   transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease;
 }
 .cursor-dot.is-hovered {
-  width: 32px;
-  height: 32px;
+  width: 32px; height: 32px;
   background-color: transparent;
   border: 1.5px solid #C49555;
 }
 
-/* ── Scroll progress ───────────────────────── */
-/* (component handles it inline) */
-
-/* ── Nav underline from center ─────────────── */
+/* ── Nav underline ──────────────────────────── */
 .nav-link { position: relative; }
 .nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 50%; right: 50%;
-  height: 1px;
-  background: #C49555;
+  content: ''; position: absolute; bottom: -3px; left: 50%; right: 50%;
+  height: 1px; background: #C49555;
   transition: left 0.3s ease, right 0.3s ease;
 }
 .nav-link:hover::after,
@@ -104,10 +122,22 @@
 /* ── Badge pulse ────────────────────────────── */
 .badge-pulse { animation: badgePulse 2s ease-in-out infinite; }
 
-/* ── Section separator ──────────────────────── */
-.sep-gold {
-  height: 1px;
-  background: linear-gradient(to right, transparent, #C49555, transparent);
+/* ── Gold separator ─────────────────────────── */
+.sep-gold { height: 1px; }
+.gold-line { background: linear-gradient(to right, transparent, #C49555, transparent); }
+
+/* ── Grain overlay (shared) ─────────────────── */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  pointer-events: none;
+}
+
+/* ── Number reveal clip ─────────────────────── */
+.clip-reveal {
+  clip-path: inset(100% 0 0 0);
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ── Reduced motion ─────────────────────────── */
@@ -123,36 +153,21 @@
 @layer base {
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
   body {
     @apply bg-crema text-tierra;
     font-feature-settings: "ss01", "cv05";
   }
-
   h1, h2, h3, h4 {
     font-family: var(--font-cormorant), Georgia, serif;
     font-weight: 300;
     letter-spacing: -0.02em;
     line-height: 1.05;
   }
-
-  /* Better selection color */
-  ::selection {
-    background: #C49555;
-    color: #1C1916;
-  }
+  ::selection { background: #C49555; color: #1C1916; }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
-
-  /* Eyebrow utility */
-  .eyebrow {
-    @apply font-body text-dorado text-[11px] tracking-[0.3em] uppercase;
-  }
-
-  /* Section separator */
-  .gold-line {
-    background: linear-gradient(to right, transparent, #C49555, transparent);
-  }
+  .eyebrow { @apply font-body text-dorado text-[11px] tracking-[0.3em] uppercase; }
+  .gold-line { background: linear-gradient(to right, transparent, #C49555, transparent); }
 }

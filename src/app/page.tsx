@@ -3,6 +3,7 @@ import StatsStrip from "@/components/marketing/StatsStrip";
 import Nosotros from "@/components/marketing/Nosotros";
 import ProyectosSlider from "@/components/marketing/ProyectosSlider";
 import Servicios from "@/components/marketing/Servicios";
+import Proceso from "@/components/marketing/Proceso";
 import CTAFinal from "@/components/marketing/CTAFinal";
 
 export default function HomePage() {
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Nosotros />
       <ProyectosSlider />
       <Servicios />
+      <Proceso />
       <CTAFinal />
     </>
   );
