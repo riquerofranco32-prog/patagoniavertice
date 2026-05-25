@@ -1,18 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 import StatCounter from "./StatCounter";
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
-      {/* Background image (swap src for video when ready) */}
-      <Image
-        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80"
-        alt="Patagonia"
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
+      {/* Video background — Unsplash como poster/fallback */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/bg-hero.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80"
       />
 
       {/* Dark overlay rgba(28,26,23,0.65) */}
