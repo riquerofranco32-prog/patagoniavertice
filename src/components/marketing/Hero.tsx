@@ -1,22 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 import StatCounter from "./StatCounter";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-end bg-tierra overflow-hidden">
-      {/* Video background */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover opacity-30"
-        src="/bg-hero.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="https://placehold.co/1920x1080/1C1A17/1C1A17"
+    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+      {/* Background image (swap src for video when ready) */}
+      <Image
+        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80"
+        alt="Patagonia"
+        fill
+        priority
+        className="object-cover"
+        sizes="100vw"
       />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-tierra via-tierra/70 to-tierra/40" />
+      {/* Dark overlay rgba(28,26,23,0.65) */}
+      <div className="absolute inset-0" style={{ background: "rgba(28,26,23,0.65)" }} />
 
       {/* Left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-dorado/30 to-transparent" />
@@ -27,7 +27,7 @@ export default function Hero() {
         <div className="flex items-center gap-4 mb-10">
           <div className="h-px w-10 bg-dorado" />
           <span className="font-body text-dorado text-xs tracking-[0.4em] uppercase">
-            6 Proyectos Activos en Neuquén
+            3 Proyectos Activos en Neuquén
           </span>
         </div>
 
@@ -70,19 +70,9 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div className="absolute bottom-6 right-12 flex flex-col items-center gap-1">
         <div className="relative h-14 w-px overflow-hidden">
-          <div
-            className="absolute inset-0 bg-dorado/50"
-            style={{
-              animation: "scrollDown 1.8s ease-in-out infinite",
-            }}
-          />
+          <div className="absolute inset-0 bg-dorado/50" style={{ animation: "scrollDown 1.8s ease-in-out infinite" }} />
         </div>
-        <style>{`
-          @keyframes scrollDown {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(200%); }
-          }
-        `}</style>
+        <style>{`@keyframes scrollDown { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }`}</style>
       </div>
     </section>
   );

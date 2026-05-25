@@ -8,6 +8,13 @@ type Stat = {
   label: string;
 };
 
+const stats: Stat[] = [
+  { value: 3,   suffix: "+", label: "Proyectos activos" },
+  { value: 47,              label: "Unidades en construcción" },
+  { value: 120,             label: "Lotes en desarrollo" },
+  { value: 85,  suffix: "+", label: "Familias acompañadas" },
+];
+
 function Counter({ value, suffix = "", label }: Stat) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -51,13 +58,6 @@ function Counter({ value, suffix = "", label }: Stat) {
     </div>
   );
 }
-
-const stats: Stat[] = [
-  { value: 6, suffix: "+", label: "Proyectos activos" },
-  { value: 48, label: "Unidades en construcción" },
-  { value: 120, label: "Lotes en desarrollo" },
-  { value: 200, suffix: "+", label: "Familias acompañadas" },
-];
 
 export default function StatCounter() {
   return (

@@ -30,13 +30,18 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link href="/" className="flex flex-col leading-none shrink-0">
-          <span className="font-display text-crema text-xl font-light tracking-widest uppercase">
-            Patagonia
-          </span>
-          <span className="font-display text-dorado text-xs font-light tracking-[0.35em] uppercase">
-            Vértice
-          </span>
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="14,2 27,26 1,26" fill="#B8965A" />
+          </svg>
+          <div className="flex flex-col leading-none">
+            <span className="font-display text-crema text-lg font-light tracking-widest uppercase">
+              Patagonia
+            </span>
+            <span className="font-display text-dorado text-xs font-semibold tracking-[0.35em] uppercase">
+              Vértice
+            </span>
+          </div>
         </Link>
 
         {/* Desktop nav */}

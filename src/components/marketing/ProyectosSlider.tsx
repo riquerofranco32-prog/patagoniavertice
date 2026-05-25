@@ -9,7 +9,7 @@ const fallback: ProyectoCard[] = [
     ubicacion: "Neuquén Capital",
     descripcion: "Complejo residencial en altura con vistas panorámicas al río Limay. Unidades de 2 y 3 ambientes con amenities de primer nivel.",
     estado: "en_construccion",
-    imagen: null,
+    imagen: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
   },
   {
     id: "demo-2",
@@ -17,7 +17,7 @@ const fallback: ProyectoCard[] = [
     ubicacion: "Centenario, Neuquén",
     descripcion: "Loteo premium en entorno natural. 80 lotes de entre 500 y 1.200 m² con acceso a áreas verdes y seguridad perimetral.",
     estado: "disponible",
-    imagen: null,
+    imagen: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
   },
   {
     id: "demo-3",
@@ -25,7 +25,7 @@ const fallback: ProyectoCard[] = [
     ubicacion: "Confluencia, Neuquén",
     descripcion: "Desarrollo de viviendas unifamiliares en el corazón residencial de Neuquén. Diseño contemporáneo con materiales de la región.",
     estado: "vendido",
-    imagen: null,
+    imagen: "https://images.unsplash.com/photo-1460317442991-0ec209397118?w=800&q=80",
   },
 ];
 
