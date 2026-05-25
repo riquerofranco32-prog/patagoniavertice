@@ -142,23 +142,28 @@ export default function Hero() {
 
       {/* ── Marquee ticker (bottom) ── */}
       <motion.div
-        className="relative border-t border-crema/8 overflow-hidden h-11 flex items-center bg-tierra/40 backdrop-blur-sm shrink-0"
+        className="relative border-t border-crema/8 overflow-hidden h-11 bg-tierra/40 backdrop-blur-sm shrink-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.6 }}
       >
-        {/* Scroll indicator dot */}
-        <div className="absolute left-6 flex flex-col items-center gap-1 z-10">
-          <div className="relative h-6 w-px overflow-hidden">
+        {/* Scroll indicator — positioned outside the animating track */}
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+          <div className="relative h-5 w-px overflow-hidden">
             <div className="absolute inset-0 bg-dorado/60" style={{ animation: "scrollDown 1.8s ease-in-out infinite" }} />
           </div>
         </div>
 
-        <div className="flex whitespace-nowrap marquee-track pl-16">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(28,25,22,0.4), transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, rgba(28,25,22,0.4), transparent)" }} />
+
+        {/* Animating track — no padding on this element */}
+        <div className="flex items-center h-full marquee-track">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-5 px-5">
-              <span className="font-body text-crema/20 text-[9px] tracking-[0.4em] uppercase">{item}</span>
-              <span className="text-dorado/25 text-[10px]">·</span>
+            <span key={i} className="inline-flex items-center gap-5 px-6 shrink-0">
+              <span className="font-body text-crema/25 text-[9px] tracking-[0.4em] uppercase">{item}</span>
+              <span className="text-dorado/30 text-[10px]">·</span>
             </span>
           ))}
         </div>
