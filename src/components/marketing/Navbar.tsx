@@ -42,13 +42,13 @@ export default function Navbar() {
           : undefined
       }
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-24 md:h-28">
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center shrink-0">
           <img
             src="/logoo.png"
             alt="Altum Inmobiliaria"
-            className="h-14 md:h-20 w-auto object-contain transition-opacity duration-300"
+            className="h-16 md:h-24 w-auto object-contain transition-opacity duration-300"
             style={{ mixBlendMode: "screen", filter: "brightness(1.05)" }}
           />
         </Link>
