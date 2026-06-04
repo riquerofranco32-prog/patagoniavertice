@@ -3,7 +3,6 @@ import { WHATSAPP_URL } from "@/lib/constants";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/proyectos", label: "Propiedades" },
   { href: "/servicios", label: "Servicios" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
@@ -34,9 +33,10 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <img
-                src="/logo-altum-white.png"
+                src="/LOGO SIN FONFO.jpg"
                 alt="Altum Inmobiliaria"
                 className="h-10 w-auto object-contain"
+                style={{ mixBlendMode: "screen" }}
               />
             </Link>
             <p className="font-body text-crema/40 text-sm leading-relaxed mb-6">
@@ -110,7 +110,7 @@ export default function Footer() {
                 className="flex items-center gap-3 hover:text-dorado transition-colors duration-200"
               >
                 <WaIcon />
-                +54 9 2996 09-5742
+                +54 9 299 466-8428
               </a>
 
               {/* Email */}

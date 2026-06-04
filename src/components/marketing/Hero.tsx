@@ -5,7 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 
 const WA_HERO =
-  "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
+  "https://wa.me/5492994668428?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
 
 const SERVICES = ["Venta", "Alquiler", "Consultoría", "Contratos"];
 
@@ -186,12 +186,12 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.15, duration: 0.7 }}
         >
-          {/* Primary — Ver Propiedades */}
+          {/* Primary — Ver Servicios */}
           <Link
-            href="/proyectos"
+            href="/servicios"
             className="group inline-flex items-center justify-center gap-3 px-9 py-4 btn-shimmer text-tierra font-body text-[11px] font-semibold tracking-[0.15em] uppercase"
           >
-            Ver Propiedades
+            Ver Servicios
             <svg
               className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"

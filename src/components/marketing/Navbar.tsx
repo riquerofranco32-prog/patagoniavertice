@@ -8,7 +8,6 @@ import { WHATSAPP_URL } from "@/lib/constants";
 
 const links = [
   { href: "/", label: "Inicio" },
-  { href: "/proyectos", label: "Propiedades" },
   { href: "/servicios", label: "Servicios" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
@@ -41,12 +40,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center shrink-0">
-          {/* logo-altum-white.png → transparente (sobre hero oscuro)   */}
-          {/* logo-altum.png       → sólido (sobre navy #1A2752)        */}
           <img
-            src={scrolled ? "/logo-altum.png" : "/logo-altum-white.png"}
+            src="/LOGO SIN FONFO.jpg"
             alt="Altum Inmobiliaria"
             className="h-9 w-auto object-contain transition-opacity duration-300"
+            style={{ mixBlendMode: "screen" }}
           />
         </Link>
 

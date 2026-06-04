@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 /* ── Datos de contacto ───────────────────────────────────────────────────── */
 
 const WA_HREF =
-  "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20contactarme%20con%20Altum%20Inmobiliaria";
+  "https://wa.me/5492994668428?text=Hola%2C%20quisiera%20contactarme%20con%20Altum%20Inmobiliaria";
 
 const contactInfo = [
   {
