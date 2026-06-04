@@ -5,18 +5,18 @@ import { useRef } from "react";
 
 const IMAGES = [
   {
-    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80",
-    alt: "Lagos de Patagonia",
+    url: "/casa.avif",
+    alt: "Casa junto al lago — Patagonia",
     caption: "Neuquén, Patagonia",
   },
   {
-    url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80",
-    alt: "Paisaje patagónico",
+    url: "/bosque.avif",
+    alt: "Bosque patagónico",
     caption: "Río Negro · Neuquén",
   },
   {
-    url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80",
-    alt: "Cordillera patagónica",
+    url: "/noche.avif",
+    alt: "Patagonia de noche",
     caption: "Patagonia Argentina",
   },
 ];
