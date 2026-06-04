@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 const WA_HERO =
   "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
@@ -36,6 +36,12 @@ const titleLines = [
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.75;
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -49,10 +55,20 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-screen flex flex-col overflow-hidden"
     >
+      {/* Ken Burns keyframes */}
+      <style>{`
+        @keyframes kenburns {
+          0%   { transform: scale(1.05) translateX(0px); }
+          100% { transform: scale(1.12) translateX(-20px); }
+        }
+        .video-kb { animation: kenburns 20s ease-in-out infinite alternate; }
+      `}</style>
+
       {/* ── Video background — parallax ────────────────────────── */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: 1.1 }}>
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover video-kb"
           src="/bg-hero.mp4"
           poster="/hero.png"
           autoPlay
@@ -63,20 +79,20 @@ export default function Hero() {
       </motion.div>
 
       {/* ── Overlays ─────────────────────────────────────────────────────── */}
-      {/* Navy brand tint */}
+      {/* Navy brand tint — más ligero para ver el video */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(155deg, rgba(15,26,62,0.70) 0%, rgba(26,39,82,0.48) 38%, rgba(10,18,40,0.92) 100%)",
+            "linear-gradient(155deg, rgba(15,26,62,0.35) 0%, rgba(26,39,82,0.20) 38%, rgba(10,18,40,0.75) 100%)",
         }}
       />
-      {/* Bottom-up dark for content legibility */}
+      {/* Bottom-up dark para legibilidad del texto */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, rgba(10,18,40,0.97) 0%, rgba(10,18,40,0.28) 52%, transparent 100%)",
+            "linear-gradient(to top, rgba(10,18,40,0.92) 0%, rgba(10,18,40,0.15) 52%, transparent 100%)",
         }}
       />
       {/* Grain texture */}
@@ -263,7 +279,7 @@ export default function Hero() {
             width: "max-content",
           }}
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+          transition={{ duration: 60, ease: "linear", repeat: Infinity }}
         >
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
             <span

@@ -31,11 +31,16 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.05)]"
-          : "bg-transparent"
+        scrolled ? "backdrop-blur-md" : "bg-transparent"
       }`}
-      style={scrolled ? { background: "rgba(26,39,82,0.96)" } : undefined}
+      style={
+        scrolled
+          ? {
+              background: "rgba(26,39,82,0.96)",
+              borderBottom: "1px solid rgba(201,168,76,0.2)",
+            }
+          : undefined
+      }
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* ── Logo ── */}

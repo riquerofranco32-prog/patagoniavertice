@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
+import PatagoniaGallery from "@/components/marketing/PatagoniaGallery";
 
 function MiniCounter({
   value,
@@ -141,33 +142,9 @@ export default function Nosotros() {
               </Link>
             </SlideInLeft>
 
-            {/* Right: image */}
+            {/* Right: gallery */}
             <SlideInRight delay={0.1}>
-              <div className="relative group">
-                {/* Shadow rectangle */}
-                <div className="absolute -top-5 -right-5 w-full h-full bg-arena/50 -z-10 transition-transform duration-700 group-hover:translate-x-1 group-hover:translate-y-1" />
-                {/* Corner accent */}
-                <div className="absolute -bottom-5 -left-5 w-24 h-24 border border-dorado/25 pointer-events-none z-10 transition-transform duration-700 group-hover:-translate-x-1 group-hover:-translate-y-1" />
-
-                <div className="aspect-[4/5] overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80"
-                    alt="Altum Inmobiliaria — obra en Río Negro"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Floating badge on image */}
-                <div className="absolute top-6 -left-4 bg-tierra px-5 py-3 shadow-xl">
-                  <p className="font-body text-dorado text-[10px] tracking-[0.25em] uppercase">
-                    Río Negro · Patagonia
-                  </p>
-                  <p className="font-display text-crema text-lg font-light mt-0.5">
-                    Argentina
-                  </p>
-                </div>
-              </div>
+              <PatagoniaGallery />
             </SlideInRight>
           </div>
         </div>
