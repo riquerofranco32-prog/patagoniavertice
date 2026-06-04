@@ -5,7 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 
 const WA_HERO =
-  "https://wa.me/5492994668428?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
+  "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
 
 const SERVICES = ["Venta", "Alquiler", "Consultoría", "Contratos"];
 

@@ -41,7 +41,7 @@ export default function Navbar() {
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center shrink-0">
           <img
-            src="/LOGO SIN FONFO.jpg"
+            src="/logoo.png"
             alt="Altum Inmobiliaria"
             className="h-9 w-auto object-contain transition-opacity duration-300"
             style={{ mixBlendMode: "screen" }}

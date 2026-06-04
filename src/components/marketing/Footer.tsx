@@ -33,7 +33,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
               <img
-                src="/LOGO SIN FONFO.jpg"
+                src="/logoo.png"
                 alt="Altum Inmobiliaria"
                 className="h-10 w-auto object-contain"
                 style={{ mixBlendMode: "screen" }}
@@ -110,7 +110,7 @@ export default function Footer() {
                 className="flex items-center gap-3 hover:text-dorado transition-colors duration-200"
               >
                 <WaIcon />
-                +54 9 299 466-8428
+                +54 9 2996 09-5742
               </a>
 
               {/* Email */}
