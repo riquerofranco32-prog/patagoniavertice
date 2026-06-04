@@ -1,117 +1,328 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
-import { enviarConsulta, type ContactoState } from "@/app/actions/contacto";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useState, useEffect } from "react";
+import { guardarLeadAltum, type TipoConsulta } from "@/app/actions/leads-altum";
 
-const initialState: ContactoState = {};
+/* ── Schema Zod ──────────────────────────────────────────────────────────── */
 
-const inputClass =
-  "w-full bg-transparent border-b border-tierra/15 py-3.5 font-body text-tierra text-sm focus:outline-none focus:border-dorado transition-colors duration-200 placeholder:text-tierra/25";
+const schema = z.object({
+  nombre: z.string().min(2, "Ingresá tu nombre completo").max(100),
+  email: z.string().email("Ingresá un email válido"),
+  telefono: z.string().max(30).optional().or(z.literal("")),
+  tipo_consulta: z
+    .enum(["venta", "alquiler", "consultoria", "contratos"] as const)
+    .refine((v) => v !== undefined, {
+      message: "Seleccioná el tipo de consulta",
+    }),
+  mensaje: z
+    .string()
+    .min(10, "El mensaje debe tener al menos 10 caracteres")
+    .max(2000),
+});
 
-const labelClass = "font-body text-tierra/40 text-[10px] tracking-[0.25em] uppercase mb-2 block";
+type FormValues = z.infer<typeof schema>;
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+/* ── Labels y opciones ───────────────────────────────────────────────────── */
+
+const TIPOS: { value: TipoConsulta; label: string }[] = [
+  { value: "venta", label: "Venta" },
+  { value: "alquiler", label: "Alquiler" },
+  { value: "consultoria", label: "Consultoría" },
+  { value: "contratos", label: "Contratos" },
+];
+
+/* ── Estilos compartidos ─────────────────────────────────────────────────── */
+
+const inputBase =
+  "w-full bg-transparent border-b border-tierra/15 py-3.5 font-body text-tierra text-sm " +
+  "focus:outline-none focus:border-dorado transition-colors duration-200 placeholder:text-tierra/25";
+
+const labelBase =
+  "font-body text-tierra/40 text-[10px] tracking-[0.25em] uppercase mb-2 block";
+
+/* ── Toast interno ───────────────────────────────────────────────────────── */
+
+type ToastState = { type: "success" | "error"; message: string } | null;
+
+function Toast({ toast, onClose }: { toast: ToastState; onClose: () => void }) {
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(onClose, 4500);
+    return () => clearTimeout(id);
+  }, [toast, onClose]);
+
+  if (!toast) return null;
+
+  const isSuccess = toast.type === "success";
+
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="mt-4 w-full sm:w-auto px-12 py-4 bg-tierra text-crema font-body text-[11px] tracking-[0.15em] font-medium uppercase hover:bg-dorado transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+    <div
+      role="alert"
+      className={`
+        fixed bottom-6 right-6 z-50 flex items-start gap-3
+        px-5 py-4 max-w-sm
+        border font-body text-sm leading-relaxed
+        animate-fade-in-up
+        ${
+          isSuccess
+            ? "bg-[#0D1628] border-dorado/30 text-crema"
+            : "bg-red-950 border-red-500/30 text-red-100"
+        }
+      `}
+      style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.25)" }}
     >
-      {pending ? "Enviando..." : "Enviar mensaje"}
-    </button>
+      {/* Icon */}
+      <span className="shrink-0 mt-0.5">
+        {isSuccess ? (
+          <svg
+            className="w-4 h-4 text-dorado"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        ) : (
+          <svg
+            className="w-4 h-4 text-red-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        )}
+      </span>
+      <span>{toast.message}</span>
+      <button
+        onClick={onClose}
+        aria-label="Cerrar"
+        className="ml-auto shrink-0 opacity-40 hover:opacity-80 transition-opacity"
+      >
+        <svg
+          className="w-3.5 h-3.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
   );
 }
 
-export default function FormularioContacto() {
-  const [state, action] = useFormState(enviarConsulta, initialState);
+/* ── Formulario ──────────────────────────────────────────────────────────── */
 
-  if (state.success) {
-    return (
-      <div className="flex flex-col items-start gap-6 py-16">
-        <div className="w-14 h-14 border border-dorado/40 flex items-center justify-center">
-          <svg className="w-6 h-6 text-dorado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <div>
-          <h3 className="font-display text-tierra text-3xl font-light mb-3">Consulta recibida</h3>
-          <p className="font-body text-tierra/50 text-sm leading-relaxed max-w-sm">
-            Gracias por contactarte. Nos comunicaremos con vos a la brevedad.
-          </p>
-        </div>
-      </div>
-    );
-  }
+export default function FormularioContacto() {
+  const [toast, setToast] = useState<ToastState>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  const tipoSeleccionado = watch("tipo_consulta");
+
+  const onSubmit = async (data: FormValues) => {
+    const result = await guardarLeadAltum({
+      nombre: data.nombre,
+      email: data.email,
+      telefono: data.telefono || undefined,
+      tipo_consulta: data.tipo_consulta,
+      mensaje: data.mensaje,
+    });
+
+    if (result.success) {
+      setToast({
+        type: "success",
+        message: "Consulta enviada. Te contactamos a la brevedad.",
+      });
+      reset();
+    } else {
+      setToast({
+        type: "error",
+        message: result.error ?? "Error al enviar. Intentá de nuevo.",
+      });
+    }
+  };
 
   return (
-    <form action={action} className="flex flex-col gap-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <div>
-          <label className={labelClass}>
-            Nombre <span className="text-dorado">*</span>
-          </label>
-          <input
-            type="text"
-            name="nombre"
-            required
-            className={inputClass}
-            placeholder="Tu nombre completo"
-          />
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="flex flex-col gap-8"
+      >
+        {/* Nombre + Email */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div>
+            <label className={labelBase}>
+              Nombre <span className="text-dorado">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Tu nombre completo"
+              className={inputBase}
+              {...register("nombre")}
+            />
+            {errors.nombre && (
+              <p className="font-body text-red-600 text-[11px] mt-1.5">
+                {errors.nombre.message}
+              </p>
+            )}
+          </div>
+          <div>
+            <label className={labelBase}>
+              Email <span className="text-dorado">*</span>
+            </label>
+            <input
+              type="email"
+              placeholder="tu@email.com"
+              className={inputBase}
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="font-body text-red-600 text-[11px] mt-1.5">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label className={labelClass}>
-            Email <span className="text-dorado">*</span>
-          </label>
-          <input
-            type="email"
-            name="email"
-            required
-            className={inputClass}
-            placeholder="tu@email.com"
-          />
-        </div>
-      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {/* Teléfono */}
         <div>
-          <label className={labelClass}>Teléfono</label>
+          <label className={labelBase}>Teléfono</label>
           <input
             type="tel"
-            name="telefono"
-            className={inputClass}
             placeholder="+54 299 000 0000"
+            className={inputBase}
+            {...register("telefono")}
           />
         </div>
+
+        {/* Tipo de consulta — pills */}
         <div>
-          <label className={labelClass}>Asunto</label>
-          <input
-            type="text"
-            name="asunto"
-            className={inputClass}
-            placeholder="Ej: Consulta sobre proyecto"
-          />
+          <label className={labelBase}>
+            Tipo de consulta <span className="text-dorado">*</span>
+          </label>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {TIPOS.map((t) => {
+              const selected = tipoSeleccionado === t.value;
+              return (
+                <button
+                  key={t.value}
+                  type="button"
+                  onClick={() =>
+                    setValue("tipo_consulta", t.value, { shouldValidate: true })
+                  }
+                  className={`
+                    font-body text-[10px] tracking-[0.18em] uppercase px-4 py-2
+                    border transition-all duration-200
+                    ${
+                      selected
+                        ? "border-dorado bg-dorado/10 text-tierra"
+                        : "border-tierra/15 text-tierra/40 hover:border-tierra/30 hover:text-tierra/60"
+                    }
+                  `}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
+          {errors.tipo_consulta && (
+            <p className="font-body text-red-600 text-[11px] mt-1.5">
+              {errors.tipo_consulta.message}
+            </p>
+          )}
         </div>
-      </div>
 
-      <div>
-        <label className={labelClass}>
-          Mensaje <span className="text-dorado">*</span>
-        </label>
-        <textarea
-          name="mensaje"
-          required
-          rows={5}
-          className={inputClass}
-          placeholder="Contanos qué estás buscando..."
-        />
-      </div>
+        {/* Mensaje */}
+        <div>
+          <label className={labelBase}>
+            Mensaje <span className="text-dorado">*</span>
+          </label>
+          <textarea
+            rows={5}
+            placeholder="Contanos qué estás buscando..."
+            className={inputBase}
+            {...register("mensaje")}
+          />
+          {errors.mensaje && (
+            <p className="font-body text-red-600 text-[11px] mt-1.5">
+              {errors.mensaje.message}
+            </p>
+          )}
+        </div>
 
-      {state.error && (
-        <p className="font-body text-red-600 text-sm">{state.error}</p>
-      )}
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="
+            mt-2 w-full sm:w-auto px-12 py-4
+            bg-tierra text-crema
+            font-body text-[11px] tracking-[0.15em] font-medium uppercase
+            hover:bg-dorado transition-colors duration-300
+            disabled:opacity-50 disabled:cursor-not-allowed
+            flex items-center justify-center gap-2.5
+          "
+        >
+          {isSubmitting ? (
+            <>
+              <svg
+                className="w-3.5 h-3.5 animate-spin"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                />
+              </svg>
+              Enviando...
+            </>
+          ) : (
+            "Enviar consulta"
+          )}
+        </button>
+      </form>
 
-      <SubmitButton />
-    </form>
+      <Toast toast={toast} onClose={() => setToast(null)} />
+    </>
   );
 }

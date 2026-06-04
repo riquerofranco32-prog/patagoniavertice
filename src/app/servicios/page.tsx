@@ -1,26 +1,20 @@
+import type { Metadata } from "next";
 import Servicios from "@/components/marketing/Servicios";
 
-export const metadata = {
-  title: "Servicios — Patagonia Vértice",
+export const metadata: Metadata = {
+  title: "Servicios — ALTUM SDI",
+  description:
+    "Compra y venta de inmuebles, administración de alquileres, consultoría estratégica y contratos inmobiliarios en Neuquén y la Patagonia.",
+  keywords: [
+    "servicios inmobiliarios Neuquén",
+    "compra venta inmuebles Patagonia",
+    "administración alquileres Neuquén",
+    "consultoría inmobiliaria",
+    "contratos inmobiliarios",
+    "ALTUM SDI",
+  ],
 };
 
 export default function ServiciosPage() {
-  return (
-    <>
-      <div className="bg-tierra pt-40 pb-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px w-12 bg-dorado" />
-            <span className="font-body text-dorado text-xs tracking-[0.4em] uppercase">
-              Lo que hacemos
-            </span>
-          </div>
-          <h1 className="font-display text-crema text-6xl lg:text-7xl font-light leading-[1.1]">
-            Nuestros <span className="italic text-dorado">servicios</span>
-          </h1>
-        </div>
-      </div>
-      <Servicios />
-    </>
-  );
+  return <Servicios />;
 }
