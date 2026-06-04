@@ -25,7 +25,7 @@ const servicios: Servicio[] = [
     icon: Landmark,
     titulo: "Compra y Venta de Inmuebles",
     descripcion:
-      "Gestionamos la compra y venta de propiedades residenciales y comerciales en Neuquén. Tasación, difusión, negociación y acompañamiento hasta la firma de escritura.",
+      "Gestionamos la compra y venta de propiedades residenciales y comerciales en Río Negro y la Patagonia. Tasación, difusión, negociación y acompañamiento hasta la firma de escritura.",
     modelo: "Comisión sobre precio de venta",
     waText:
       "Hola%2C%20me%20interesa%20comprar%20o%20vender%20un%20inmueble%20con%20ALTUM%20SDI",
@@ -245,7 +245,7 @@ export default function Servicios() {
               variants={fadeUp}
             >
               Cuatro líneas de trabajo para acompañarte en cada etapa de tu
-              operación inmobiliaria en Neuquén y la Patagonia.
+              operación inmobiliaria en Río Negro y la Patagonia.
             </motion.p>
           </motion.div>
         </div>

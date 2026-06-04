@@ -19,47 +19,61 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://patagoniavertice.vercel.app";
+const siteUrl =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://patagoniavertice.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Patagonia Vértice — Desarrollos Inmobiliarios en Neuquén",
-    template: "%s | Patagonia Vértice",
+    default: "Altum Inmobiliaria — Servicios Inmobiliarios en Río Negro",
+    template: "%s | Altum Inmobiliaria",
   },
   description:
-    "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina. Donde el paisaje define el valor.",
+    "Servicios inmobiliarios de primer nivel en Río Negro y la Patagonia Argentina. Venta, alquiler, consultoría y contratos.",
   keywords: [
-    "inmobiliaria Neuquén",
-    "desarrollos inmobiliarios Patagonia",
-    "propiedades Neuquén",
-    "inversión inmobiliaria Neuquén",
-    "Patagonia Vértice",
-    "construcción Neuquén",
-    "lotes Patagonia",
+    "inmobiliaria Río Negro",
+    "propiedades Río Negro",
+    "inmobiliaria Cipoletti",
+    "inmobiliaria Catriel",
+    "inversión inmobiliaria Patagonia",
+    "Altum Inmobiliaria",
+    "alquiler Río Negro",
   ],
-  authors: [{ name: "Patagonia Vértice" }],
-  creator: "Patagonia Vértice",
+  authors: [{ name: "Altum Inmobiliaria" }],
+  creator: "Altum Inmobiliaria",
   openGraph: {
     type: "website",
     locale: "es_AR",
     url: siteUrl,
-    siteName: "Patagonia Vértice",
-    title: "Patagonia Vértice — Desarrollos Inmobiliarios en Neuquén",
+    siteName: "Altum Inmobiliaria",
+    title: "Altum Inmobiliaria — Servicios Inmobiliarios en Río Negro",
     description:
-      "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina. Donde el paisaje define el valor.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Patagonia Vértice" }],
+      "Servicios inmobiliarios de primer nivel en Río Negro y la Patagonia Argentina. Donde el paisaje define el valor.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Altum Inmobiliaria",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Patagonia Vértice — Desarrollos Inmobiliarios en Neuquén",
-    description: "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina.",
+    title: "Altum Inmobiliaria — Servicios Inmobiliarios en Río Negro",
+    description:
+      "Servicios inmobiliarios de primer nivel en Río Negro y la Patagonia Argentina.",
     images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   alternates: { canonical: siteUrl },
 };
@@ -67,19 +81,22 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
-  name: "Patagonia Vértice",
-  description: "Desarrollos y servicios inmobiliarios de primer nivel en Neuquén y la Patagonia Argentina.",
+  name: "Altum Inmobiliaria",
+  description:
+    "Servicios inmobiliarios de primer nivel en Río Negro y la Patagonia Argentina.",
   url: siteUrl,
-  telephone: "+54-299-466-8428",
+  telephone: "+54-9-2996-09-5742",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Neuquén",
-    addressRegion: "Neuquén",
+    addressLocality: "Cipoletti",
+    addressRegion: "Río Negro",
     addressCountry: "AR",
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={`${cormorant.variable} ${jakarta.variable}`}>
       <head>

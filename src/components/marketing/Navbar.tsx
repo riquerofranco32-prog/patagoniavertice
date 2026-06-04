@@ -45,7 +45,7 @@ export default function Navbar() {
           {/* logo-altum.png       → sólido (sobre navy #1A2752)        */}
           <img
             src={scrolled ? "/logo-altum.png" : "/logo-altum-white.png"}
-            alt="ALTUM SDI"
+            alt="Altum Inmobiliaria"
             className="h-9 w-auto object-contain transition-opacity duration-300"
           />
         </Link>

@@ -5,7 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 
-function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
+function MiniCounter({
+  value,
+  suffix = "",
+}: {
+  value: number;
+  suffix?: string;
+}) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
@@ -29,7 +35,7 @@ function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string })
           requestAnimationFrame(tick);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -43,7 +49,13 @@ function MiniCounter({ value, suffix = "" }: { value: number; suffix?: string })
   );
 }
 
-const valores = ["Transparencia", "Compromiso", "Calidad", "Visión", "Territorio"];
+const valores = [
+  "Transparencia",
+  "Compromiso",
+  "Calidad",
+  "Visión",
+  "Territorio",
+];
 
 export default function Nosotros() {
   return (
@@ -52,7 +64,6 @@ export default function Nosotros() {
       <div className="py-28 lg:py-36">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
             {/* Left: text */}
             <SlideInLeft>
               <div className="flex items-center gap-4 mb-8">
@@ -62,10 +73,15 @@ export default function Nosotros() {
 
               <h2
                 className="font-display text-tierra font-light leading-[1.0] mb-8"
-                style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)", letterSpacing: "-0.03em" }}
+                style={{
+                  fontSize: "clamp(2.8rem, 6vw, 5rem)",
+                  letterSpacing: "-0.03em",
+                }}
               >
                 Raíces patagónicas,{" "}
-                <em className="not-italic italic text-dorado">visión de futuro</em>
+                <em className="not-italic italic text-dorado">
+                  visión de futuro
+                </em>
               </h2>
 
               <div className="space-y-4 font-body text-tierra/50 text-[15px] leading-relaxed mb-10">
@@ -90,7 +106,10 @@ export default function Nosotros() {
                   <div key={s.label} className="flex items-center gap-5">
                     <span
                       className="font-display text-dorado font-light"
-                      style={{ fontSize: "clamp(2.8rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
+                      style={{
+                        fontSize: "clamp(2.8rem, 5vw, 4rem)",
+                        letterSpacing: "-0.03em",
+                      }}
                     >
                       <MiniCounter value={s.value} suffix={s.suffix} />
                     </span>
@@ -106,8 +125,18 @@ export default function Nosotros() {
                 className="inline-flex items-center gap-3 font-body text-[11px] tracking-[0.15em] font-semibold uppercase bg-tierra text-crema px-9 py-4 hover:bg-dorado transition-colors duration-300"
               >
                 Conocer más
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
             </SlideInLeft>
@@ -123,7 +152,7 @@ export default function Nosotros() {
                 <div className="aspect-[4/5] overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80"
-                    alt="Patagonia Vértice — obra en Neuquén"
+                    alt="Altum Inmobiliaria — obra en Río Negro"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
@@ -131,8 +160,12 @@ export default function Nosotros() {
 
                 {/* Floating badge on image */}
                 <div className="absolute top-6 -left-4 bg-tierra px-5 py-3 shadow-xl">
-                  <p className="font-body text-dorado text-[10px] tracking-[0.25em] uppercase">Neuquén · Patagonia</p>
-                  <p className="font-display text-crema text-lg font-light mt-0.5">Argentina</p>
+                  <p className="font-body text-dorado text-[10px] tracking-[0.25em] uppercase">
+                    Río Negro · Patagonia
+                  </p>
+                  <p className="font-display text-crema text-lg font-light mt-0.5">
+                    Argentina
+                  </p>
                 </div>
               </div>
             </SlideInRight>
@@ -148,8 +181,20 @@ export default function Nosotros() {
           transition={{ duration: 40, ease: "linear", repeat: Infinity }}
         >
           {[...valores, ...valores, ...valores, ...valores].map((v, i) => (
-            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "1.5rem", padding: "1.25rem 2rem", whiteSpace: "nowrap", flexShrink: 0 }}>
-              <span className="font-display text-tierra/40 font-light italic text-xl">{v}</span>
+            <span
+              key={i}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "1.5rem",
+                padding: "1.25rem 2rem",
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+            >
+              <span className="font-display text-tierra/40 font-light italic text-xl">
+                {v}
+              </span>
               <span className="text-dorado/40 text-sm">·</span>
             </span>
           ))}

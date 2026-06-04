@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Servicios from "@/components/marketing/Servicios";
 
 export const metadata: Metadata = {
-  title: "Servicios — ALTUM SDI",
+  title: "Servicios — Altum Inmobiliaria",
   description:
-    "Compra y venta de inmuebles, administración de alquileres, consultoría estratégica y contratos inmobiliarios en Neuquén y la Patagonia.",
+    "Compra y venta de inmuebles, administración de alquileres, consultoría estratégica y contratos inmobiliarios en Río Negro y la Patagonia.",
   keywords: [
-    "servicios inmobiliarios Neuquén",
+    "servicios inmobiliarios Río Negro",
     "compra venta inmuebles Patagonia",
-    "administración alquileres Neuquén",
+    "administración alquileres Río Negro",
     "consultoría inmobiliaria",
     "contratos inmobiliarios",
-    "ALTUM SDI",
+    "Altum Inmobiliaria",
   ],
 };
 

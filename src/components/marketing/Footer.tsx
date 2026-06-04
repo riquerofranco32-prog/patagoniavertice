@@ -35,16 +35,17 @@ export default function Footer() {
             <Link href="/" className="inline-block mb-6">
               <img
                 src="/logo-altum-white.png"
-                alt="ALTUM SDI"
+                alt="Altum Inmobiliaria"
                 className="h-10 w-auto object-contain"
               />
             </Link>
             <p className="font-body text-crema/40 text-sm leading-relaxed mb-6">
-              Servicios inmobiliarios de primer nivel en Neuquén y la Patagonia.
-              Venta, alquiler, consultoría y contratos con respaldo profesional.
+              Servicios inmobiliarios de primer nivel en Río Negro y la
+              Patagonia. Venta, alquiler, consultoría y contratos con respaldo
+              profesional.
             </p>
             <p className="font-body text-crema/20 text-[11px] tracking-[0.15em] uppercase">
-              Neuquén, Patagonia Argentina
+              Río Negro, Patagonia Argentina
             </p>
           </div>
 
@@ -95,7 +96,7 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <LocationIcon />
                 <span>
-                  Neuquén Capital,
+                  Cipoletti,
                   <br />
                   Patagonia Argentina
                 </span>
@@ -109,7 +110,7 @@ export default function Footer() {
                 className="flex items-center gap-3 hover:text-dorado transition-colors duration-200"
               >
                 <WaIcon />
-                +54 299 466-8428
+                +54 9 2996 09-5742
               </a>
 
               {/* Email */}
@@ -126,17 +127,20 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <SocialLink
                 href="https://instagram.com/altumsdi"
-                label="Instagram ALTUM SDI"
+                label="Instagram Altum Inmobiliaria"
               >
                 <InstagramIcon />
               </SocialLink>
               <SocialLink
                 href="https://linkedin.com/company/altumsdi"
-                label="LinkedIn ALTUM SDI"
+                label="LinkedIn Altum Inmobiliaria"
               >
                 <LinkedInIcon />
               </SocialLink>
-              <SocialLink href={WHATSAPP_URL} label="WhatsApp ALTUM SDI">
+              <SocialLink
+                href={WHATSAPP_URL}
+                label="WhatsApp Altum Inmobiliaria"
+              >
                 <WaIconSm />
               </SocialLink>
             </div>
@@ -146,7 +150,7 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className="border-t border-crema/8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-crema/20 text-xs tracking-wider">
-            © 2025 ALTUM SDI. Todos los derechos reservados.
+            © 2025 Altum Inmobiliaria. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-6">
             <Link
@@ -157,7 +161,7 @@ export default function Footer() {
             </Link>
             <span className="text-crema/10 select-none">·</span>
             <span className="font-body text-crema/15 text-xs tracking-wider">
-              Neuquén, Argentina
+              Río Negro, Argentina
             </span>
           </div>
         </div>

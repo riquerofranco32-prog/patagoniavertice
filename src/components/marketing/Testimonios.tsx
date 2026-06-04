@@ -1,12 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Clock, MapPin, TrendingUp, Users, CheckCircle } from "lucide-react";
+import {
+  Shield,
+  Clock,
+  MapPin,
+  TrendingUp,
+  Users,
+  CheckCircle,
+} from "lucide-react";
 
 const diferenciadores = [
   {
     icon: MapPin,
-    titulo: "Empresa 100% neuquina",
+    titulo: "Empresa 100% patagónica",
     descripcion:
       "Nacimos y crecimos en la Patagonia. Conocemos el territorio, el mercado y los barrios mejor que nadie. No somos una inversora de afuera.",
   },
@@ -26,13 +33,13 @@ const diferenciadores = [
     icon: Clock,
     titulo: "15 años de trayectoria",
     descripcion:
-      "Más de una década desarrollando proyectos en Neuquén. Nuestra historia habla por nosotros.",
+      "Más de una década desarrollando proyectos en Río Negro y la Patagonia. Nuestra historia habla por nosotros.",
   },
   {
     icon: Users,
     titulo: "Acompañamiento real",
     descripcion:
-      "Desde la primera consulta hasta la escritura. Estela y el equipo están disponibles, no una central de atención.",
+      "Desde la primera consulta hasta la escritura. Nuestro equipo está disponible para vos, no una central de atención.",
   },
   {
     icon: CheckCircle,
@@ -46,7 +53,6 @@ export default function PorQueElegirnos() {
   return (
     <section className="bg-crema py-28 lg:py-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 lg:mb-20">
           <div>
@@ -63,11 +69,18 @@ export default function PorQueElegirnos() {
 
             <motion.h2
               className="font-display text-tierra font-light leading-[1.0]"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", letterSpacing: "-0.03em" }}
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                letterSpacing: "-0.03em",
+              }}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             >
               Lo que nos hace{" "}
               <em className="not-italic italic text-dorado">diferentes</em>
@@ -81,12 +94,16 @@ export default function PorQueElegirnos() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            No somos la única desarrolladora en Neuquén. Pero sí la que más te acompaña.
+            No somos la única desarrolladora en Río Negro y la Patagonia. Pero
+            sí la que más te acompaña.
           </motion.p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "rgba(28,25,22,0.07)" }}>
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{ background: "rgba(28,25,22,0.07)" }}
+        >
           {diferenciadores.map((d, i) => {
             const Icon = d.icon;
             return (
@@ -96,7 +113,11 @@ export default function PorQueElegirnos() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.08,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
               >
                 {/* Hover background */}
                 <div className="absolute inset-0 bg-tierra opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -118,7 +139,6 @@ export default function PorQueElegirnos() {
             );
           })}
         </div>
-
       </div>
     </section>
   );

@@ -3,7 +3,8 @@ import SumateContent from "@/components/marketing/SumateContent";
 
 export const metadata: Metadata = {
   title: "Sumate",
-  description: "Trabajá con Patagonia Vértice. Buscamos profesionales apasionados por el desarrollo de la Patagonia.",
+  description:
+    "Trabajá con Altum Inmobiliaria. Buscamos profesionales apasionados por el desarrollo de Río Negro y la Patagonia.",
 };
 
 export default function SumatePage() {
@@ -20,7 +21,10 @@ export default function SumatePage() {
           />
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(to bottom, rgba(28,26,23,0.5), rgba(28,26,23,0.95))" }}
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(28,26,23,0.5), rgba(28,26,23,0.95))",
+            }}
           />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
@@ -32,19 +36,25 @@ export default function SumatePage() {
           </div>
           <h1
             className="font-display text-crema font-light leading-[1.05] mb-6 max-w-3xl"
-            style={{ fontSize: "clamp(3rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
+            style={{
+              fontSize: "clamp(3rem, 6vw, 5rem)",
+              letterSpacing: "-0.02em",
+            }}
           >
             Construí tu futuro{" "}
             <span className="italic text-dorado">con nosotros</span>
           </h1>
           <p className="font-body text-crema/40 text-base leading-relaxed max-w-xl">
-            Somos un equipo apasionado por el desarrollo de la Patagonia.
-            Si querés formar parte, queremos conocerte.
+            Somos un equipo apasionado por el desarrollo de la Patagonia. Si
+            querés formar parte, queremos conocerte.
           </p>
         </div>
         <div
           className="absolute bottom-0 left-0 right-0 h-px"
-          style={{ background: "linear-gradient(to right, transparent, #B8965A40, transparent)" }}
+          style={{
+            background:
+              "linear-gradient(to right, transparent, #B8965A40, transparent)",
+          }}
         />
       </div>
 

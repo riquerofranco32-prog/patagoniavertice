@@ -3,15 +3,15 @@ import FormularioContacto from "@/components/marketing/FormularioContacto";
 import { WHATSAPP_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Contacto — ALTUM SDI",
+  title: "Contacto — Altum Inmobiliaria",
   description:
-    "Contactate con ALTUM SDI. Asesores inmobiliarios en Cipoletti, Catriel y toda la región de Neuquén-Río Negro.",
+    "Contactate con Altum Inmobiliaria. Asesores inmobiliarios en Cipoletti, Catriel y toda la región de Río Negro.",
 };
 
 /* ── Datos de contacto ───────────────────────────────────────────────────── */
 
 const WA_HREF =
-  "https://wa.me/5492994668428?text=Hola%2C%20quisiera%20contactarme%20con%20ALTUM%20SDI";
+  "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20contactarme%20con%20Altum%20Inmobiliaria";
 
 const contactInfo = [
   {
@@ -132,7 +132,7 @@ export default function ContactoPage() {
                   rel="noopener noreferrer"
                   className="font-body text-crema/55 text-[13px] hover:text-[#25D366] transition-colors"
                 >
-                  +54 9 299 466-8428
+                  +54 9 2996 09-5742
                 </a>
               </div>
             </div>

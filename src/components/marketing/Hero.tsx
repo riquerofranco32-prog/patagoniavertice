@@ -5,25 +5,25 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 
 const WA_HERO =
-  "https://wa.me/5492994668428?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20ALTUM%20SDI";
+  "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
 
 const SERVICES = ["Venta", "Alquiler", "Consultoría", "Contratos"];
 
 const MARQUEE_ITEMS = [
-  "ALTUM SDI",
+  "ALTUM INMOBILIARIA",
   "VENTA",
   "ALQUILER",
   "CONSULTORÍA",
   "CONTRATOS",
-  "NEUQUÉN",
+  "RÍO NEGRO",
   "PATAGONIA",
   "PROPIEDADES",
-  "ALTUM SDI",
+  "ALTUM INMOBILIARIA",
   "VENTA",
   "ALQUILER",
   "CONSULTORÍA",
   "CONTRATOS",
-  "NEUQUÉN",
+  "RÍO NEGRO",
   "PATAGONIA",
   "PROPIEDADES",
 ];
@@ -33,10 +33,6 @@ const titleLines = [
   { text: "en el corazón", cls: "text-crema/30 pl-0 lg:pl-20" },
   { text: "de Patagonia.", cls: "italic text-dorado" },
 ];
-
-// High-quality Patagonian Andes landscape
-const BG_IMAGE =
-  "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=85&auto=format&fit=crop";
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -53,11 +49,16 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-screen flex flex-col overflow-hidden"
     >
-      {/* ── Patagonia background image — parallax ────────────────────────── */}
+      {/* ── Video background — parallax ────────────────────────── */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: 1.1 }}>
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url("${BG_IMAGE}")` }}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/bg-hero.mp4"
+          poster="/hero.png"
+          autoPlay
+          muted
+          loop
+          playsInline
         />
       </motion.div>
 
@@ -97,7 +98,7 @@ export default function Hero() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-dorado badge-pulse" />
           <span className="font-body text-dorado/75 text-[10px] tracking-[0.25em] uppercase">
-            ALTUM SDI · Neuquén
+            Altum Inmobiliaria · Río Negro
           </span>
         </div>
       </motion.div>
@@ -120,7 +121,7 @@ export default function Hero() {
             animate={{ width: 40 }}
             transition={{ delay: 0.6, duration: 0.5 }}
           />
-          <span className="eyebrow">Neuquén · Patagonia Argentina</span>
+          <span className="eyebrow">Río Negro · Patagonia Argentina</span>
         </motion.div>
 
         {/* Headline — clip-up reveal per line */}
@@ -175,7 +176,7 @@ export default function Hero() {
           transition={{ delay: 1.05, duration: 0.7 }}
         >
           Accedé al mercado inmobiliario de mayor crecimiento en Argentina.
-          Propiedades con respaldo profesional en Neuquén y la Patagonia.
+          Propiedades con respaldo profesional en Río Negro y la Patagonia.
         </motion.p>
 
         {/* CTAs */}
