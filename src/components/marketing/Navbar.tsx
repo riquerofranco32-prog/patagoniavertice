@@ -48,8 +48,8 @@ export default function Navbar() {
           <img
             src="/logoo.png"
             alt="Altum Inmobiliaria"
-            className="h-9 w-auto object-contain transition-opacity duration-300"
-            style={{ mixBlendMode: "screen" }}
+            className="h-10 md:h-14 w-auto object-contain transition-opacity duration-300"
+            style={{ mixBlendMode: "screen", filter: "brightness(1.05)" }}
           />
         </Link>
 
