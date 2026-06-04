@@ -20,7 +20,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://patagoniavertice.vercel.app";
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://altumsdi.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
