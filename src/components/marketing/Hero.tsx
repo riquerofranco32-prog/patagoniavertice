@@ -55,26 +55,20 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-screen flex flex-col overflow-hidden"
     >
-      {/* Ken Burns keyframes */}
-      <style>{`
-        @keyframes kenburns {
-          0%   { transform: scale(1.05) translateX(0px); }
-          100% { transform: scale(1.12) translateX(-20px); }
-        }
-        .video-kb { animation: kenburns 20s ease-in-out infinite alternate; }
-      `}</style>
-
-      {/* ── Video background — parallax ────────────────────────── */}
+      {/* ── Video background — parallax + subtle scale on load ── */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: 1.1 }}>
-        <video
+        <motion.video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover video-kb"
+          className="absolute inset-0 w-full h-full object-cover"
           src="/bg-hero.mp4"
           poster="/hero.png"
           autoPlay
           muted
           loop
           playsInline
+          initial={{ scale: 1.0 }}
+          animate={{ scale: 1.03 }}
+          transition={{ duration: 8, ease: "linear" }}
         />
       </motion.div>
 
@@ -155,9 +149,9 @@ export default function Hero() {
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{
-                  duration: 0.85,
-                  delay: 0.5 + i * 0.18,
-                  ease: [0.16, 1, 0.3, 1],
+                  duration: 0.7,
+                  delay: 0.4 + i * 0.3,
+                  ease: "easeInOut",
                 }}
               >
                 {line.text}
@@ -205,7 +199,7 @@ export default function Hero() {
           {/* Primary — Ver Servicios */}
           <Link
             href="/servicios"
-            className="group inline-flex items-center justify-center gap-3 px-9 py-4 btn-shimmer text-tierra font-body text-[11px] font-semibold tracking-[0.15em] uppercase"
+            className="group cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 btn-shimmer text-tierra font-body text-[11px] font-semibold tracking-[0.15em] uppercase"
           >
             Ver Servicios
             <svg
@@ -228,7 +222,7 @@ export default function Hero() {
             href={WA_HERO}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-3 px-9 py-4 border border-crema/15 text-crema/70 font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
+            className="cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 border border-crema/15 text-crema/70 font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
           >
             <WaIcon />
             Consultar por WhatsApp

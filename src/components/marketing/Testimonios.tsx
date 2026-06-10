@@ -2,17 +2,17 @@
 
 import { motion } from "framer-motion";
 import {
+  Mountain,
   Shield,
-  Clock,
-  MapPin,
-  TrendingUp,
+  Handshake,
   Users,
+  Heart,
   CheckCircle,
 } from "lucide-react";
 
 const diferenciadores = [
   {
-    icon: MapPin,
+    icon: Mountain,
     titulo: "Empresa 100% patagónica",
     descripcion:
       "Nacimos y crecimos en la Patagonia. Conocemos el territorio, el mercado y los barrios mejor que nadie. No somos una inversora de afuera.",
@@ -21,19 +21,19 @@ const diferenciadores = [
     icon: Shield,
     titulo: "Transparencia total",
     descripcion:
-      "Contratos claros, plazo de entrega garantizado y comunicación constante durante toda la obra. Sin letra chica.",
+      "Contratos claros, condiciones garantizadas y comunicación constante durante toda la operación. Sin letra chica.",
   },
   {
-    icon: TrendingUp,
-    titulo: "Financiamiento sin banco",
+    icon: Handshake,
+    titulo: "Trato directo",
     descripcion:
-      "Planes de pago directos con la empresa. Sin trámites bancarios, sin burocracia. Adaptados a tu situación.",
+      "Negociás con quienes toman las decisiones. Sin intermediarios, sin burocracia. Condiciones adaptadas a tu situación.",
   },
   {
-    icon: Clock,
-    titulo: "15 años de trayectoria",
+    icon: Heart,
+    titulo: "Calidad en cada detalle",
     descripcion:
-      "Más de una década desarrollando proyectos en Río Negro y la Patagonia. Nuestra historia habla por nosotros.",
+      "Atención personalizada y rigor profesional en cada operación en Río Negro y la Patagonia. Nuestro trabajo habla por nosotros.",
   },
   {
     icon: Users,
@@ -94,8 +94,8 @@ export default function PorQueElegirnos() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            No somos la única desarrolladora en Río Negro y la Patagonia. Pero
-            sí la que más te acompaña.
+            No somos la única inmobiliaria en Río Negro y la Patagonia. Pero sí
+            la que más te acompaña.
           </motion.p>
         </div>
 
@@ -119,19 +119,22 @@ export default function PorQueElegirnos() {
                   ease: [0.25, 0.46, 0.45, 0.94],
                 }}
               >
-                {/* Hover background */}
-                <div className="absolute inset-0 bg-tierra opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Hover background — soft gold tint */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
+                  style={{ background: "rgba(201,168,76,0.08)" }}
+                />
 
                 <div className="relative">
-                  <div className="text-dorado mb-6 transition-transform duration-300 group-hover:scale-110 origin-left">
+                  <div className="text-dorado mb-6 group-hover:rotate-[360deg] transition-transform duration-[600ms] ease-in-out">
                     <Icon size={24} strokeWidth={1.25} />
                   </div>
 
-                  <h3 className="font-display text-tierra group-hover:text-crema text-xl font-light leading-tight mb-3 transition-colors duration-500">
+                  <h3 className="font-display text-tierra text-xl font-light leading-tight mb-3">
                     {d.titulo}
                   </h3>
 
-                  <p className="font-body text-tierra/50 group-hover:text-crema/50 text-sm leading-relaxed transition-colors duration-500">
+                  <p className="font-body text-tierra/50 text-sm leading-relaxed">
                     {d.descripcion}
                   </p>
                 </div>

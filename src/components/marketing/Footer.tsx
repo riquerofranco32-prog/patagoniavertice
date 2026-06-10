@@ -59,7 +59,7 @@ export default function Footer() {
                 <Link
                   key={l.href + l.label}
                   href={l.href}
-                  className="font-body text-crema/40 text-sm hover:text-dorado transition-colors duration-200"
+                  className="footer-link self-start font-body text-crema/40 text-sm hover:text-dorado transition-colors duration-200"
                 >
                   {l.label}
                 </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="font-body text-crema/40 text-sm hover:text-dorado transition-colors duration-200"
+                  className="footer-link self-start font-body text-crema/40 text-sm hover:text-dorado transition-colors duration-200"
                 >
                   {l.label}
                 </Link>
@@ -155,7 +155,7 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <Link
               href="/contacto"
-              className="font-body text-crema/30 text-xs tracking-wider hover:text-dorado transition-colors duration-200"
+              className="footer-link font-body text-crema/30 text-xs tracking-wider hover:text-dorado transition-colors duration-200"
             >
               Contacto
             </Link>

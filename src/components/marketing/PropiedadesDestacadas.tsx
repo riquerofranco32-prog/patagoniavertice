@@ -3,7 +3,9 @@ import { createClient } from "@/lib/supabase/server";
 import type { Propiedad } from "@/lib/supabase/types";
 
 function PropiedadCard({ propiedad }: { propiedad: Propiedad }) {
-  const imagen = propiedad.imagenes?.[0] ?? `https://placehold.co/600x400/1C1A17/B8965A?text=${encodeURIComponent(propiedad.titulo)}`;
+  const imagen =
+    propiedad.imagenes?.[0] ??
+    `https://placehold.co/600x400/1C1A17/B8965A?text=${encodeURIComponent(propiedad.titulo)}`;
 
   const tipoLabel: Record<string, string> = {
     venta: "Venta",
@@ -19,23 +21,29 @@ function PropiedadCard({ propiedad }: { propiedad: Propiedad }) {
           src={imagen}
           alt={propiedad.titulo}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          loading="lazy"
         />
       </div>
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="font-body text-dorado text-xs tracking-widest uppercase mb-2">
-            {propiedad.tipo ? tipoLabel[propiedad.tipo] : ""} · {propiedad.ciudad}
+            {propiedad.tipo ? tipoLabel[propiedad.tipo] : ""} ·{" "}
+            {propiedad.ciudad}
           </div>
           <h3 className="font-display text-tierra text-xl font-light leading-snug group-hover:text-dorado transition-colors">
             {propiedad.titulo}
           </h3>
           {propiedad.barrio && (
-            <p className="font-body text-tierra/50 text-sm mt-1">{propiedad.barrio}</p>
+            <p className="font-body text-tierra/50 text-sm mt-1">
+              {propiedad.barrio}
+            </p>
           )}
         </div>
         {propiedad.precio && (
           <div className="text-right shrink-0">
-            <div className="font-body text-tierra/40 text-xs mb-1">{propiedad.moneda}</div>
+            <div className="font-body text-tierra/40 text-xs mb-1">
+              {propiedad.moneda}
+            </div>
             <div className="font-display text-tierra text-xl font-light">
               {propiedad.precio.toLocaleString("es-AR")}
             </div>
@@ -74,8 +82,7 @@ export default async function PropiedadesDestacadas() {
               </span>
             </div>
             <h2 className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1]">
-              Proyectos{" "}
-              <span className="italic">seleccionados</span>
+              Proyectos <span className="italic">seleccionados</span>
             </h2>
           </div>
           <Link

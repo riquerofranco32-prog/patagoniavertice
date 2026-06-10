@@ -1,54 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 import PatagoniaGallery from "@/components/marketing/PatagoniaGallery";
-
-function MiniCounter({
-  value,
-  suffix = "",
-}: {
-  value: number;
-  suffix?: string;
-}) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          observer.disconnect();
-          const duration = 1800;
-          const start = performance.now();
-          const tick = (now: number) => {
-            const t = Math.min((now - start) / duration, 1);
-            setCount(Math.floor((1 - Math.pow(1 - t, 3)) * value));
-            if (t < 1) requestAnimationFrame(tick);
-            else setCount(value);
-          };
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.3 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [value]);
-
-  return (
-    <span ref={ref}>
-      {count}
-      <span className="text-dorado">{suffix}</span>
-    </span>
-  );
-}
 
 const valores = [
   "Transparencia",
@@ -87,38 +42,15 @@ export default function Nosotros() {
 
               <div className="space-y-4 font-body text-tierra/50 text-[15px] leading-relaxed mb-10">
                 <p>
-                  Somos una empresa neuquina con más de 15 años desarrollando
-                  proyectos inmobiliarios que respetan el entorno patagónico y
-                  generan valor real para quienes invierten con nosotros.
+                  Somos una consultora inmobiliaria especializada en operaciones
+                  de alto nivel en Río Negro y la Patagonia. Servicio directo,
+                  transparencia total, sin intermediarios.
                 </p>
                 <p>
-                  Cada proyecto nace de un profundo conocimiento del territorio,
-                  del mercado y de las familias que eligen la Patagonia como su
-                  lugar en el mundo.
+                  Cada operación nace de un profundo conocimiento del
+                  territorio, del mercado y de las personas que eligen la
+                  Patagonia como su lugar en el mundo.
                 </p>
-              </div>
-
-              {/* Stats */}
-              <div className="flex flex-col sm:flex-row gap-10 mb-10 py-8 border-y border-arena">
-                {[
-                  { value: 15, suffix: "+", label: "Años de experiencia" },
-                  { value: 200, suffix: "+", label: "Familias acompañadas" },
-                ].map((s) => (
-                  <div key={s.label} className="flex items-center gap-5">
-                    <span
-                      className="font-display text-dorado font-light"
-                      style={{
-                        fontSize: "clamp(2.8rem, 5vw, 4rem)",
-                        letterSpacing: "-0.03em",
-                      }}
-                    >
-                      <MiniCounter value={s.value} suffix={s.suffix} />
-                    </span>
-                    <span className="font-body text-tierra/35 text-[11px] tracking-[0.2em] uppercase leading-tight max-w-[80px]">
-                      {s.label}
-                    </span>
-                  </div>
-                ))}
               </div>
 
               <Link

@@ -5,7 +5,7 @@ import { Eye, Handshake, Shield, Star, Lightbulb, Users } from "lucide-react";
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Conocé la historia y valores de Patagonia Vértice, desarrolladora inmobiliaria con más de 15 años en Neuquén y la Patagonia.",
+    "Conocé la historia y valores de Altum Inmobiliaria, consultora especializada en operaciones de alto nivel en Río Negro y la Patagonia.",
 };
 
 const valores = [
@@ -71,7 +71,7 @@ export default function NosotrosPage() {
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-10 bg-dorado" />
             <span className="font-body text-dorado text-[11px] tracking-[0.3em] uppercase">
-              Patagonia Vértice
+              Altum Inmobiliaria
             </span>
           </div>
           <h1
@@ -84,8 +84,9 @@ export default function NosotrosPage() {
             Quiénes <span className="italic text-dorado">somos</span>
           </h1>
           <p className="font-body text-crema/40 text-base leading-relaxed max-w-xl">
-            Somos una desarrolladora y constructora neuquina en pleno
-            crecimiento, con proyectos propios en Neuquén y la Patagonia.
+            Somos una consultora inmobiliaria especializada en operaciones de
+            alto nivel en Río Negro y la Patagonia. Servicio directo,
+            transparencia total, sin intermediarios.
           </p>
         </div>
         <div
@@ -115,26 +116,26 @@ export default function NosotrosPage() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Una empresa joven con{" "}
-                <span className="italic text-dorado">experiencia sólida</span>
+                Servicio a medida,{" "}
+                <span className="italic text-dorado">calidad sin atajos</span>
               </h2>
               <div className="space-y-5 font-body text-tierra/55 text-sm leading-relaxed">
                 <p>
-                  Patagonia Vértice nació del profundo conocimiento del
-                  territorio neuquino y de la convicción de que la Patagonia
-                  merece desarrollos inmobiliarios a la altura de su paisaje y
-                  su gente.
+                  Altum Inmobiliaria nació del profundo conocimiento del
+                  territorio patagónico y de la convicción de que la Patagonia
+                  merece un servicio inmobiliario a la altura de su paisaje y su
+                  gente.
                 </p>
                 <p>
-                  Con más de 15 años de trayectoria, combinamos experiencia en
-                  construcción con una visión integral del mercado regional.
-                  Cada proyecto responde a la demanda real de familias e
-                  inversores que eligen vivir o apostar al sur.
+                  Trabajamos con un estándar simple: atención personalizada,
+                  comunicación directa y rigor profesional en cada operación.
+                  Cada cliente recibe un acompañamiento a medida, sin
+                  intermediarios ni vueltas.
                 </p>
                 <p>
-                  Desde lotes en entornos naturales hasta complejos
-                  residenciales en el corazón de Neuquén Capital, nuestros
-                  desarrollos generan valor real y duradero.
+                  Desde la tasación inicial hasta la firma de la escritura,
+                  cuidamos cada detalle para que tu operación genere valor real
+                  y duradero.
                 </p>
               </div>
             </div>
@@ -142,7 +143,7 @@ export default function NosotrosPage() {
               <div className="aspect-[4/5] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80"
-                  alt="Patagonia Vértice — construcción"
+                  alt="Altum Inmobiliaria — propiedades en la Patagonia"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />

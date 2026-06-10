@@ -35,7 +35,9 @@ export default async function PropiedadPage({
   const propiedad = data as Propiedad;
   const imagenes = propiedad.imagenes?.length
     ? propiedad.imagenes
-    : [`https://placehold.co/1200x800/1C1A17/B8965A?text=${encodeURIComponent(propiedad.titulo)}`];
+    : [
+        `https://placehold.co/1200x800/1C1A17/B8965A?text=${encodeURIComponent(propiedad.titulo)}`,
+      ];
 
   return (
     <>
@@ -62,7 +64,8 @@ export default async function PropiedadPage({
             {/* Main info */}
             <div className="lg:col-span-2">
               <div className="font-body text-dorado text-xs tracking-widest uppercase mb-4">
-                {propiedad.tipo ? tipoLabel[propiedad.tipo] : ""} · {propiedad.ciudad}
+                {propiedad.tipo ? tipoLabel[propiedad.tipo] : ""} ·{" "}
+                {propiedad.ciudad}
                 {propiedad.barrio && ` · ${propiedad.barrio}`}
               </div>
               <h1 className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1] mb-8">
@@ -83,6 +86,7 @@ export default async function PropiedadPage({
                       src={img}
                       alt={`${propiedad.titulo} ${i + 2}`}
                       className="w-full aspect-[4/3] object-cover"
+                      loading="lazy"
                     />
                   ))}
                 </div>
@@ -94,7 +98,9 @@ export default async function PropiedadPage({
               <div className="bg-tierra p-8 sticky top-28">
                 {propiedad.precio && (
                   <div className="mb-6 pb-6 border-b border-crema/10">
-                    <div className="font-body text-crema/40 text-xs mb-1">{propiedad.moneda}</div>
+                    <div className="font-body text-crema/40 text-xs mb-1">
+                      {propiedad.moneda}
+                    </div>
                     <div className="font-display text-crema text-4xl font-light">
                       {propiedad.precio.toLocaleString("es-AR")}
                     </div>
@@ -104,20 +110,32 @@ export default async function PropiedadPage({
                 <div className="space-y-4 mb-8">
                   {propiedad.estado && (
                     <div className="flex justify-between">
-                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">Estado</span>
-                      <span className="font-body text-crema text-sm">{estadoLabel[propiedad.estado]}</span>
+                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">
+                        Estado
+                      </span>
+                      <span className="font-body text-crema text-sm">
+                        {estadoLabel[propiedad.estado]}
+                      </span>
                     </div>
                   )}
                   {propiedad.superficie_m2 && (
                     <div className="flex justify-between">
-                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">Superficie</span>
-                      <span className="font-body text-crema text-sm">{propiedad.superficie_m2} m²</span>
+                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">
+                        Superficie
+                      </span>
+                      <span className="font-body text-crema text-sm">
+                        {propiedad.superficie_m2} m²
+                      </span>
                     </div>
                   )}
                   {propiedad.ubicacion && (
                     <div className="flex justify-between">
-                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">Ubicación</span>
-                      <span className="font-body text-crema text-sm">{propiedad.ubicacion}</span>
+                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">
+                        Ubicación
+                      </span>
+                      <span className="font-body text-crema text-sm">
+                        {propiedad.ubicacion}
+                      </span>
                     </div>
                   )}
                 </div>

@@ -139,6 +139,7 @@ export default async function ProyectosPage() {
                       src={imagen}
                       alt={p.titulo}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
                     />
                     {/* Overlay */}
                     <div

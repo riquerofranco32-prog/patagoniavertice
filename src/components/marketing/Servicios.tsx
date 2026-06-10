@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Landmark, KeyRound, TrendingUp, Scale } from "lucide-react";
+import { Home, DollarSign, BarChart2, FileText } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { WHATSAPP_NUMBER } from "@/lib/constants";
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
@@ -17,12 +18,12 @@ interface Servicio {
 
 /* ── Data ────────────────────────────────────────────────────────────────── */
 
-const WA_NUMBER = "5492994668428";
+const WA_NUMBER = WHATSAPP_NUMBER;
 
 const servicios: Servicio[] = [
   {
     num: "01",
-    icon: Landmark,
+    icon: Home,
     titulo: "Compra y Venta de Inmuebles",
     descripcion:
       "Gestionamos la compra y venta de propiedades residenciales y comerciales en Río Negro y la Patagonia. Tasación, difusión, negociación y acompañamiento hasta la firma de escritura.",
@@ -32,7 +33,7 @@ const servicios: Servicio[] = [
   },
   {
     num: "02",
-    icon: KeyRound,
+    icon: DollarSign,
     titulo: "Administración de Alquileres",
     descripcion:
       "Administramos tu propiedad de forma integral: búsqueda de inquilinos, cobros, expensas, mantenimiento y rendición mensual. Tranquilidad total para el propietario.",
@@ -42,7 +43,7 @@ const servicios: Servicio[] = [
   },
   {
     num: "03",
-    icon: TrendingUp,
+    icon: BarChart2,
     titulo: "Consultoría Estratégica",
     descripcion:
       "Análisis de mercado, valuación de activos y asesoramiento en decisiones de inversión inmobiliaria. Información precisa para decisiones inteligentes en la Patagonia.",
@@ -52,7 +53,7 @@ const servicios: Servicio[] = [
   },
   {
     num: "04",
-    icon: Scale,
+    icon: FileText,
     titulo: "Redacción y Revisión de Contratos",
     descripcion:
       "Redactamos y revisamos contratos de compraventa, locación y opciones de compra. Seguridad jurídica en cada operación, sin sorpresas.",
@@ -80,7 +81,7 @@ const fadeUp = {
 
 const gridVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
 };
 
 const cardVariants = {
@@ -105,9 +106,11 @@ function ServiceCard({ s, index }: { s: Servicio; index: number }) {
       className="
         group relative flex flex-col p-10 lg:p-12
         border-b border-r border-tierra/8
+        border-l-2 border-l-[#1A2752] hover:border-l-[#C9A84C]
         min-h-[420px]
-        transition-shadow duration-300
-        hover:shadow-[inset_0_0_0_1px_rgba(196,149,85,0.2)]
+        transition-all duration-300 ease-in-out
+        hover:-translate-y-2
+        hover:shadow-[0_18px_40px_rgba(26,39,82,0.14)]
       "
       style={{ background: bg }}
     >
@@ -120,7 +123,7 @@ function ServiceCard({ s, index }: { s: Servicio; index: number }) {
           <Icon
             size={26}
             strokeWidth={1.25}
-            className="text-tierra/50 group-hover:text-dorado transition-colors duration-300"
+            className="text-tierra/50 group-hover:text-dorado group-hover:rotate-[15deg] transition-all duration-300 ease-in-out"
           />
         </div>
         <span
