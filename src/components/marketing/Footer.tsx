@@ -115,11 +115,11 @@ export default function Footer() {
 
               {/* Email */}
               <a
-                href="mailto:info@altumsdi.com"
+                href="mailto:altumsci@gmail.com"
                 className="flex items-center gap-3 hover:text-dorado transition-colors duration-200"
               >
                 <EmailIcon />
-                info@altumsdi.com
+                altumsci@gmail.com
               </a>
             </div>
 

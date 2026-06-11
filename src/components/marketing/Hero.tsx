@@ -241,6 +241,15 @@ export default function Hero() {
             <WaIcon />
             Consultar por WhatsApp
           </a>
+
+          {/* Terciario — Email */}
+          <a
+            href="mailto:altumsci@gmail.com?subject=Consulta%20Altum%20Inmobiliaria"
+            className="hero-cta opacity-0 cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 border border-crema/15 text-crema/70 font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
+          >
+            <MailIcon />
+            Enviar email
+          </a>
         </div>
       </motion.div>
 
@@ -310,6 +319,24 @@ export default function Hero() {
         </motion.div>
       </motion.div>
     </section>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg
+      className="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+      />
+    </svg>
   );
 }
 

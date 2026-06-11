@@ -5,6 +5,7 @@ import { Home, DollarSign, BarChart2, FileText } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { WHATSAPP_NUMBER } from "@/lib/constants";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { VideoPlayer } from "@/components/ui/VideoPlayer";
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
@@ -285,6 +286,44 @@ export default function Servicios() {
               <ServiceCard s={s} />
             </motion.div>
           ))}
+        </motion.div>
+      </section>
+
+      {/* ── Video: Conocé nuestro proceso ───────────────────────────────── */}
+      <section className="py-20 lg:py-24 bg-navy-900">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-3xl mx-auto px-6 lg:px-12"
+        >
+          <h3 className="font-cormorant font-bold text-crema text-center mb-2 text-[clamp(1.9rem,3.5vw,2.25rem)] tracking-[0.01em]">
+            Conocé nuestro proceso
+          </h3>
+          <p className="font-inter text-crema/40 text-center mb-8 text-[15px]">
+            Un recorrido visual por cómo trabajamos en cada operación
+            inmobiliaria
+          </p>
+
+          <VideoPlayer
+            src="/videos/ALTUMSCI.mp4"
+            title="Servicios Altum Inmobiliaria"
+            className="shadow-2xl shadow-gold-500/20"
+          />
+
+          {/* CTA bajo video */}
+          <div className="text-center mt-10">
+            <p className="font-inter text-crema/40 text-sm mb-5">
+              ¿Listo para trabajar con nosotros?
+            </p>
+            <CTAButton
+              href={`https://wa.me/${WA_NUMBER}?text=Hola%2C%20vi%20su%20video%20y%20quiero%20consultar`}
+              variant="primary"
+            >
+              Consultar ahora por WhatsApp
+            </CTAButton>
+          </div>
         </motion.div>
       </section>
 

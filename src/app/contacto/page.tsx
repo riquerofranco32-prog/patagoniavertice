@@ -29,8 +29,8 @@ const contactInfo = [
   {
     icon: <EmailIcon />,
     label: "Email",
-    value: "info@altumsdi.com",
-    href: "mailto:info@altumsdi.com",
+    value: "altumsci@gmail.com",
+    href: "mailto:altumsci@gmail.com",
   },
 ];
 
