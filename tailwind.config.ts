@@ -28,6 +28,7 @@ const config: Config = {
 
         // ── Neutral grays (cool, harmonize with navy) ─
         gray: {
+          400: "#9AA3B5", // body text on dark navy
           500: "#6E7686", // body text on white
           600: "#545D70", // stronger secondary text
         },

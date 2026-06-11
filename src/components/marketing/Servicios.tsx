@@ -290,27 +290,30 @@ export default function Servicios() {
       </section>
 
       {/* ── Video: Conocé nuestro proceso ───────────────────────────────── */}
-      <section className="py-20 lg:py-24 bg-navy-900">
+      <section className="w-full py-20 lg:py-24 bg-navy-900">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="max-w-3xl mx-auto px-6 lg:px-12"
+          className="w-full max-w-7xl mx-auto px-4 md:px-8"
         >
           <h3 className="font-cormorant font-bold text-crema text-center mb-2 text-[clamp(1.9rem,3.5vw,2.25rem)] tracking-[0.01em]">
             Conocé nuestro proceso
           </h3>
-          <p className="font-inter text-crema/40 text-center mb-8 text-[15px]">
+          <p className="font-inter text-gray-400 text-center mb-8 text-base">
             Un recorrido visual por cómo trabajamos en cada operación
             inmobiliaria
           </p>
 
-          <VideoPlayer
-            src="/videos/ALTUMSCI.mp4"
-            title="Servicios Altum Inmobiliaria"
-            className="shadow-2xl shadow-gold-500/20"
-          />
+          {/* Video full-width 16:9 */}
+          <div className="w-full">
+            <VideoPlayer
+              src="/videos/ALTUMSCI.mp4"
+              title="Servicios Altum Inmobiliaria"
+              className="w-full shadow-2xl shadow-gold-500/20"
+            />
+          </div>
 
           {/* CTA bajo video */}
           <div className="text-center mt-10">
