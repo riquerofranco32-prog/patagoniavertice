@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Home, DollarSign, BarChart2, FileText } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { WHATSAPP_NUMBER } from "@/lib/constants";
+import { CTAButton } from "@/components/ui/CTAButton";
 
 /* ── Tipos ───────────────────────────────────────────────────────────────── */
 
@@ -101,7 +102,11 @@ function ServiceCard({ s }: { s: Servicio }) {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
+      whileHover={{
+        scale: 1.02,
+        y: -8,
+        boxShadow: "0 20px 40px rgba(201, 168, 76, 0.15)",
+      }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="
         group relative flex flex-col p-10 lg:p-12
@@ -110,7 +115,6 @@ function ServiceCard({ s }: { s: Servicio }) {
         border-l-2 border-l-dorado
         min-h-[420px]
         transition-colors duration-500 ease-in-out
-        hover:shadow-[0_18px_48px_rgba(201,168,76,0.25)]
       "
     >
       {/* Número sobre el borde izquierdo dorado — crece on hover */}
@@ -311,21 +315,16 @@ export default function Servicios() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <a
+            <CTAButton
               href={`https://wa.me/${WA_NUMBER}?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20ALTUM%20SDI`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 btn-shimmer text-tierra font-body text-[11px] font-semibold tracking-[0.15em] uppercase"
+              variant="primary"
             >
               <WaIcon />
               Consultar ahora
-            </a>
-            <a
-              href="/contacto"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 border border-tierra/15 text-tierra/60 font-body text-[11px] tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
-            >
+            </CTAButton>
+            <CTAButton href="/contacto" variant="secondary" external={false}>
               Ver formulario
-            </a>
+            </CTAButton>
           </div>
         </div>
       </motion.section>

@@ -23,7 +23,7 @@ export default function Footer() {
         className="h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, #C49555, transparent)",
+            "linear-gradient(to right, transparent, #C9A84C, transparent)",
         }}
       />
 
@@ -126,13 +126,13 @@ export default function Footer() {
             {/* Redes sociales */}
             <div className="flex items-center gap-2">
               <SocialLink
-                href="https://instagram.com/altumsdi"
+                href="https://instagram.com/altumsci"
                 label="Instagram Altum Inmobiliaria"
               >
                 <InstagramIcon />
               </SocialLink>
               <SocialLink
-                href="https://linkedin.com/company/altumsdi"
+                href="https://linkedin.com/company/altum-sdi"
                 label="LinkedIn Altum Inmobiliaria"
               >
                 <LinkedInIcon />

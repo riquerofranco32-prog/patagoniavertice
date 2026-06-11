@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 import PatagoniaGallery from "@/components/marketing/PatagoniaGallery";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const valores = [
   "Transparencia",
@@ -14,6 +15,8 @@ const valores = [
 ];
 
 export default function Nosotros() {
+  const titleRef = useScrollReveal<HTMLHeadingElement>({ y: 30 });
+
   return (
     <section className="bg-crema overflow-hidden">
       {/* Main 2-col content */}
@@ -28,10 +31,11 @@ export default function Nosotros() {
               </div>
 
               <h2
-                className="font-display text-tierra font-light leading-[1.0] mb-8"
+                ref={titleRef}
+                className="font-display text-tierra font-light leading-[1.1] mb-8 opacity-0"
                 style={{
-                  fontSize: "clamp(2.8rem, 6vw, 5rem)",
-                  letterSpacing: "-0.03em",
+                  fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)",
+                  letterSpacing: "0.01em",
                 }}
               >
                 Raíces patagónicas,{" "}

@@ -344,9 +344,7 @@
   * {
     box-sizing: border-box;
   }
-  html {
-    scroll-behavior: smooth;
-  }
+  /* scroll-behavior: smooth removido — Lenis maneja el smooth scroll */
   body {
     @apply bg-crema text-tierra;
     font-feature-settings: "ss01", "cv05";
