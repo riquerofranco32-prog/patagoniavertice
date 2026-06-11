@@ -13,15 +13,30 @@ const config: Config = {
         foreground: "var(--foreground)",
 
         // ── Core palette ──────────────────────────
-        tierra:  "#1C1916",   // deep warm charcoal (main dark)
-        crema:   "#F5EFE6",   // warm cream (main light bg)
-        dorado:  "#C49555",   // warm amber-gold (main accent)
+        tierra: "#1C1916", // deep warm charcoal (main dark)
+        crema: "#F5EFE6", // warm cream (main light bg)
+        dorado: "#C9A84C", // brand gold (accent primary)
+
+        // ── Brand navy scale ──────────────────────
+        navy: {
+          DEFAULT: "#1A2752",
+          900: "#0F1A30", // darkest — deep backgrounds
+          800: "#15214A", // hover backgrounds
+          700: "#1A2752", // brand base
+        },
+        smoke: "#2A3A52", // gray smoke — subtle dark backgrounds
+
+        // ── Neutral grays (cool, harmonize with navy) ─
+        gray: {
+          500: "#6E7686", // body text on white
+          600: "#545D70", // stronger secondary text
+        },
 
         // ── Pastel / mid-tones ────────────────────
-        arena:   "#EAD9C4",   // warm sand — secondary backgrounds
-        salvia:  "#7A9E7E",   // muted sage green — Patagonia landscape
-        piedra:  "#9E8E80",   // warm stone grey — mid tone
-        humo:    "#F0E8DC",   // very light warm smoke — card bg
+        arena: "#EAD9C4", // warm sand — secondary backgrounds
+        salvia: "#7A9E7E", // muted sage green — Patagonia landscape
+        piedra: "#9E8E80", // warm stone grey — mid tone
+        humo: "#F0E8DC", // very light warm smoke — card bg
 
         // ── Extended earth palette (for fine control) ─
         earth: {
@@ -33,15 +48,20 @@ const config: Config = {
           200: "#C8B4A0",
         },
         gold: {
-          500: "#C49555",
-          400: "#D4A868",
-          300: "#E2BF8A",
-          100: "#F5E6CC",
+          500: "#C9A84C", // accent primary
+          400: "#D4B86A",
+          300: "#E0CB8E",
+          200: "#E8D5B7", // oro light — hovers & highlights
+          100: "#F3E9D3",
         },
       },
       fontFamily: {
         display: ["var(--font-cormorant)", "Georgia", "serif"],
-        body:    ["var(--font-jakarta)", "system-ui", "sans-serif"],
+        cormorant: ["var(--font-cormorant)", "Georgia", "serif"],
+        body: ["var(--font-inter)", "system-ui", "sans-serif"],
+        inter: ["var(--font-inter)", "system-ui", "sans-serif"],
+        accent: ["var(--font-sohne)", "system-ui", "sans-serif"],
+        sohne: ["var(--font-sohne)", "system-ui", "sans-serif"],
       },
     },
   },

@@ -1,0 +1,61 @@
+/* ── Sistema tipográfico Altum (Sprint 1) ─────────────────────
+   H1 56px · H2 36px · H3 28px · body 16px · small 14px
+   Headings: Cormorant Garamond, +1% tracking
+   Body:     Inter, +0.5% tracking
+   Accent:   Sohne (sustituto libre: Hanken Grotesk)
+──────────────────────────────────────────────────────────────── */
+
+.type-h1 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, var(--text-h1)); /* 40 → 56px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.type-h2 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.9rem, 3.5vw, var(--text-h2)); /* 30 → 36px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+.type-h3 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.5rem, 2.5vw, var(--text-h3)); /* 24 → 28px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.type-body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--text-body); /* 16px */
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1.65;
+}
+
+.type-small {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: var(--text-small); /* 14px */
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1.55;
+}
+
+.type-accent {
+  font-family: var(--font-sohne), system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* Cita destacada (Manifiesto / testimonios) */
+.type-quote {
+  font-family: var(--font-sohne), system-ui, sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+}

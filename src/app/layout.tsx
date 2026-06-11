@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Inter, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
+import "./styles/typography.css";
 import Navbar from "@/components/marketing/Navbar";
 import Footer from "@/components/marketing/Footer";
 import WhatsAppButton from "@/components/marketing/WhatsAppButton";
@@ -13,10 +14,17 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-jakarta",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+});
+
+// Sohne es comercial (Klim Type Foundry); Hanken Grotesk es el sustituto libre
+const sohne = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-sohne",
 });
 
 const siteUrl =
@@ -98,7 +106,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${cormorant.variable} ${jakarta.variable}`}>
+    <html
+      lang="es"
+      className={`${cormorant.variable} ${inter.variable} ${sohne.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"

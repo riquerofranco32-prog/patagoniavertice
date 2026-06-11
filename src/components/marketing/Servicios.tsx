@@ -95,67 +95,68 @@ const cardVariants = {
 
 /* ── Componente tarjeta ──────────────────────────────────────────────────── */
 
-function ServiceCard({ s, index }: { s: Servicio; index: number }) {
+function ServiceCard({ s }: { s: Servicio }) {
   const Icon = s.icon;
-  const isEven = index % 2 === 0;
-  const bg = isEven ? "#ffffff" : "#F5F3EF";
   const waUrl = `https://wa.me/${WA_NUMBER}?text=${s.waText}`;
 
   return (
-    <div
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="
         group relative flex flex-col p-10 lg:p-12
+        bg-white hover:bg-navy-800
         border-b border-r border-tierra/8
-        border-l-2 border-l-[#1A2752] hover:border-l-[#C9A84C]
+        border-l-2 border-l-dorado
         min-h-[420px]
-        transition-all duration-300 ease-in-out
-        hover:-translate-y-2
-        hover:shadow-[0_18px_40px_rgba(26,39,82,0.14)]
+        transition-colors duration-500 ease-in-out
+        hover:shadow-[0_18px_48px_rgba(201,168,76,0.25)]
       "
-      style={{ background: bg }}
     >
-      {/* Gold top accent — visible on hover */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-dorado scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+      {/* Número sobre el borde izquierdo dorado — crece on hover */}
+      <span
+        className="
+          absolute left-0 top-10 -translate-x-1/2
+          bg-dorado text-navy-900
+          font-inter font-semibold text-[11px] tracking-[0.15em]
+          px-2 py-1 leading-none select-none
+          group-hover:scale-125
+          transition-transform duration-300 ease-out
+        "
+      >
+        {s.num}
+      </span>
 
-      {/* Header row: icon + number */}
+      {/* Header row: icon */}
       <div className="flex items-start justify-between mb-8">
-        <div className="inline-flex p-3.5 bg-tierra/5 group-hover:bg-dorado/10 transition-colors duration-300">
+        <div className="inline-flex p-3.5 bg-tierra/5 group-hover:bg-dorado/15 transition-colors duration-500">
           <Icon
             size={26}
             strokeWidth={1.25}
-            className="text-tierra/50 group-hover:text-dorado group-hover:rotate-[15deg] transition-all duration-300 ease-in-out"
+            className="text-tierra/50 group-hover:text-gold-200 group-hover:rotate-[15deg] transition-all duration-300 ease-in-out"
           />
         </div>
-        <span
-          className="font-display text-tierra/6 font-light select-none leading-none group-hover:text-dorado/10 transition-colors duration-500"
-          style={{
-            fontSize: "clamp(3rem, 5vw, 4.5rem)",
-            letterSpacing: "-0.05em",
-          }}
-        >
-          {s.num}
-        </span>
       </div>
 
-      {/* Content */}
+      {/* Content — título bold en Inter, descripción gray-500 */}
       <h3
-        className="font-display text-tierra font-light leading-tight mb-4 group-hover:text-[#1A2752] transition-colors duration-300"
+        className="font-inter font-bold text-navy-700 group-hover:text-white leading-tight mb-4 transition-colors duration-500"
         style={{
-          fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)",
-          letterSpacing: "-0.02em",
+          fontSize: "clamp(1.15rem, 1.8vw, 1.45rem)",
+          letterSpacing: "0.01em",
         }}
       >
         {s.titulo}
       </h3>
 
-      <p className="font-body text-tierra/45 text-[14px] lg:text-[15px] leading-relaxed mb-8 flex-1">
+      <p className="font-body text-gray-500 group-hover:text-crema/70 text-[14px] lg:text-[15px] leading-relaxed mb-8 flex-1 transition-colors duration-500">
         {s.descripcion}
       </p>
 
       {/* Footer: badge + CTA */}
       <div className="flex flex-col gap-4 mt-auto">
         {/* Business model badge */}
-        <span className="inline-flex items-center gap-2 font-body text-[10px] tracking-[0.18em] uppercase text-dorado/70 border border-dorado/25 px-3 py-1.5 self-start">
+        <span className="inline-flex items-center gap-2 font-body text-[10px] tracking-[0.18em] uppercase text-dorado/70 group-hover:text-gold-200 border border-dorado/25 px-3 py-1.5 self-start transition-colors duration-500">
           <span className="w-1 h-1 rounded-full bg-dorado/60 shrink-0" />
           {s.modelo}
         </span>
@@ -168,7 +169,7 @@ function ServiceCard({ s, index }: { s: Servicio; index: number }) {
           className="
             group/cta inline-flex items-center gap-2.5
             font-body text-[11px] tracking-[0.15em] uppercase font-medium
-            text-tierra/50 hover:text-dorado
+            text-tierra/50 group-hover:text-gold-200 hover:!text-dorado
             transition-colors duration-200
             self-start
           "
@@ -190,7 +191,7 @@ function ServiceCard({ s, index }: { s: Servicio; index: number }) {
           </svg>
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -233,8 +234,8 @@ export default function Servicios() {
             <motion.h1
               className="font-display text-crema font-light leading-[1.05] mb-6"
               style={{
-                fontSize: "clamp(3rem, 7vw, 6rem)",
-                letterSpacing: "-0.03em",
+                fontSize: "clamp(2.5rem, 5vw, var(--text-h1))",
+                letterSpacing: "0.01em",
               }}
               variants={fadeUp}
             >
@@ -258,7 +259,7 @@ export default function Servicios() {
           className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to bottom, transparent, rgba(245,243,239,0.15))",
+              "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15))",
           }}
         />
       </section>
@@ -266,7 +267,7 @@ export default function Servicios() {
       {/* ── Grid de servicios ────────────────────────────────────────────── */}
       <section
         className="border-t border-tierra/8"
-        style={{ background: "#F5F3EF" }}
+        style={{ background: "#ffffff" }}
       >
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2"
@@ -275,9 +276,9 @@ export default function Servicios() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {servicios.map((s, i) => (
+          {servicios.map((s) => (
             <motion.div key={s.num} variants={cardVariants}>
-              <ServiceCard s={s} index={i} />
+              <ServiceCard s={s} />
             </motion.div>
           ))}
         </motion.div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef, useEffect } from "react";
+import gsap from "gsap";
 
 const WA_HERO =
   "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
@@ -40,6 +41,51 @@ export default function Hero() {
 
   useEffect(() => {
     if (videoRef.current) videoRef.current.playbackRate = 0.75;
+  }, []);
+
+  // GSAP staggered entrance: badge 0.3s → headline 0.6s (letter reveal)
+  // → subtitle 0.9s → CTAs 1.2s. Duration 0.8s, stagger 0.2s.
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo(
+        ".hero-badge",
+        { autoAlpha: 0, x: 20 },
+        { autoAlpha: 1, x: 0, duration: 0.8 },
+        0.3,
+      );
+      tl.fromTo(
+        ".hero-eyebrow",
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.8 },
+        0.3,
+      );
+      tl.fromTo(
+        ".hero-char",
+        { yPercent: 115, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.8, stagger: 0.02 },
+        0.6,
+      );
+      tl.fromTo(
+        [".hero-chips", ".hero-sub"],
+        { autoAlpha: 0, y: 18 },
+        { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.2 },
+        0.9,
+      );
+      tl.fromTo(
+        ".hero-cta",
+        { autoAlpha: 0, y: 16 },
+        { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.2 },
+        1.2,
+      );
+      tl.fromTo(
+        ".hero-marquee",
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.6 },
+        1.5,
+      );
+    }, ref);
+    return () => ctx.revert();
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -95,13 +141,8 @@ export default function Hero() {
       {/* Left gold accent line */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-dorado/20 to-transparent" />
 
-      {/* ── ALTUM SDI brand badge ─────────────────────────────────────────── */}
-      <motion.div
-        className="absolute top-28 right-6 lg:right-12"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-      >
+      {/* ── ALTUM SDI brand badge — GSAP entrada 0.3s ─────────────────────── */}
+      <div className="hero-badge absolute top-28 right-6 lg:right-12 opacity-0">
         <div
           className="flex items-center gap-2.5 backdrop-blur-sm border border-dorado/20 px-4 py-2"
           style={{ background: "rgba(26,39,82,0.55)" }}
@@ -111,95 +152,68 @@ export default function Hero() {
             Altum Inmobiliaria · Río Negro
           </span>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
       <motion.div
         className="relative flex-1 flex flex-col justify-end max-w-7xl mx-auto px-6 lg:px-12 w-full pb-20 pt-40"
         style={{ y: contentY, opacity: contentOpacity }}
       >
-        {/* Eyebrow */}
-        <motion.div
-          className="flex items-center gap-4 mb-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <motion.div
-            className="h-px bg-dorado"
-            initial={{ width: 0 }}
-            animate={{ width: 40 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-          />
+        {/* Eyebrow — GSAP 0.3s */}
+        <div className="hero-eyebrow flex items-center gap-4 mb-10 opacity-0">
+          <div className="h-px w-10 bg-dorado" />
           <span className="eyebrow">Río Negro · Patagonia Argentina</span>
-        </motion.div>
+        </div>
 
-        {/* Headline — clip-up reveal per line */}
+        {/* Headline — GSAP letter-reveal 0.6s, escala H1 56px */}
         <h1
-          className="font-display font-light leading-[1.0] max-w-5xl mb-8"
+          className="font-display font-light leading-[1.1] max-w-5xl mb-8"
           style={{
-            fontSize: "clamp(3.8rem, 9vw, 8rem)",
-            letterSpacing: "-0.03em",
+            fontSize: "clamp(2.75rem, 6vw, var(--text-h1))",
+            letterSpacing: "0.01em",
           }}
+          aria-label={titleLines.map((l) => l.text).join(" ")}
         >
           {titleLines.map((line, i) => (
-            <div key={i} className="overflow-hidden">
-              <motion.span
-                className={`block ${line.cls}`}
-                initial={{ y: "110%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.4 + i * 0.3,
-                  ease: "easeInOut",
-                }}
-              >
-                {line.text}
-              </motion.span>
-            </div>
+            <span
+              key={i}
+              className={`block overflow-hidden ${line.cls}`}
+              aria-hidden="true"
+            >
+              {line.text.split("").map((ch, j) => (
+                <span key={j} className="hero-char inline-block opacity-0">
+                  {ch === " " ? " " : ch}
+                </span>
+              ))}
+            </span>
           ))}
         </h1>
 
-        {/* Services chips */}
-        <motion.div
-          className="flex flex-wrap gap-2 mb-8"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.92, duration: 0.55 }}
-        >
+        {/* Services chips — GSAP 0.9s */}
+        <div className="hero-chips flex flex-wrap gap-2 mb-8 opacity-0">
           {SERVICES.map((service) => (
             <span
               key={service}
               className="font-body text-[10px] tracking-[0.18em] uppercase px-3 py-1.5 border border-dorado/25 text-dorado/65"
-              style={{ background: "rgba(196,149,85,0.07)" }}
+              style={{ background: "rgba(201,168,76,0.07)" }}
             >
               {service}
             </span>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Subtitle */}
-        <motion.p
-          className="font-body text-crema/45 text-[15px] lg:text-base leading-relaxed max-w-md mb-12"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.05, duration: 0.7 }}
-        >
+        {/* Subtitle — GSAP 0.9s + stagger */}
+        <p className="hero-sub font-body text-crema/45 text-[15px] lg:text-base leading-relaxed max-w-md mb-12 opacity-0">
           Accedé al mercado inmobiliario de mayor crecimiento en Argentina.
           Propiedades con respaldo profesional en Río Negro y la Patagonia.
-        </motion.p>
+        </p>
 
-        {/* CTAs */}
-        <motion.div
-          className="flex flex-col sm:flex-row gap-4"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.15, duration: 0.7 }}
-        >
+        {/* CTAs — GSAP 1.2s, glow oro */}
+        <div className="flex flex-col sm:flex-row gap-4">
           {/* Primary — Ver Servicios */}
           <Link
             href="/servicios"
-            className="group cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 btn-shimmer text-tierra font-body text-[11px] font-semibold tracking-[0.15em] uppercase"
+            className="hero-cta opacity-0 group cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 btn-shimmer text-tierra font-body text-[11px] font-semibold tracking-[0.15em] uppercase"
           >
             Ver Servicios
             <svg
@@ -222,12 +236,12 @@ export default function Hero() {
             href={WA_HERO}
             target="_blank"
             rel="noopener noreferrer"
-            className="cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 border border-crema/15 text-crema/70 font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
+            className="hero-cta opacity-0 cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 border border-crema/15 text-crema/70 font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
           >
             <WaIcon />
             Consultar por WhatsApp
           </a>
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* ── Marquee ticker ────────────────────────────────────────────────── */}

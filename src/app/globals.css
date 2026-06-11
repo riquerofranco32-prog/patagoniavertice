@@ -2,17 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── CSS custom properties ─────────────────── */
+/* ── CSS custom properties ─────────────────────────────
+   Sistema de color Altum (Sprint 1)
+   navy   #1A2752 — base de marca
+   gold   #C9A84C — acento primario
+   smoke  #2A3A52 — backgrounds sutiles oscuros
+   oro-lt #E8D5B7 — hovers y highlights
+   white  #FFFFFF — reemplaza al warm gray #F5F3EF
+─────────────────────────────────────────────────────── */
 :root {
   --background: #f5efe6;
   --foreground: #1c1916;
   --tierra: #1c1916;
   --crema: #f5efe6;
-  --dorado: #c49555;
   --arena: #ead9c4;
   --salvia: #7a9e7e;
   --piedra: #9e8e80;
   --humo: #f0e8dc;
+
+  /* brand core */
+  --navy-900: #0f1a30;
+  --navy-800: #15214a;
+  --navy-700: #1a2752; /* base */
+  --gray-smoke: #2a3a52;
+  --gold: #c9a84c;
+  --dorado: #c9a84c; /* alias legacy */
+  --gold-light: #e8d5b7;
+  --gray-600: #545d70;
+  --gray-500: #6e7686;
+  --white: #ffffff;
+
+  /* type scale */
+  --text-h1: 3.5rem; /* 56px */
+  --text-h2: 2.25rem; /* 36px */
+  --text-h3: 1.75rem; /* 28px */
+  --text-body: 1rem; /* 16px */
+  --text-small: 0.875rem; /* 14px */
 }
 
 /* ── Keyframes ─────────────────────────────── */
@@ -175,7 +200,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #c49555;
+  background-color: #c9a84c;
   transition:
     width 0.2s ease,
     height 0.2s ease,
@@ -186,7 +211,7 @@
   width: 32px;
   height: 32px;
   background-color: transparent;
-  border: 1.5px solid #c49555;
+  border: 1.5px solid #c9a84c;
 }
 
 /* ── Nav underline (gold, width 0 → 100%) ───── */
@@ -259,9 +284,9 @@
 .btn-shimmer {
   background-image: linear-gradient(
     110deg,
-    #c49555 0%,
-    #d4b070 40%,
-    #c49555 80%
+    #c9a84c 0%,
+    #dcc27a 40%,
+    #c9a84c 80%
   );
   background-size: 200% auto;
   transition: background-position 0.5s ease;
@@ -280,7 +305,7 @@
   height: 1px;
 }
 .gold-line {
-  background: linear-gradient(to right, transparent, #c49555, transparent);
+  background: linear-gradient(to right, transparent, #c9a84c, transparent);
 }
 
 /* ── Grain overlay (shared) ─────────────────── */
@@ -325,6 +350,8 @@
   body {
     @apply bg-crema text-tierra;
     font-feature-settings: "ss01", "cv05";
+    font-size: var(--text-body);
+    letter-spacing: 0.005em; /* +0.5% body */
   }
   h1,
   h2,
@@ -332,11 +359,20 @@
   h4 {
     font-family: var(--font-cormorant), Georgia, serif;
     font-weight: 300;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    letter-spacing: 0.01em; /* +1% headings — luxury feel */
+    line-height: 1.1;
+  }
+  h1 {
+    font-size: var(--text-h1);
+  }
+  h2 {
+    font-size: var(--text-h2);
+  }
+  h3 {
+    font-size: var(--text-h3);
   }
   ::selection {
-    background: #c49555;
+    background: #c9a84c;
     color: #1c1916;
   }
 }
