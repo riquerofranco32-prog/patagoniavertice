@@ -60,38 +60,61 @@ export default function Servicios() {
           </p>
         </motion.div>
 
-        {/* Grid 2×2 compacto */}
+        {/* Grid 2×2 — clipPath wipe entry + hover background reveal */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {servicios.map((s, i) => (
             <motion.div
               key={s.num}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover={{
-                y: -4,
-                boxShadow: "0 12px 24px rgba(201, 168, 76, 0.1)",
+              initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0 }}
+              whileInView={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }}
+              transition={{
+                duration: 0.65,
+                delay: i * 0.12,
+                ease: [0.16, 1, 0.3, 1],
               }}
-              className="p-6 bg-navy-800 rounded-lg border-l-2 border-gold-500 cursor-pointer transition-all"
+              viewport={{ once: true, margin: "-40px" }}
+              className="group relative overflow-hidden p-6 bg-navy-800 rounded-lg border-l-2 border-gold-500 cursor-pointer"
             >
-              <div className="text-xs text-gold-500 font-inter mb-2 tracking-widest">
-                {s.num}
+              {/* Hover background reveal — wipe from bottom */}
+              <motion.div
+                className="absolute inset-0 bg-navy-700 rounded-lg"
+                initial={{ clipPath: "inset(100% 0 0 0)" }}
+                whileHover={{ clipPath: "inset(0% 0 0 0)" }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                style={{ zIndex: 0 }}
+              />
+
+              {/* Content — sits above the reveal layer */}
+              <div className="relative z-10">
+                <motion.div
+                  className="text-xs text-gold-500 font-inter mb-2 tracking-widest"
+                  whileHover={{ opacity: [null, 0.5, 1] }}
+                >
+                  {s.num}
+                </motion.div>
+                <h3 className="text-18px font-cormorant font-bold mb-3 text-white">
+                  {s.titulo}
+                </h3>
+                <p className="text-gray-400 text-13px leading-relaxed mb-4 font-inter group-hover:text-gray-300 transition-colors duration-300">
+                  {s.descripcion}
+                </p>
+                <motion.a
+                  href={`https://wa.me/${WA}?text=${s.waText}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-gold-500 text-12px font-inter font-semibold hover:text-gold-400 transition"
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Consultar por WhatsApp
+                  <motion.span
+                    initial={{ opacity: 0, x: -4 }}
+                    whileHover={{ opacity: 1, x: 0 }}
+                  >
+                    →
+                  </motion.span>
+                </motion.a>
               </div>
-              <h3 className="text-18px font-cormorant font-bold mb-3 text-white">
-                {s.titulo}
-              </h3>
-              <p className="text-gray-400 text-13px leading-relaxed mb-4 font-inter">
-                {s.descripcion}
-              </p>
-              <a
-                href={`https://wa.me/${WA}?text=${s.waText}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gold-500 text-12px font-inter font-semibold hover:text-gold-400 transition"
-              >
-                Consultar por WhatsApp →
-              </a>
             </motion.div>
           ))}
         </div>

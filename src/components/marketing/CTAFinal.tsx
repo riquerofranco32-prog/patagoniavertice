@@ -64,23 +64,45 @@ export default function CTAFinal() {
             <span className="eyebrow text-crema/30">Dando el primer paso</span>
           </motion.div>
 
-          {/* Title */}
-          <motion.h2
-            className="font-display text-crema font-light leading-[1.0] mb-8"
+          {/* Title — split-line reveal: each line slides up from a mask */}
+          <h2
+            className="font-display text-crema font-light leading-[1.05] mb-8"
             style={{
               fontSize: "clamp(2.6rem, 5.5vw, 4.5rem)",
               letterSpacing: "-0.03em",
             }}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            La Patagonia crece.{" "}
-            <em className="not-italic italic text-dorado block lg:inline">
-              Tu capital también.
-            </em>
-          </motion.h2>
+            {(
+              [
+                { text: "La Patagonia crece.", italic: false },
+                { text: "Tu capital también.", italic: true },
+              ] as const
+            ).map((line, i) => (
+              <span
+                key={i}
+                style={{
+                  display: "block",
+                  overflow: "hidden",
+                  lineHeight: 1.1,
+                }}
+              >
+                <motion.span
+                  style={{ display: "block" }}
+                  className={line.italic ? "not-italic italic text-dorado" : ""}
+                  initial={{ y: "105%", opacity: 0 }}
+                  whileInView={{ y: "0%", opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.75,
+                    delay: 0.1 + i * 0.18,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  {line.text}
+                </motion.span>
+              </span>
+            ))}
+          </h2>
 
           {/* Subtitle */}
           <motion.p
