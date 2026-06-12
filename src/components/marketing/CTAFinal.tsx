@@ -84,27 +84,24 @@ export default function CTAFinal() {
                 { text: "Tu capital también.", italic: true },
               ] as const
             ).map((line, i) => (
-              <span
-                key={i}
-                style={{
-                  display: "block",
-                  overflow: "hidden",
-                  lineHeight: 1.1,
-                }}
-              >
+              <span key={i} style={{ display: "block", lineHeight: 1.1 }}>
                 <motion.span
                   style={{ display: "block" }}
                   className={line.italic ? "not-italic italic text-dorado" : ""}
                   initial={
-                    prefersReduced ? { opacity: 0 } : { y: "105%", opacity: 0 }
+                    prefersReduced
+                      ? { opacity: 0 }
+                      : { clipPath: "inset(0 0 100% 0)", y: 20, opacity: 0 }
                   }
                   whileInView={
-                    prefersReduced ? { opacity: 1 } : { y: "0%", opacity: 1 }
+                    prefersReduced
+                      ? { opacity: 1 }
+                      : { clipPath: "inset(0 0 0% 0)", y: 0, opacity: 1 }
                   }
                   viewport={{ once: true }}
                   transition={{
                     duration: 0.75,
-                    delay: 0.1 + i * 0.18,
+                    delay: 0.1 + i * 0.15,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
