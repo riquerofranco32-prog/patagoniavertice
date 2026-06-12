@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { WHATSAPP_NUMBER } from "@/lib/constants";
 import { VideoPlayer } from "@/components/ui/VideoPlayer";
 
@@ -39,7 +40,90 @@ const servicios = [
   },
 ];
 
+function ServiceCard({
+  s,
+  i,
+  prefersReduced,
+}: {
+  s: (typeof servicios)[number];
+  i: number;
+  prefersReduced: boolean | null;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={
+        prefersReduced
+          ? { opacity: 0 }
+          : { clipPath: "inset(0 0 100% 0)", opacity: 0 }
+      }
+      whileInView={
+        prefersReduced
+          ? { opacity: 1 }
+          : { clipPath: "inset(0 0 0% 0)", opacity: 1 }
+      }
+      transition={{ duration: 0.65, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-40px" }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      className="relative overflow-hidden p-6 bg-navy-800 rounded-lg border-l-2 border-gold-500 cursor-pointer"
+    >
+      {/* Ghost number — 0.05→0.15 on hover */}
+      <motion.span
+        animate={{ opacity: hovered ? 0.15 : 0.05 }}
+        transition={{ duration: 0.25 }}
+        className="absolute -bottom-2 right-3 font-cormorant font-bold text-gold-500 select-none pointer-events-none leading-none"
+        style={{ fontSize: "6rem", zIndex: 0 }}
+        aria-hidden="true"
+      >
+        {s.num}
+      </motion.span>
+
+      {/* Hover background reveal — wipe from bottom */}
+      {!prefersReduced && (
+        <motion.div
+          className="absolute inset-0 bg-navy-700 rounded-lg"
+          animate={{
+            clipPath: hovered ? "inset(0% 0 0 0)" : "inset(100% 0 0 0)",
+          }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          style={{ zIndex: 1 }}
+        />
+      )}
+
+      {/* Content */}
+      <div className="relative" style={{ zIndex: 2 }}>
+        <div className="text-xs text-gold-500 font-inter mb-2 tracking-widest">
+          {s.num}
+        </div>
+        <h3 className="text-18px font-cormorant font-bold mb-3 text-white">
+          {s.titulo}
+        </h3>
+        <p
+          className="text-13px leading-relaxed mb-4 font-inter transition-colors duration-300"
+          style={{ color: hovered ? "#d1d5db" : "#9ca3af" }}
+        >
+          {s.descripcion}
+        </p>
+        <motion.a
+          href={`https://wa.me/${WA}?text=${s.waText}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-gold-500 text-12px font-inter font-semibold hover:text-gold-400 transition"
+          animate={{ x: hovered ? 4 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          Consultar por WhatsApp →
+        </motion.a>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Servicios() {
+  const prefersReduced = useReducedMotion();
+
   return (
     <section className="py-16 bg-navy-900">
       <div className="container mx-auto px-4">
@@ -60,62 +144,15 @@ export default function Servicios() {
           </p>
         </motion.div>
 
-        {/* Grid 2×2 — clipPath wipe entry + hover background reveal */}
+        {/* Grid 2×2 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {servicios.map((s, i) => (
-            <motion.div
+            <ServiceCard
               key={s.num}
-              initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0 }}
-              whileInView={{ clipPath: "inset(0 0 0% 0)", opacity: 1 }}
-              transition={{
-                duration: 0.65,
-                delay: i * 0.12,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              viewport={{ once: true, margin: "-40px" }}
-              className="group relative overflow-hidden p-6 bg-navy-800 rounded-lg border-l-2 border-gold-500 cursor-pointer"
-            >
-              {/* Hover background reveal — wipe from bottom */}
-              <motion.div
-                className="absolute inset-0 bg-navy-700 rounded-lg"
-                initial={{ clipPath: "inset(100% 0 0 0)" }}
-                whileHover={{ clipPath: "inset(0% 0 0 0)" }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                style={{ zIndex: 0 }}
-              />
-
-              {/* Content — sits above the reveal layer */}
-              <div className="relative z-10">
-                <motion.div
-                  className="text-xs text-gold-500 font-inter mb-2 tracking-widest"
-                  whileHover={{ opacity: [null, 0.5, 1] }}
-                >
-                  {s.num}
-                </motion.div>
-                <h3 className="text-18px font-cormorant font-bold mb-3 text-white">
-                  {s.titulo}
-                </h3>
-                <p className="text-gray-400 text-13px leading-relaxed mb-4 font-inter group-hover:text-gray-300 transition-colors duration-300">
-                  {s.descripcion}
-                </p>
-                <motion.a
-                  href={`https://wa.me/${WA}?text=${s.waText}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-gold-500 text-12px font-inter font-semibold hover:text-gold-400 transition"
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  Consultar por WhatsApp
-                  <motion.span
-                    initial={{ opacity: 0, x: -4 }}
-                    whileHover={{ opacity: 1, x: 0 }}
-                  >
-                    →
-                  </motion.span>
-                </motion.a>
-              </div>
-            </motion.div>
+              s={s}
+              i={i}
+              prefersReduced={prefersReduced}
+            />
           ))}
         </div>
 
