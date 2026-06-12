@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { WHATSAPP_URL } from "@/lib/constants";
 
 const MotionLink = motion(Link);
@@ -23,6 +28,7 @@ function spawnRipple(e: React.MouseEvent<HTMLElement>) {
 
 export default function CTAFinal() {
   const sectionRef = useRef<HTMLElement>(null);
+  const prefersReduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -89,8 +95,12 @@ export default function CTAFinal() {
                 <motion.span
                   style={{ display: "block" }}
                   className={line.italic ? "not-italic italic text-dorado" : ""}
-                  initial={{ y: "105%", opacity: 0 }}
-                  whileInView={{ y: "0%", opacity: 1 }}
+                  initial={
+                    prefersReduced ? { opacity: 0 } : { y: "105%", opacity: 0 }
+                  }
+                  whileInView={
+                    prefersReduced ? { opacity: 1 } : { y: "0%", opacity: 1 }
+                  }
                   viewport={{ once: true }}
                   transition={{
                     duration: 0.75,
@@ -162,6 +172,20 @@ export default function CTAFinal() {
               </svg>
             </MotionLink>
           </motion.div>
+
+          {/* Gold accent line — scaleX from center on viewport entry */}
+          <motion.div
+            className="h-px bg-dorado/40 mt-8"
+            style={{ transformOrigin: "center" }}
+            initial={
+              prefersReduced ? { opacity: 0 } : { scaleX: 0, opacity: 0 }
+            }
+            whileInView={
+              prefersReduced ? { opacity: 1 } : { scaleX: 1, opacity: 1 }
+            }
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          />
         </div>
       </div>
 
