@@ -12,8 +12,8 @@ interface VideoPlayerProps {
 }
 
 /**
- * Player de video 16:9 con thumbnail + play button animado (glow oro).
- * El video recién se monta al hacer click — no descarga nada antes.
+ * Player de video vertical 9:16 (formato story) en card con borde oro
+ * y sombra. El video recién se monta al hacer click — no descarga antes.
  */
 export function VideoPlayer({
   src,
@@ -31,10 +31,14 @@ export function VideoPlayer({
 
   return (
     <div
-      className={`relative w-full bg-black rounded-lg overflow-hidden group ${className}`}
-      style={{ contain: "layout style paint" }}
+      className={`relative mx-auto ${className}`}
+      style={{ maxWidth: "400px" }}
     >
-      <div className="aspect-video relative bg-navy-900">
+      {/* Card 9:16 vertical con borde oro + sombra */}
+      <div
+        className="relative bg-black rounded-lg overflow-hidden group border-2 border-gold-500/30 shadow-2xl shadow-gold-500/20"
+        style={{ aspectRatio: "9 / 16", contain: "layout style paint" }}
+      >
         <AnimatePresence>
           {isPlaying ? (
             <motion.video
@@ -87,15 +91,17 @@ export function VideoPlayer({
                     ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="w-20 h-20 rounded-full bg-gold-500 flex items-center justify-center"
+                  className="w-16 h-16 rounded-full bg-gold-500 flex items-center justify-center"
                 >
-                  <Play className="w-8 h-8 text-navy-900 fill-current ml-1" />
+                  <Play className="w-6 h-6 text-navy-900 fill-current ml-1" />
                 </motion.div>
               </motion.div>
 
               {/* Title overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900 to-transparent p-6">
-                <p className="text-white font-cormorant text-xl">{title}</p>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900 to-transparent p-4">
+                <p className="text-white font-cormorant text-base text-center">
+                  {title}
+                </p>
               </div>
             </motion.div>
           )}
@@ -114,7 +120,7 @@ export function VideoPlayer({
                   key={delay}
                   animate={{ scaleY: [0.5, 1, 0.5] }}
                   transition={{ duration: 0.8, repeat: Infinity, delay }}
-                  className="w-1 h-6 bg-gold-500 rounded"
+                  className="w-1 h-4 bg-gold-500 rounded"
                 />
               ))}
             </div>
