@@ -61,21 +61,49 @@ export default function PorQueElegirnos() {
             </p>
           </motion.div>
 
-          {/* Grid 2x3 */}
+          {/* Grid 2x3 — wipe horizontal de izquierda a derecha por card */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
             {diferenciadores.map((d, i) => (
               <motion.div
                 key={d.titulo}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
+                whileInView={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
+                transition={{
+                  duration: 0.65,
+                  delay: i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="space-y-3 border-l-2 border-gold-500/30 pl-6 hover:border-gold-500 transition-colors duration-300"
+                whileHover={{ backgroundColor: "rgba(201,168,76,0.04)" }}
+                className="relative space-y-3 pl-6 rounded-r-sm"
+                style={{ borderLeft: "2px solid rgba(201,168,76,0.3)" }}
               >
-                <h3 className="text-2xl font-cormorant font-bold text-white">
+                {/* Border-left dorado que crece en hover */}
+                <motion.div
+                  className="absolute left-0 top-0 bottom-0 w-0.5 bg-gold-500 origin-top"
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.3 + i * 0.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                />
+
+                {/* Número ghost */}
+                <span
+                  className="absolute -top-2 right-0 font-cormorant font-bold text-gold-500/8 select-none pointer-events-none leading-none"
+                  style={{ fontSize: "5rem" }}
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                <h3 className="text-2xl font-cormorant font-bold text-white relative z-10">
                   {d.titulo}
                 </h3>
-                <p className="text-gray-400 text-base font-inter leading-relaxed">
+                <p className="text-gray-400 text-base font-inter leading-relaxed relative z-10">
                   {d.descripcion}
                 </p>
               </motion.div>

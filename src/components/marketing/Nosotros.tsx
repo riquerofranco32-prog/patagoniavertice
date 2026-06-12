@@ -26,7 +26,18 @@ export default function Nosotros() {
             {/* Left: text */}
             <SlideInLeft>
               <div className="flex items-center gap-4 mb-8">
-                <div className="h-px w-10 bg-dorado" />
+                <motion.div
+                  className="h-px bg-dorado origin-left"
+                  style={{ width: 40 }}
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 0.5,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                />
                 <span className="eyebrow">Quiénes somos</span>
               </div>
 
