@@ -150,7 +150,7 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className="border-t border-crema/8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-crema/20 text-xs tracking-wider">
-            © 2025 Altum Inmobiliaria. Todos los derechos reservados.
+            © 2026 Altum Inmobiliaria. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-6">
             <Link
