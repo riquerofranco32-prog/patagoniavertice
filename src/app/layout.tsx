@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/marketing/WhatsAppButton";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import SmoothScroll from "@/components/ui/SmoothScroll";
+import { Analytics } from "@vercel/analytics/next";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -126,6 +127,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppButton />
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
