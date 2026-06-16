@@ -1,15 +1,25 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/marketing/Hero";
 import Manifiesto from "@/components/marketing/Manifiesto";
-import Nosotros from "@/components/marketing/Nosotros";
-import Estadisticas from "@/components/marketing/Estadisticas";
-import Servicios from "@/components/marketing/Servicios";
-import Proceso from "@/components/marketing/Proceso";
-import Testimonios from "@/components/marketing/Testimonios";
-import CTAFinal from "@/components/marketing/CTAFinal";
+
+// Below-fold: lazy loaded to reduce initial JS bundle
+const Nosotros = dynamic(() => import("@/components/marketing/Nosotros"));
+const Estadisticas = dynamic(
+  () => import("@/components/marketing/Estadisticas"),
+);
+const Servicios = dynamic(() => import("@/components/marketing/Servicios"));
+const Proceso = dynamic(() => import("@/components/marketing/Proceso"));
+const Testimonios = dynamic(() => import("@/components/marketing/Testimonios"));
+const CTAFinal = dynamic(() => import("@/components/marketing/CTAFinal"));
+const SpotlightCursor = dynamic(
+  () => import("@/components/ui/SpotlightCursor"),
+  { ssr: false },
+);
 
 export default function HomePage() {
   return (
     <>
+      <SpotlightCursor />
       <Hero />
       <Manifiesto />
       <Nosotros />

@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const words = [
   { text: "El", italic: false },
@@ -20,25 +19,14 @@ const words = [
 ];
 
 export default function Manifiesto() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
-
   return (
-    <section
-      ref={ref}
-      className="relative bg-crema py-28 lg:py-40 overflow-hidden"
-    >
+    <section className="relative bg-crema py-28 lg:py-40 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px gold-line" />
 
       <div className="relative max-w-3xl mx-auto px-8 lg:px-16 text-center">
         {/* Ornament */}
         <motion.div
           className="flex items-center justify-center gap-3 mb-12"
-          style={{ y }}
           initial={{ opacity: 0, scaleX: 0 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
