@@ -1,6 +1,7 @@
 import Hero from "@/components/marketing/Hero";
 import Manifiesto from "@/components/marketing/Manifiesto";
 import Nosotros from "@/components/marketing/Nosotros";
+import Estadisticas from "@/components/marketing/Estadisticas";
 import Servicios from "@/components/marketing/Servicios";
 import Proceso from "@/components/marketing/Proceso";
 import Testimonios from "@/components/marketing/Testimonios";
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Hero />
       <Manifiesto />
       <Nosotros />
+      <Estadisticas />
       <Servicios />
       <Proceso />
       <Testimonios />
