@@ -1,15 +1,49 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Hero from "@/components/marketing/Hero";
 import Manifiesto from "@/components/marketing/Manifiesto";
 
-// Below-fold: lazy loaded to reduce initial JS bundle
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://altumsci.com.ar";
+
+// ── Metadata específica de la home ──────────────────────────────────────────
+export const metadata: Metadata = {
+  title: "Altum Inmobiliaria — Propiedades en Río Negro y la Patagonia",
+  description:
+    "Inmobiliaria en Río Negro con más de 5 años de experiencia y +200 operaciones exitosas. Compra, venta, alquiler y consultoría de propiedades en Cipoletti, Catriel y toda la Patagonia.",
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: "Altum Inmobiliaria — Propiedades en Río Negro y la Patagonia",
+    description:
+      "Compra, venta y alquiler de propiedades en Río Negro. Trato directo, transparencia total. +200 operaciones exitosas en Cipoletti, Catriel y la Patagonia Argentina.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Altum Inmobiliaria — Propiedades en Río Negro y la Patagonia Argentina",
+      },
+    ],
+  },
+};
+
+// ── Lazy loading de secciones below-fold ────────────────────────────────────
 const Nosotros = dynamic(() => import("@/components/marketing/Nosotros"));
 const Estadisticas = dynamic(
   () => import("@/components/marketing/Estadisticas"),
 );
 const Servicios = dynamic(() => import("@/components/marketing/Servicios"));
 const Proceso = dynamic(() => import("@/components/marketing/Proceso"));
-const Testimonios = dynamic(() => import("@/components/marketing/Testimonios"));
+const TestimoniosReales = dynamic(
+  () => import("@/components/marketing/TestimoniosReales"),
+);
+const PorQueElegirnos = dynamic(
+  () => import("@/components/marketing/Testimonios"),
+);
+const FAQ = dynamic(() => import("@/components/marketing/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/marketing/CTAFinal"));
 const SpotlightCursor = dynamic(
   () => import("@/components/ui/SpotlightCursor"),
@@ -20,13 +54,32 @@ export default function HomePage() {
   return (
     <>
       <SpotlightCursor />
+      {/* Hero + Manifiesto: above-fold, no lazy */}
       <Hero />
       <Manifiesto />
+
+      {/* Quiénes somos */}
       <Nosotros />
+
+      {/* Métricas clave */}
       <Estadisticas />
+
+      {/* Servicios + video institucional */}
       <Servicios />
+
+      {/* Proceso de trabajo */}
       <Proceso />
-      <Testimonios />
+
+      {/* Testimonios de clientes (marquee doble) */}
+      <TestimoniosReales />
+
+      {/* Diferenciadores "Por qué elegirnos" */}
+      <PorQueElegirnos />
+
+      {/* FAQ — preguntas frecuentes (rich snippet) */}
+      <FAQ />
+
+      {/* CTA final */}
       <CTAFinal />
     </>
   );

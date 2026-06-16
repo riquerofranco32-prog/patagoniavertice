@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import {
   motion,
@@ -194,13 +195,19 @@ export default function CTAFinal() {
         viewport={{ once: true }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <motion.img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
-          alt="Patagonia — paisaje"
-          loading="lazy"
-          className="absolute inset-0 w-full h-[116%] -top-[8%] object-cover"
+        <motion.div
+          className="absolute inset-0 w-full h-[116%] -top-[8%]"
           style={{ y: imgY }}
-        />
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
+            alt="Paisaje patagónico — Altum Inmobiliaria, propiedades en Río Negro"
+            fill
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="object-cover"
+            priority={false}
+          />
+        </motion.div>
         {/* Gradient overlay blending into left panel */}
         <div
           className="absolute inset-0"
