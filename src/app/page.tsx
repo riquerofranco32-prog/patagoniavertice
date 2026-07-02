@@ -32,14 +32,8 @@ export const metadata: Metadata = {
 
 // ── Lazy loading de secciones below-fold ────────────────────────────────────
 const Nosotros = dynamic(() => import("@/components/marketing/Nosotros"));
-const Estadisticas = dynamic(
-  () => import("@/components/marketing/Estadisticas"),
-);
 const Servicios = dynamic(() => import("@/components/marketing/Servicios"));
 const Proceso = dynamic(() => import("@/components/marketing/Proceso"));
-const TestimoniosReales = dynamic(
-  () => import("@/components/marketing/TestimoniosReales"),
-);
 const PorQueElegirnos = dynamic(
   () => import("@/components/marketing/Testimonios"),
 );
@@ -61,17 +55,11 @@ export default function HomePage() {
       {/* Quiénes somos */}
       <Nosotros />
 
-      {/* Métricas clave */}
-      <Estadisticas />
-
       {/* Servicios + video institucional */}
       <Servicios />
 
       {/* Proceso de trabajo */}
       <Proceso />
-
-      {/* Testimonios de clientes (marquee doble) */}
-      <TestimoniosReales />
 
       {/* Diferenciadores "Por qué elegirnos" */}
       <PorQueElegirnos />
