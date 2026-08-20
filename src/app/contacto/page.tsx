@@ -69,7 +69,7 @@ export default function ContactoPage() {
 
           {/* Headline */}
           <h1
-            className="font-display text-crema font-light leading-[1.0] mb-5"
+            className="font-display text-crema font-medium leading-[1.0] mb-5"
             style={{
               fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)",
               letterSpacing: "-0.03em",
@@ -168,7 +168,7 @@ export default function ContactoPage() {
           </div>
 
           <h2
-            className="font-display text-tierra font-light leading-[1.05] mb-3"
+            className="font-display text-tierra font-medium leading-[1.05] mb-3"
             style={{
               fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
               letterSpacing: "-0.02em",

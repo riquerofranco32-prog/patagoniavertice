@@ -75,7 +75,7 @@ export default function NosotrosPage() {
             </span>
           </div>
           <h1
-            className="font-display text-crema font-light leading-[1.05] mb-6 max-w-3xl"
+            className="font-display text-crema font-medium leading-[1.05] mb-6 max-w-3xl"
             style={{
               fontSize: "clamp(3rem, 6vw, 5rem)",
               letterSpacing: "-0.02em",
@@ -110,7 +110,7 @@ export default function NosotrosPage() {
                 </span>
               </div>
               <h2
-                className="font-display text-tierra font-light leading-[1.05] mb-8"
+                className="font-display text-tierra font-medium leading-[1.05] mb-8"
                 style={{
                   fontSize: "clamp(2rem, 3.5vw, 3rem)",
                   letterSpacing: "-0.02em",
@@ -167,7 +167,7 @@ export default function NosotrosPage() {
               <div className="h-px w-10 bg-dorado" />
             </div>
             <h2
-              className="font-display text-tierra font-light leading-[1.05]"
+              className="font-display text-tierra font-medium leading-[1.05]"
               style={{
                 fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
                 letterSpacing: "-0.02em",
@@ -189,7 +189,7 @@ export default function NosotrosPage() {
                   <div className="text-dorado mb-5 transition-transform duration-300 group-hover:scale-110 origin-left">
                     <Icon size={28} strokeWidth={1} />
                   </div>
-                  <h3 className="font-display text-tierra text-2xl font-light mb-3 group-hover:text-crema transition-colors duration-500">
+                  <h3 className="font-display text-tierra text-2xl font-medium mb-3 group-hover:text-crema transition-colors duration-500">
                     {v.titulo}
                   </h3>
                   <p className="font-body text-tierra/50 text-sm leading-relaxed group-hover:text-crema/50 transition-colors duration-500">
@@ -213,7 +213,7 @@ export default function NosotrosPage() {
             <div className="h-px w-10 bg-dorado" />
           </div>
           <h2
-            className="font-display text-crema font-light leading-[1.05] mb-10"
+            className="font-display text-crema font-medium leading-[1.05] mb-10"
             style={{
               fontSize: "clamp(2rem, 4vw, 3.5rem)",
               letterSpacing: "-0.02em",

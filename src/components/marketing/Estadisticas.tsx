@@ -12,24 +12,28 @@ import {
 const stats = [
   {
     value: 5,
+    ringMax: 10,
     suffix: "+",
     label: "Años en el mercado",
     detail: "Experiencia acumulada en la Patagonia",
   },
   {
     value: 200,
+    ringMax: 200,
     suffix: "+",
     label: "Operaciones",
     detail: "Compras, ventas y alquileres gestionados",
   },
   {
     value: 98,
+    ringMax: 100,
     suffix: "%",
     label: "Satisfacción",
     detail: "Clientes que vuelven o nos recomiendan",
   },
   {
     value: 24,
+    ringMax: 24,
     suffix: "hs",
     label: "Respuesta",
     detail: "Tiempo máximo de atención garantizado",
@@ -66,6 +70,65 @@ function CounterNumber({
   );
 }
 
+function ProgressRing({
+  value,
+  suffix,
+  progress,
+  inView,
+  delay,
+}: {
+  value: number;
+  suffix: string;
+  progress: number;
+  inView: boolean;
+  delay: number;
+}) {
+  const radius = 46;
+  const circumference = 2 * Math.PI * radius;
+
+  return (
+    <div className="relative w-24 h-24 lg:w-28 lg:h-28 shrink-0 mb-5">
+      <svg
+        className="absolute inset-0 w-full h-full -rotate-90"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r={radius}
+          fill="none"
+          stroke="rgba(245,239,230,0.08)"
+          strokeWidth="2"
+        />
+        <motion.circle
+          cx="50"
+          cy="50"
+          r={radius}
+          fill="none"
+          stroke="#C9A84C"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          style={{ filter: "drop-shadow(0 0 4px rgba(201,168,76,0.6))" }}
+          initial={{ strokeDashoffset: circumference }}
+          animate={
+            inView
+              ? { strokeDashoffset: circumference * (1 - progress) }
+              : { strokeDashoffset: circumference }
+          }
+          transition={{ duration: 1.6, delay, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="font-display font-medium text-crema text-2xl lg:text-3xl tabular-nums">
+          <CounterNumber value={value} suffix={suffix} inView={inView} />
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function Estadisticas() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -76,6 +139,16 @@ export default function Estadisticas() {
       className="relative overflow-hidden"
       style={{ background: "#080E1A" }}
     >
+      {/* Dot grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(201,168,76,0.6) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
+
       {/* Gold top line */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
@@ -120,20 +193,14 @@ export default function Estadisticas() {
                 }}
               />
 
-              {/* Number */}
-              <div
-                className="font-display font-light text-crema leading-none mb-4 relative"
-                style={{
-                  fontSize: "clamp(3.5rem, 6vw, 5rem)",
-                  letterSpacing: "-0.03em",
-                }}
-              >
-                <CounterNumber
-                  value={s.value}
-                  suffix={s.suffix}
-                  inView={inView}
-                />
-              </div>
+              {/* Progress ring con número centrado */}
+              <ProgressRing
+                value={s.value}
+                suffix={s.suffix}
+                progress={s.value / s.ringMax}
+                inView={inView}
+                delay={0.2 + i * 0.1}
+              />
 
               {/* Thin gold separator */}
               <motion.div

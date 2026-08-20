@@ -9,6 +9,7 @@ import { WHATSAPP_URL } from "@/lib/constants";
 const links = [
   { href: "/", label: "Inicio" },
   { href: "/servicios", label: "Servicios" },
+  { href: "/proyectos", label: "Proyectos" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
@@ -16,10 +17,11 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeHover, setActiveHover] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -30,63 +32,89 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "backdrop-blur-md" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500`}
       style={
         scrolled
           ? {
-              background: "rgba(26,39,82,0.96)",
-              borderBottom: "1px solid rgba(201,168,76,0.2)",
+              background: "rgba(8,14,26,0.82)",
+              backdropFilter: "blur(20px) saturate(180%)",
+              WebkitBackdropFilter: "blur(20px) saturate(180%)",
+              borderBottom: "1px solid rgba(201,168,76,0.15)",
+              boxShadow: "0 4px 30px rgba(0,0,0,0.3)",
             }
-          : undefined
+          : {
+              background: "transparent",
+            }
       }
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-24 md:h-28">
+      {/* Gold progress line on scroll */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-dorado/60 to-transparent"
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: scrolled ? 1 : 0, opacity: scrolled ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+        style={{ transformOrigin: "left" }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20 md:h-24">
         {/* ── Logo ── */}
-        <Link href="/" className="flex items-center shrink-0">
-          <img
+        <Link href="/" className="flex items-center shrink-0 group">
+          <motion.img
             src="/logoo.png"
-            alt="Altum Inmobiliaria"
-            className="h-16 md:h-24 w-auto object-contain transition-opacity duration-300"
+            alt="Altum Inmobiliaria — Propiedades en Río Negro"
+            className="h-14 md:h-20 w-auto object-contain"
             style={{ mixBlendMode: "screen", filter: "brightness(1.05)" }}
+            whileHover={{ filter: "brightness(1.2)" }}
+            transition={{ duration: 0.2 }}
           />
         </Link>
 
         {/* ── Desktop nav ── */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8" aria-label="Navegación principal">
           {links.map((l) => {
             const active = pathname === l.href;
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`nav-link font-body text-[11px] tracking-[0.25em] uppercase transition-colors duration-300 ${
-                  active
-                    ? "text-dorado active"
-                    : "text-crema/70 hover:text-crema"
-                }`}
+                onMouseEnter={() => setActiveHover(l.href)}
+                onMouseLeave={() => setActiveHover(null)}
+                className="relative font-body text-[11px] tracking-[0.25em] uppercase transition-colors duration-300 py-1"
+                style={{
+                  color: active
+                    ? "#C9A84C"
+                    : activeHover === l.href
+                      ? "rgba(245,239,230,1)"
+                      : "rgba(245,239,230,0.6)",
+                }}
               >
                 {l.label}
+                {/* Animated underline */}
+                <motion.span
+                  className="absolute bottom-0 left-0 right-0 h-px"
+                  style={{ background: "#C9A84C", transformOrigin: "left" }}
+                  animate={{ scaleX: active || activeHover === l.href ? 1 : 0 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                />
               </Link>
             );
           })}
         </nav>
 
-        {/* ── Derecha: WhatsApp + CTA ── */}
+        {/* ── Right: CTA ── */}
         <div className="hidden lg:flex items-center gap-5">
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-crema/60 text-[11px] tracking-wider hover:text-[#25D366] transition-colors flex items-center gap-2"
+            className="font-body text-crema/50 text-[11px] tracking-wider hover:text-[#25D366] transition-colors flex items-center gap-2 group"
           >
             <WaIcon />
-            WhatsApp
+            <span>WhatsApp</span>
           </a>
           <Link
             href="/contacto"
-            className="btn-shimmer font-body text-tierra text-[11px] tracking-[0.12em] font-medium uppercase px-5 py-2.5"
+            className="btn-shimmer font-body text-tierra text-[11px] tracking-[0.12em] font-medium uppercase px-5 py-2.5 hover:scale-[1.03] transition-transform duration-200"
           >
             Consultar Ahora
           </Link>
@@ -96,16 +124,23 @@ export default function Navbar() {
         <button
           onClick={() => setOpen(!open)}
           className="lg:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Menú"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
         >
-          <span
-            className={`block w-6 h-px bg-crema transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`}
+          <motion.span
+            className="block w-6 h-px bg-crema origin-center"
+            animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.25 }}
           />
-          <span
-            className={`block w-6 h-px bg-crema transition-all duration-300 ${open ? "opacity-0" : ""}`}
+          <motion.span
+            className="block w-6 h-px bg-crema"
+            animate={open ? { opacity: 0, x: -8 } : { opacity: 1, x: 0 }}
+            transition={{ duration: 0.2 }}
           />
-          <span
-            className={`block w-6 h-px bg-crema transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`}
+          <motion.span
+            className="block w-6 h-px bg-crema origin-center"
+            animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.25 }}
           />
         </button>
       </div>
@@ -118,36 +153,48 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden border-t border-white/5 overflow-hidden"
-            style={{ background: "rgba(26,39,82,0.98)" }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden overflow-hidden"
+            style={{
+              background: "rgba(8,14,26,0.97)",
+              backdropFilter: "blur(20px)",
+              borderBottom: "1px solid rgba(201,168,76,0.1)",
+            }}
           >
-            <nav className="flex flex-col gap-5 px-6 py-6">
+            <nav className="flex flex-col gap-0 px-6 py-4" aria-label="Menú móvil">
               {links.map((l, i) => (
                 <motion.div
                   key={l.href}
-                  initial={{ opacity: 0, x: -16 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.2 }}
+                  transition={{ delay: i * 0.06, duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="border-b border-crema/[0.06] last:border-b-0"
                 >
                   <Link
                     href={l.href}
-                    className={`font-body text-[11px] tracking-[0.25em] uppercase transition-colors ${
+                    className={`block font-body text-[11px] tracking-[0.25em] uppercase py-4 transition-colors ${
                       pathname === l.href
                         ? "text-dorado"
-                        : "text-crema/70 hover:text-dorado"
+                        : "text-crema/60 hover:text-dorado"
                     }`}
                   >
                     {l.label}
                   </Link>
                 </motion.div>
               ))}
-              <Link
-                href="/contacto"
-                className="mt-2 btn-shimmer font-body text-tierra text-[11px] tracking-[0.12em] font-medium uppercase px-5 py-3 text-center"
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: links.length * 0.06 + 0.05, duration: 0.25 }}
+                className="pt-4 pb-2"
               >
-                Consultar Ahora
-              </Link>
+                <Link
+                  href="/contacto"
+                  className="btn-shimmer block font-body text-tierra text-[11px] tracking-[0.12em] font-medium uppercase px-5 py-3 text-center"
+                >
+                  Consultar Ahora
+                </Link>
+              </motion.div>
             </nav>
           </motion.div>
         )}

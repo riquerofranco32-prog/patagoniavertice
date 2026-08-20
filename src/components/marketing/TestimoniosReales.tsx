@@ -157,7 +157,7 @@ export default function TestimoniosReales() {
             <div className="h-px w-10 bg-dorado" />
             <span className="eyebrow">Lo que dicen nuestros clientes</span>
           </div>
-          <h2 id="testimonios-heading" className="font-display font-light text-crema mb-12"
+          <h2 id="testimonios-heading" className="font-display font-medium text-crema mb-12"
             style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}>
             Historias de <em className="not-italic italic text-dorado">confianza</em>
           </h2>
@@ -202,7 +202,7 @@ export default function TestimoniosReales() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <h2
               id="testimonios-heading"
-              className="font-display font-light text-crema leading-[1.0]"
+              className="font-display font-medium text-crema leading-[1.0]"
               style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
             >
               Historias de{" "}

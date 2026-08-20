@@ -78,7 +78,7 @@ export default async function ProyectosSlider() {
               </span>
             </div>
             <h2
-              className="font-display text-crema font-light leading-[1.05]"
+              className="font-display text-crema font-medium leading-[1.05]"
               style={{
                 fontSize: "clamp(2.5rem, 5vw, 4rem)",
                 letterSpacing: "-0.02em",

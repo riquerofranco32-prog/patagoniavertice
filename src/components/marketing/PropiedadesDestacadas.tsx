@@ -30,7 +30,7 @@ function PropiedadCard({ propiedad }: { propiedad: Propiedad }) {
             {propiedad.tipo ? tipoLabel[propiedad.tipo] : ""} ·{" "}
             {propiedad.ciudad}
           </div>
-          <h3 className="font-display text-tierra text-xl font-light leading-snug group-hover:text-dorado transition-colors">
+          <h3 className="font-display text-tierra text-xl font-medium leading-snug group-hover:text-dorado transition-colors">
             {propiedad.titulo}
           </h3>
           {propiedad.barrio && (
@@ -44,7 +44,7 @@ function PropiedadCard({ propiedad }: { propiedad: Propiedad }) {
             <div className="font-body text-tierra/40 text-xs mb-1">
               {propiedad.moneda}
             </div>
-            <div className="font-display text-tierra text-xl font-light">
+            <div className="font-display text-tierra text-xl font-medium">
               {propiedad.precio.toLocaleString("es-AR")}
             </div>
           </div>
@@ -81,7 +81,7 @@ export default async function PropiedadesDestacadas() {
                 Destacados
               </span>
             </div>
-            <h2 className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1]">
+            <h2 className="font-display text-tierra text-5xl lg:text-6xl font-medium leading-[1.1]">
               Proyectos <span className="italic">seleccionados</span>
             </h2>
           </div>

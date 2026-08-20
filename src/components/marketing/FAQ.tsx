@@ -76,7 +76,7 @@ function FAQItem({
 
         {/* Pregunta */}
         <span
-          className="flex-1 font-display font-light text-crema leading-snug group-hover:text-dorado transition-colors duration-300"
+          className="flex-1 font-display font-medium text-crema leading-snug group-hover:text-dorado transition-colors duration-300"
           style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", letterSpacing: "0.01em" }}
         >
           {faq.pregunta}
@@ -136,7 +136,7 @@ export default function FAQ() {
 
       {/* Decorative large text */}
       <div
-        className="absolute right-0 bottom-0 font-display text-crema/[0.02] font-light leading-none select-none pointer-events-none"
+        className="absolute right-0 bottom-0 font-display text-crema/[0.02] font-medium leading-none select-none pointer-events-none"
         style={{ fontSize: "clamp(6rem, 20vw, 16rem)", letterSpacing: "-0.06em" }}
         aria-hidden="true"
       >
@@ -161,7 +161,7 @@ export default function FAQ() {
 
             <h2
               id="faq-heading"
-              className="font-display font-light text-crema leading-[1.0] mb-6"
+              className="font-display font-medium text-crema leading-[1.0] mb-6"
               style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
             >
               Todo lo que{" "}

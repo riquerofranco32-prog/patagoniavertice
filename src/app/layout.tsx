@@ -4,7 +4,7 @@ import "./globals.css";
 import "./styles/typography.css";
 import Navbar from "@/components/marketing/Navbar";
 import Footer from "@/components/marketing/Footer";
-import WhatsAppButton from "@/components/marketing/WhatsAppButton";
+import FloatingDock from "@/components/marketing/FloatingDock";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import SmoothScroll from "@/components/ui/SmoothScroll";
@@ -28,8 +28,7 @@ const sohne = Hanken_Grotesk({
   variable: "--font-sohne",
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://altumsci.com.ar";
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://altumsci.com.ar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -71,7 +70,7 @@ export const metadata: Metadata = {
     "geo.region": "AR-R",
     "geo.placename": "Cipoletti, Río Negro, Argentina",
     "geo.position": "-38.9333;-68.0667",
-    "ICBM": "-38.9333, -68.0667",
+    ICBM: "-38.9333, -68.0667",
     "og:locale:alternate": "es_AR",
   },
   openGraph: {
@@ -151,10 +150,26 @@ const localBusinessSchema = {
     longitude: -68.0667,
   },
   areaServed: [
-    { "@type": "City", name: "Cipoletti", containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" } },
-    { "@type": "City", name: "Catriel", containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" } },
-    { "@type": "City", name: "General Roca", containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" } },
-    { "@type": "City", name: "Viedma", containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" } },
+    {
+      "@type": "City",
+      name: "Cipoletti",
+      containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" },
+    },
+    {
+      "@type": "City",
+      name: "Catriel",
+      containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" },
+    },
+    {
+      "@type": "City",
+      name: "General Roca",
+      containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" },
+    },
+    {
+      "@type": "City",
+      name: "Viedma",
+      containedInPlace: { "@type": "AdministrativeArea", name: "Río Negro" },
+    },
     { "@type": "State", name: "Río Negro" },
     { "@type": "State", name: "Patagonia Argentina" },
   ],
@@ -186,7 +201,8 @@ const websiteSchema = {
   "@id": `${siteUrl}/#website`,
   url: siteUrl,
   name: "Altum Inmobiliaria",
-  description: "Inmobiliaria especializada en Río Negro y la Patagonia Argentina",
+  description:
+    "Inmobiliaria especializada en Río Negro y la Patagonia Argentina",
   publisher: { "@id": `${siteUrl}/#organization` },
   inLanguage: "es-AR",
 };
@@ -249,14 +265,20 @@ export default function RootLayout({
       <head>
         {/* Preconnect a dominios externos para mejorar LCP */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
 
         {/* Schema.org — LocalBusiness */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema),
+          }}
         />
         {/* Schema.org — WebSite */}
         <script
@@ -276,7 +298,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <WhatsAppButton />
+          <FloatingDock />
         </SmoothScroll>
       </body>
     </html>

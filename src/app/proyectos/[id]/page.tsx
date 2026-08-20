@@ -68,7 +68,7 @@ export default async function PropiedadPage({
                 {propiedad.ciudad}
                 {propiedad.barrio && ` · ${propiedad.barrio}`}
               </div>
-              <h1 className="font-display text-tierra text-5xl lg:text-6xl font-light leading-[1.1] mb-8">
+              <h1 className="font-display text-tierra text-5xl lg:text-6xl font-medium leading-[1.1] mb-8">
                 {propiedad.titulo}
               </h1>
               {propiedad.descripcion && (
@@ -101,7 +101,7 @@ export default async function PropiedadPage({
                     <div className="font-body text-crema/40 text-xs mb-1">
                       {propiedad.moneda}
                     </div>
-                    <div className="font-display text-crema text-4xl font-light">
+                    <div className="font-display text-crema text-4xl font-medium">
                       {propiedad.precio.toLocaleString("es-AR")}
                     </div>
                   </div>

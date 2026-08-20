@@ -52,7 +52,7 @@ export default function PorQueElegirnos() {
             <span className="eyebrow">Por qué elegirnos</span>
           </div>
           <h2
-            className="font-display font-light text-crema leading-[1.0] mb-5"
+            className="font-display font-medium text-crema leading-[1.0] mb-5"
             style={{
               fontSize: "clamp(2.5rem, 5vw, 4rem)",
               letterSpacing: "-0.02em",
@@ -107,7 +107,7 @@ export default function PorQueElegirnos() {
               </span>
 
               <h3
-                className="font-display font-light text-crema relative z-10"
+                className="font-display font-medium text-crema relative z-10"
                 style={{
                   fontSize: "clamp(1.3rem, 2vw, 1.6rem)",
                   letterSpacing: "0.01em",

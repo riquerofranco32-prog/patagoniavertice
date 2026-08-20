@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import TypewriterText from "@/components/ui/TypewriterText";
 
 const WA_HERO =
   "https://wa.me/5492996095742?text=Hola%2C%20quisiera%20consultar%20propiedades%20de%20Altum%20Inmobiliaria";
@@ -106,7 +107,6 @@ export default function Hero() {
         <motion.video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
-          src="/bg-hero.mp4"
           poster="/hero.png"
           autoPlay
           muted
@@ -115,7 +115,11 @@ export default function Hero() {
           initial={{ scale: 1.0 }}
           animate={{ scale: 1.03 }}
           transition={{ duration: 8, ease: "linear" }}
-        />
+        >
+          {/* WebM primero (mejor compresión en Chrome/Firefox), MP4 como fallback */}
+          <source src="/bg-hero.webm" type="video/webm" />
+          <source src="/bg-hero-opt.mp4" type="video/mp4" />
+        </motion.video>
       </motion.div>
 
       {/* ── Overlays ─────────────────────────────────────────────────────── */}
@@ -141,16 +145,21 @@ export default function Hero() {
       {/* Left gold accent line */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-dorado/20 to-transparent" />
 
-      {/* ── ALTUM SDI brand badge — GSAP entrada 0.3s ─────────────────────── */}
+      {/* ── Brand badge — GSAP entrada 0.3s ─────────────────────────────── */}
       <div className="hero-badge absolute top-28 right-6 lg:right-12 opacity-0">
         <div
-          className="flex items-center gap-2.5 backdrop-blur-sm border border-dorado/20 px-4 py-2"
+          className="flex flex-col gap-1 backdrop-blur-sm border border-dorado/20 px-4 py-3"
           style={{ background: "rgba(26,39,82,0.55)" }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-dorado badge-pulse" />
-          <span className="font-body text-dorado/75 text-[10px] tracking-[0.25em] uppercase">
-            Altum Inmobiliaria · Río Negro
-          </span>
+          <div className="flex items-center gap-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-dorado badge-pulse flex-shrink-0" />
+            <span className="font-body text-dorado/80 text-[10px] tracking-[0.22em] uppercase">
+              Estela Mari Rojas
+            </span>
+          </div>
+          <p className="font-body text-crema/30 text-[9px] tracking-[0.18em] uppercase pl-[18px]">
+            Martillera · Mat. 35 RP 2026 · Río Negro
+          </p>
         </div>
       </div>
 
@@ -167,7 +176,7 @@ export default function Hero() {
 
         {/* Headline — GSAP letter-reveal 0.6s, escala H1 56px */}
         <h1
-          className="font-display font-light leading-[1.1] max-w-5xl mb-8"
+          className="font-display font-medium leading-[1.1] max-w-5xl mb-8"
           style={{
             fontSize: "clamp(2.75rem, 6vw, var(--text-h1))",
             letterSpacing: "0.01em",
@@ -202,11 +211,23 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Subtitle — GSAP 0.9s + stagger */}
-        <p className="hero-sub font-body text-crema/45 text-[15px] lg:text-base leading-relaxed max-w-md mb-12 opacity-0">
-          Accedé al mercado inmobiliario de mayor crecimiento en Argentina.
-          Propiedades con respaldo profesional en Río Negro y la Patagonia.
-        </p>
+        {/* Subtitle — typewriter rotativo */}
+        <div className="hero-sub font-body text-crema/45 text-[15px] lg:text-base leading-relaxed max-w-md mb-12 opacity-0 min-h-[3rem]">
+          <TypewriterText
+            texts={[
+              "Más de 200 operaciones exitosas en Río Negro.",
+              "Trato directo. Sin intermediarios.",
+              "Tu inversión, en el corazón de Patagonia.",
+              "Transparencia total en cada operación.",
+            ]}
+            className="text-crema/45"
+            cursorClassName="bg-dorado/50"
+            typeSpeed={50}
+            deleteSpeed={28}
+            pauseMs={2500}
+            startDelay={1400}
+          />
+        </div>
 
         {/* CTAs — GSAP 1.2s, glow oro */}
         <div className="flex flex-col sm:flex-row gap-4">

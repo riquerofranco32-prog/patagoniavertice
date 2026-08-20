@@ -98,7 +98,7 @@ function ServiceCard({
           {s.num}
         </div>
         <h3
-          className="font-display font-light text-crema leading-tight mb-4"
+          className="font-display font-medium text-crema leading-tight mb-4"
           style={{
             fontSize: "clamp(1.3rem, 2vw, 1.6rem)",
             letterSpacing: "0.01em",
@@ -151,7 +151,7 @@ export default function Servicios() {
             <span className="eyebrow">Lo que hacemos</span>
           </div>
           <h2
-            className="font-display font-light text-crema leading-[1.0] mb-5"
+            className="font-display font-medium text-crema leading-[1.0] mb-5"
             style={{
               fontSize: "clamp(2.5rem, 5vw, 4rem)",
               letterSpacing: "-0.02em",
@@ -195,7 +195,7 @@ export default function Servicios() {
                 </span>
               </div>
               <h3
-                className="font-display font-light text-crema leading-[1.0]"
+                className="font-display font-medium text-crema leading-[1.0]"
                 style={{
                   fontSize: "clamp(2rem, 3.5vw, 2.8rem)",
                   letterSpacing: "-0.02em",

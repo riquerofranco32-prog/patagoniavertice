@@ -111,7 +111,7 @@ export default function ProyectosSliderClient({ proyectos }: { proyectos: Proyec
 
         {/* Ghost counter */}
         <div
-          className="absolute top-6 left-6 font-display text-crema/10 font-light leading-none select-none"
+          className="absolute top-6 left-6 font-display text-crema/10 font-medium leading-none select-none"
           style={{ fontSize: "clamp(5rem, 12vw, 8rem)", letterSpacing: "-0.05em" }}
         >
           {String(current + 1).padStart(2, "0")}
@@ -159,7 +159,7 @@ export default function ProyectosSliderClient({ proyectos }: { proyectos: Proyec
             </div>
 
             <h3
-              className="font-display text-crema font-light leading-[1.05] mb-4"
+              className="font-display text-crema font-medium leading-[1.05] mb-4"
               style={{ fontSize: "clamp(2rem, 4vw, 3rem)", letterSpacing: "-0.02em" }}
             >
               {p.titulo}

@@ -101,7 +101,7 @@ export default async function ProyectosPage() {
             </span>
           </div>
           <h1
-            className="font-display text-crema font-light leading-[1.0] mb-6"
+            className="font-display text-crema font-medium leading-[1.0] mb-6"
             style={{
               fontSize: "clamp(3rem, 7vw, 6rem)",
               letterSpacing: "-0.03em",
@@ -151,7 +151,7 @@ export default async function ProyectosPage() {
                     />
                     {/* Number */}
                     <div
-                      className="absolute top-4 right-4 font-display text-crema/15 font-light select-none"
+                      className="absolute top-4 right-4 font-display text-crema/15 font-medium select-none"
                       style={{
                         fontSize: "4rem",
                         letterSpacing: "-0.05em",
@@ -177,7 +177,7 @@ export default async function ProyectosPage() {
                     {p.ciudad ?? "Río Negro"}
                   </div>
                   <h3
-                    className="font-display text-tierra font-light group-hover:text-dorado transition-colors duration-300 mb-1"
+                    className="font-display text-tierra font-medium group-hover:text-dorado transition-colors duration-300 mb-1"
                     style={{
                       fontSize: "clamp(1.3rem, 2vw, 1.6rem)",
                       letterSpacing: "-0.02em",
@@ -191,7 +191,7 @@ export default async function ProyectosPage() {
                     </p>
                   )}
                   {p.precio && (
-                    <p className="font-display text-tierra text-lg font-light mt-2">
+                    <p className="font-display text-tierra text-lg font-medium mt-2">
                       {p.moneda} {p.precio.toLocaleString("es-AR")}
                     </p>
                   )}
@@ -223,7 +223,7 @@ export default async function ProyectosPage() {
           {/* CTA bottom */}
           <div className="mt-20 pt-16 border-t border-tierra/8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <p className="font-display text-tierra font-light text-2xl mb-1">
+              <p className="font-display text-tierra font-medium text-2xl mb-1">
                 ¿Buscás algo específico?
               </p>
               <p className="font-body text-tierra/40 text-sm">

@@ -35,7 +35,7 @@ export default function SumatePage() {
             </span>
           </div>
           <h1
-            className="font-display text-crema font-light leading-[1.05] mb-6 max-w-3xl"
+            className="font-display text-crema font-medium leading-[1.05] mb-6 max-w-3xl"
             style={{
               fontSize: "clamp(3rem, 6vw, 5rem)",
               letterSpacing: "-0.02em",

@@ -67,7 +67,7 @@ function PostulacionForm() {
           </svg>
         </div>
         <div>
-          <h3 className="font-display text-crema text-3xl font-light mb-3">¡Postulación recibida!</h3>
+          <h3 className="font-display text-crema text-3xl font-medium mb-3">¡Postulación recibida!</h3>
           <p className="font-body text-crema/40 text-sm leading-relaxed max-w-sm">
             Gracias por tu interés. Revisaremos tu perfil y te contactaremos a la brevedad.
           </p>
@@ -182,7 +182,7 @@ export default function SumateContent() {
                 <span className="font-body text-dorado text-[11px] tracking-[0.25em] uppercase">Por qué elegirnos</span>
               </div>
               <h2
-                className="font-display text-tierra font-light leading-[1.05]"
+                className="font-display text-tierra font-medium leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", letterSpacing: "-0.02em" }}
               >
                 Lo que te{" "}
@@ -206,7 +206,7 @@ export default function SumateContent() {
                   <div className="text-dorado mb-5 transition-transform duration-300 group-hover:scale-110 origin-left">
                     <Icon size={28} strokeWidth={1} />
                   </div>
-                  <h3 className="font-display text-tierra text-xl font-light mb-3 group-hover:text-crema transition-colors duration-500">
+                  <h3 className="font-display text-tierra text-xl font-medium mb-3 group-hover:text-crema transition-colors duration-500">
                     {b.titulo}
                   </h3>
                   <p className="font-body text-tierra/50 text-sm leading-relaxed group-hover:text-crema/50 transition-colors duration-500">
@@ -229,7 +229,7 @@ export default function SumateContent() {
                 <span className="font-body text-dorado text-[11px] tracking-[0.25em] uppercase">Postulate</span>
               </div>
               <h2
-                className="font-display text-crema font-light leading-[1.05] mb-6"
+                className="font-display text-crema font-medium leading-[1.05] mb-6"
                 style={{ fontSize: "clamp(2rem, 3vw, 2.8rem)", letterSpacing: "-0.02em" }}
               >
                 Mandanos tu{" "}

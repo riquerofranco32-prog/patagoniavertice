@@ -33,9 +33,15 @@ export const metadata: Metadata = {
 // ── Lazy loading de secciones below-fold ────────────────────────────────────
 const Nosotros = dynamic(() => import("@/components/marketing/Nosotros"));
 const Servicios = dynamic(() => import("@/components/marketing/Servicios"));
+const Estadisticas = dynamic(
+  () => import("@/components/marketing/Estadisticas"),
+);
 const Proceso = dynamic(() => import("@/components/marketing/Proceso"));
+const PropiedadesDestacadasHome = dynamic(
+  () => import("@/components/marketing/PropiedadesDestacadasHome"),
+);
 const PorQueElegirnos = dynamic(
-  () => import("@/components/marketing/Testimonios"),
+  () => import("@/components/marketing/BentoDiferenciadores"),
 );
 const FAQ = dynamic(() => import("@/components/marketing/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/marketing/CTAFinal"));
@@ -58,8 +64,14 @@ export default function HomePage() {
       {/* Servicios + video institucional */}
       <Servicios />
 
+      {/* En números */}
+      <Estadisticas />
+
       {/* Proceso de trabajo */}
       <Proceso />
+
+      {/* Propiedades destacadas */}
+      <PropiedadesDestacadasHome />
 
       {/* Diferenciadores "Por qué elegirnos" */}
       <PorQueElegirnos />

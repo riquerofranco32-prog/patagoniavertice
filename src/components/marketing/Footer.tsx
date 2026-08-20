@@ -15,6 +15,13 @@ const serviceLinks = [
   { href: "/servicios", label: "Contratos" },
 ];
 
+const zonaLinks = [
+  { href: "/inmobiliaria-cipoletti", label: "Cipoletti" },
+  { href: "/inmobiliaria-catriel", label: "Catriel" },
+  { href: "/propiedades-rio-negro", label: "General Roca" },
+  { href: "/propiedades-rio-negro", label: "Río Negro" },
+];
+
 export default function Footer() {
   return (
     <footer style={{ background: "#0D1628" }} className="text-crema">
@@ -144,6 +151,24 @@ export default function Footer() {
                 <WaIconSm />
               </SocialLink>
             </div>
+          </div>
+        </div>
+
+        {/* ── Zonas que cubrimos ── */}
+        <div className="border-t border-crema/8 pt-10 pb-2 mb-6">
+          <h4 className="font-body text-dorado text-[11px] tracking-[0.25em] uppercase mb-4">
+            Zonas que cubrimos
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {zonaLinks.map((l) => (
+              <Link
+                key={l.href + l.label}
+                href={l.href}
+                className="font-body text-crema/40 text-xs tracking-wide border border-crema/10 px-3.5 py-1.5 hover:border-dorado/50 hover:text-dorado transition-colors duration-200"
+              >
+                {l.label}
+              </Link>
+            ))}
           </div>
         </div>
 
