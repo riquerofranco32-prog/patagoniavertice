@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
@@ -18,8 +17,16 @@ const valores = [
 const credenciales = [
   {
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
           d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
         />
       </svg>
@@ -30,11 +37,24 @@ const credenciales = [
   },
   {
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
           d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
         />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+        />
       </svg>
     ),
     label: "Zona de Cobertura",
@@ -43,8 +63,16 @@ const credenciales = [
   },
   {
     icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
           d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
         />
       </svg>
@@ -154,7 +182,6 @@ export default function Nosotros() {
       {/* ── PARTE 2: Estela Mari Rojas ───────────────────────────────── */}
       <div className="py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
           {/* Eyebrow */}
           <motion.div
             className="flex items-center gap-4 mb-16 lg:mb-20"
@@ -167,74 +194,8 @@ export default function Nosotros() {
             <span className="eyebrow">La profesional detrás de Altum</span>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-
-            {/* LEFT: Foto */}
-            <SlideInLeft delay={0.1}>
-              <div className="relative">
-                {/* Decorative frame */}
-                <motion.div
-                  className="absolute -top-4 -left-4 w-32 h-32 border border-dorado/20 pointer-events-none"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                />
-                <motion.div
-                  className="absolute -bottom-4 -right-4 w-32 h-32 border border-dorado/20 pointer-events-none"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                />
-
-                {/* Photo */}
-                <div className="relative overflow-hidden aspect-[3/4]">
-                  <Image
-                    src="/estela.jpg"
-                    alt="Estela Mari Rojas — Martillera y Corredora Pública, Altum Inmobiliaria"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className="object-cover object-top"
-                    priority={false}
-                  />
-                  {/* Subtle gradient at bottom */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(to top, rgba(28,25,22,0.25) 0%, transparent 50%)",
-                    }}
-                  />
-                </div>
-
-                {/* Badge credencial flotante */}
-                <motion.div
-                  className="absolute bottom-6 left-6 right-6"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.6 }}
-                >
-                  <div
-                    className="flex items-center gap-3 px-4 py-3 backdrop-blur-sm"
-                    style={{ background: "rgba(15,26,48,0.82)", border: "1px solid rgba(201,168,76,0.25)" }}
-                  >
-                    <span className="w-2 h-2 rounded-full bg-dorado badge-pulse flex-shrink-0" />
-                    <div>
-                      <p className="font-body text-dorado text-[10px] tracking-[0.22em] uppercase">
-                        Profesional Matriculada
-                      </p>
-                      <p className="font-body text-crema/70 text-[11px] mt-0.5">
-                        Matrícula 35 RP 2026 · Río Negro
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </SlideInLeft>
-
-            {/* RIGHT: Contenido */}
+          <div className="max-w-3xl">
+            {/* Contenido */}
             <SlideInRight delay={0.15}>
               {/* Nombre + título */}
               <div className="mb-10">
