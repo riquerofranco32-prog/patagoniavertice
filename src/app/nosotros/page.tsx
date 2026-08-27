@@ -98,10 +98,10 @@ export default function NosotrosPage() {
         />
       </div>
 
-      {/* Historia */}
+      {/* Historia & Credencial Oficial */}
       <section className="py-28 bg-crema">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-20">
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-px w-10 bg-dorado" />
@@ -150,6 +150,35 @@ export default function NosotrosPage() {
               </div>
               <div className="absolute -bottom-5 -right-5 w-40 h-40 border border-dorado/20 pointer-events-none" />
               <div className="absolute -top-5 -left-5 w-24 h-24 border border-dorado/10 pointer-events-none" />
+            </div>
+          </div>
+
+          {/* Credencial Institucional */}
+          <div className="p-8 lg:p-12 bg-navy-950 text-crema border border-dorado/30 relative overflow-hidden" style={{ background: "#080E1A" }}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8 space-y-3">
+                <div className="flex items-center gap-2 text-dorado text-[11px] font-body tracking-[0.2em] uppercase">
+                  <span>✦</span>
+                  <span>Matrícula Profesional Oficial</span>
+                </div>
+                <h3 className="font-display text-2xl lg:text-3xl text-crema font-medium">
+                  Estela Mari Rojas
+                </h3>
+                <p className="font-body text-crema/60 text-sm leading-relaxed max-w-2xl">
+                  Martillera y Corredora Pública Colegiada · <strong>Matrícula 35 RP 2026</strong>.<br />
+                  Colegio de Martilleros y Corredores Públicos de Río Negro (IV Circunscripción). Seguridad jurídica, transparencia notarial y máxima ética en cada contrato.
+                </p>
+              </div>
+              <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
+                <a
+                  href="https://wa.me/5492996095742?text=Hola%20Estela%2C%20quisiera%20hacerle%20una%20consulta%20inmobiliaria."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-dorado text-tierra font-body text-[11px] font-semibold tracking-[0.16em] uppercase hover:bg-dorado-light transition-all text-center"
+                >
+                  Contactar con la Martillera
+                </a>
+              </div>
             </div>
           </div>
         </div>
