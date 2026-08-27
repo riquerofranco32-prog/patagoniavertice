@@ -178,7 +178,7 @@ function BentoCard({ d }: { d: (typeof diferenciadores)[number] }) {
 export default function BentoDiferenciadores() {
   return (
     <section
-      className="py-24 lg:py-32 overflow-hidden"
+      className="relative py-24 lg:py-32 overflow-hidden"
       style={{ background: "#080E1A" }}
       aria-labelledby="diferenciadores-heading"
       id="por-que-altum"

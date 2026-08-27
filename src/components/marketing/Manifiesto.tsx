@@ -40,7 +40,8 @@ export default function Manifiesto() {
 
         {/* Word-by-word reveal */}
         <blockquote
-          className="type-quote text-tierra leading-tight"
+          className="font-display font-medium text-tierra text-2xl sm:text-3xl lg:text-4xl leading-snug"
+          style={{ letterSpacing: "-0.02em" }}
           aria-label="El territorio más generoso de Argentina espera a quienes saben mirar más allá."
         >
           {words.map((word, i) => (

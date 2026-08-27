@@ -331,6 +331,40 @@ export default function PropiedadesDestacadasHome() {
           </AnimatePresence>
         </motion.div>
 
+        {/* Estado vacío elegante */}
+        {filtradas.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mt-8 py-20 px-8 text-center border border-crema/10 bg-navy-900/40 backdrop-blur-sm"
+          >
+            <div className="text-5xl mb-6 opacity-30">&#127968;</div>
+            <h3 className="font-display text-crema text-2xl font-medium mb-3">
+              Sin resultados para esta búsqueda
+            </h3>
+            <p className="font-body text-crema/40 text-sm leading-relaxed max-w-sm mx-auto mb-8">
+              No encontramos propiedades con esa combinación de filtros. Intentá cambiar la zona u operación.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => { setZona("Todas"); setTipoOperacion("Todos"); }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-dorado text-dorado font-body text-[11px] font-medium tracking-[0.18em] uppercase hover:bg-dorado hover:text-tierra transition-all duration-300"
+              >
+                Ver todas las propiedades
+              </button>
+              <a
+                href="https://wa.me/5492996095742?text=Hola%20Altum%2C%20busco%20una%20propiedad%20espec%C3%ADfica."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-dorado text-tierra font-body text-[11px] font-semibold tracking-[0.18em] uppercase hover:bg-dorado-light transition-all"
+              >
+                Consultar con un asesor →
+              </a>
+            </div>
+          </motion.div>
+        )}
+
         {/* Bottom Banner */}
         <div className="mt-16 p-8 lg:p-10 border border-dorado/25 bg-navy-800/40 backdrop-blur-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">

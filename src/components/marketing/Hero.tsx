@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import TypewriterText from "@/components/ui/TypewriterText";
 
@@ -31,14 +32,28 @@ const MARQUEE_ITEMS = [
 ];
 
 const titleLines = [
-  { text: "Tu inversión,", cls: "text-crema/90" },
-  { text: "en el corazón", cls: "text-crema/30 pl-0 lg:pl-20" },
-  { text: "de Patagonia.", cls: "italic text-dorado" },
+  { text: "Tu inversión,", cls: "text-crema font-bold" },
+  { text: "en el corazón", cls: "text-crema/40 pl-0 lg:pl-16 font-medium" },
+  { text: "de la Patagonia.", cls: "text-dorado font-bold" },
 ];
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const router = useRouter();
+
+  // Buscador interactivo — conectado a /proyectos
+  const [tipoInmueble, setTipoInmueble] = useState("todos");
+  const [ubicacion, setUbicacion] = useState("todas");
+  const [operacion, setOperacion] = useState("venta");
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (tipoInmueble !== "todos") params.set("tipo", tipoInmueble);
+    if (ubicacion !== "todas") params.set("ciudad", ubicacion);
+    if (operacion !== "venta") params.set("operacion", operacion);
+    router.push(`/proyectos${params.toString() ? `?${params}` : ""}`);
+  };
 
   useEffect(() => {
     if (videoRef.current) videoRef.current.playbackRate = 0.75;
@@ -282,23 +297,24 @@ export default function Hero() {
               </label>
               <select
                 aria-label="Tipo de Inmueble"
+                value={tipoInmueble}
+                onChange={(e) => setTipoInmueble(e.target.value)}
                 className="w-full bg-transparent text-crema font-body text-xs font-medium focus:outline-none cursor-pointer"
-                defaultValue="todos"
               >
                 <option value="todos" className="bg-navy-950 text-crema">
                   Todos los tipos
                 </option>
-                <option value="casas" className="bg-navy-950 text-crema">
-                  Casas & Residencias
+                <option value="venta" className="bg-navy-950 text-crema">
+                  Casas &amp; Residencias
                 </option>
-                <option value="deptos" className="bg-navy-950 text-crema">
+                <option value="alquiler" className="bg-navy-950 text-crema">
                   Departamentos
                 </option>
-                <option value="lotes" className="bg-navy-950 text-crema">
-                  Lotes & Terrenos
+                <option value="lote" className="bg-navy-950 text-crema">
+                  Lotes &amp; Terrenos
                 </option>
-                <option value="chacras" className="bg-navy-950 text-crema">
-                  Chacras & Campos
+                <option value="chacra" className="bg-navy-950 text-crema">
+                  Chacras &amp; Campos
                 </option>
               </select>
             </div>
@@ -310,22 +326,23 @@ export default function Hero() {
               </label>
               <select
                 aria-label="Ubicación o Región"
+                value={ubicacion}
+                onChange={(e) => setUbicacion(e.target.value)}
                 className="w-full bg-transparent text-crema font-body text-xs font-medium focus:outline-none cursor-pointer"
-                defaultValue="todas"
               >
                 <option value="todas" className="bg-navy-950 text-crema">
                   Toda la Patagonia
                 </option>
-                <option value="cipolletti" className="bg-navy-950 text-crema">
+                <option value="Cipolletti" className="bg-navy-950 text-crema">
                   Cipolletti (Río Negro)
                 </option>
-                <option value="catriel" className="bg-navy-950 text-crema">
+                <option value="Catriel" className="bg-navy-950 text-crema">
                   Catriel (Río Negro)
                 </option>
-                <option value="roca" className="bg-navy-950 text-crema">
+                <option value="General Roca" className="bg-navy-950 text-crema">
                   General Roca (Río Negro)
                 </option>
-                <option value="bariloche" className="bg-navy-950 text-crema">
+                <option value="Bariloche" className="bg-navy-950 text-crema">
                   Bariloche (Río Negro)
                 </option>
               </select>
@@ -338,8 +355,9 @@ export default function Hero() {
               </label>
               <select
                 aria-label="Tipo de Operación"
+                value={operacion}
+                onChange={(e) => setOperacion(e.target.value)}
                 className="w-full bg-transparent text-crema font-body text-xs font-medium focus:outline-none cursor-pointer"
-                defaultValue="venta"
               >
                 <option value="venta" className="bg-navy-950 text-crema">
                   Comprar / Venta
@@ -354,13 +372,13 @@ export default function Hero() {
             </div>
 
             {/* Botón Buscar */}
-            <Link
-              href="/proyectos"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-dorado text-tierra font-body text-[11px] font-semibold tracking-[0.16em] uppercase hover:bg-dorado-light transition-all shadow-md shrink-0"
+            <button
+              onClick={handleSearch}
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-dorado text-tierra font-body text-[11px] font-semibold tracking-[0.16em] uppercase hover:bg-dorado-light transition-all shadow-md shrink-0 active:scale-95"
             >
               <span>Buscar</span>
               <span>→</span>
-            </Link>
+            </button>
           </div>
         </div>
       </motion.div>

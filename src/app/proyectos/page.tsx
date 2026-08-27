@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { Suspense } from "react";
 import CatalogoInteractivo, {
   ItemPropiedad,
 } from "@/components/marketing/CatalogoInteractivo";
@@ -175,10 +176,14 @@ export default async function ProyectosPage() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-dorado/30 to-transparent" />
       </section>
 
-      {/* ── Catálogo con Filtros Reactivos ────────────────────────────────── */}
+      {/* ── Catálogo con Filtros Reactivos ─────────────────────────────────────── */}
       <section className="py-20 bg-crema">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <CatalogoInteractivo propiedadesIniciales={propiedades} />
+          <Suspense fallback={
+            <div className="py-24 text-center font-body text-tierra/50">Cargando propiedades...</div>
+          }>
+            <CatalogoInteractivo propiedadesIniciales={propiedades} />
+          </Suspense>
         </div>
       </section>
 

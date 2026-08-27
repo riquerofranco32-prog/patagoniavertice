@@ -46,6 +46,9 @@ const TasadorExpress = dynamic(
 const ZonasInteractivas = dynamic(
   () => import("@/components/marketing/ZonasInteractivas"),
 );
+const GuiaInversion = dynamic(
+  () => import("@/components/marketing/GuiaInversion"),
+);
 const CalculadoraRentabilidad = dynamic(
   () => import("@/components/marketing/CalculadoraRentabilidad"),
 );
@@ -81,6 +84,9 @@ export default function HomePage() {
 
       {/* Exploración territorial y análisis de mercado por zona */}
       <ZonasInteractivas />
+
+      {/* Lead Magnet — Guía Estratégica de Inversión */}
+      <GuiaInversion />
 
       {/* Calculadora interactiva de rentabilidad & inversión */}
       <CalculadoraRentabilidad />

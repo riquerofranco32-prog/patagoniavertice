@@ -178,7 +178,7 @@ export default function CTAFinal() {
               <span key={i} style={{ display: "block", lineHeight: 1.1 }}>
                 <motion.span
                   style={{ display: "block" }}
-                  className={line.italic ? "not-italic italic text-dorado" : ""}
+                  className={line.italic ? "text-dorado font-bold" : "font-semibold text-crema"}
                   initial={
                     prefersReduced
                       ? { opacity: 0 }

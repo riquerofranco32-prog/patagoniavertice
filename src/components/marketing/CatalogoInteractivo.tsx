@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { WHATSAPP_NUMBER } from "@/lib/constants";
+import { useSearchParams } from "next/navigation";
 
 export interface ItemPropiedad {
   id: string;
@@ -48,10 +49,24 @@ export default function CatalogoInteractivo({
 }: {
   propiedadesIniciales: ItemPropiedad[];
 }) {
+  const searchParams = useSearchParams();
   const [tipoSeleccionado, setTipoSeleccionado] = useState<string>("Todos");
   const [ciudadSeleccionada, setCiudadSeleccionada] = useState<string>("Todas");
   const [precioFiltro, setPrecioFiltro] = useState<string>("todos");
   const [busqueda, setBusqueda] = useState<string>("");
+
+  // Pre-aplicar filtros desde URL params (ej: desde el buscador del Hero)
+  useEffect(() => {
+    const tipo = searchParams.get("tipo");
+    const ciudad = searchParams.get("ciudad");
+    if (tipo && TIPOS_FILTRO.includes(tipo as typeof TIPOS_FILTRO[number])) {
+      setTipoSeleccionado(tipo);
+    }
+    if (ciudad && CIUDADES_FILTRO.includes(ciudad as typeof CIUDADES_FILTRO[number])) {
+      setCiudadSeleccionada(ciudad);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const propiedadesFiltradas = useMemo(() => {
     return propiedadesIniciales.filter((p) => {
