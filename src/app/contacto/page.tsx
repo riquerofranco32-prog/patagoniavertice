@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import FormularioContacto from "@/components/marketing/FormularioContacto";
 import { WHATSAPP_URL } from "@/lib/constants";
 
@@ -43,10 +44,13 @@ export default function ContactoPage() {
       {/* ── Panel izquierdo — sticky, imagen + info ─────────────────────── */}
       <div className="relative lg:w-1/2 lg:sticky lg:top-0 lg:h-screen overflow-hidden">
         {/* Background */}
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
-          alt="Patagonia — ALTUM SDI"
-          className="absolute inset-0 w-full h-full object-cover"
+          alt="Patagonia — Altum Inmobiliaria"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover"
         />
 
         {/* Navy overlay — ALTUM brand */}

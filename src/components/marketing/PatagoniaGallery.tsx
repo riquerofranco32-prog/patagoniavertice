@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 
 const IMAGES = [
@@ -41,11 +42,12 @@ export default function PatagoniaGallery() {
         style={{ y: y1 }}
         className="relative row-span-2 overflow-hidden group"
       >
-        <img
+        <Image
           src={IMAGES[0].url}
           alt={IMAGES[0].alt}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <span className="absolute bottom-3 left-3 text-xs text-white/80 tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -55,11 +57,12 @@ export default function PatagoniaGallery() {
 
       {/* Imagen 2 — fila superior derecha */}
       <motion.div style={{ y: y2 }} className="relative overflow-hidden group">
-        <img
+        <Image
           src={IMAGES[1].url}
           alt={IMAGES[1].alt}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <span className="absolute bottom-3 left-3 text-xs text-white/80 tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -69,15 +72,16 @@ export default function PatagoniaGallery() {
 
       {/* Imagen 3 — fila inferior derecha con badge */}
       <motion.div style={{ y: y3 }} className="relative overflow-hidden group">
-        <img
+        <Image
           src={IMAGES[2].url}
           alt={IMAGES[2].alt}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div
-          className="absolute top-3 right-3 px-2 py-1 text-xs font-medium tracking-widest uppercase"
+          className="absolute top-3 right-3 px-2 py-1 text-xs font-medium tracking-widest uppercase z-10"
           style={{ backgroundColor: "#C9A84C", color: "#1A2752" }}
         >
           Patagonia

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Eye, Handshake, Shield, Star, Lightbulb, Users } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -53,11 +54,13 @@ export default function NosotrosPage() {
       {/* Hero */}
       <div className="relative bg-tierra pt-40 pb-32 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=60"
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover opacity-20"
+            alt="Patagonia Inmobiliaria"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-20"
           />
           <div
             className="absolute inset-0"
@@ -140,12 +143,13 @@ export default function NosotrosPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/5] overflow-hidden">
-                <img
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <Image
                   src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80"
                   alt="Altum Inmobiliaria — propiedades en la Patagonia"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
               <div className="absolute -bottom-5 -right-5 w-40 h-40 border border-dorado/20 pointer-events-none" />

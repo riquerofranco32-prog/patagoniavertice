@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import type { Propiedad } from "@/lib/supabase/types";
 
@@ -16,12 +17,13 @@ function PropiedadCard({ propiedad }: { propiedad: Propiedad }) {
 
   return (
     <Link href={`/proyectos/${propiedad.id}`} className="group block">
-      <div className="overflow-hidden aspect-[4/3] mb-5">
-        <img
+      <div className="overflow-hidden aspect-[4/3] mb-5 relative">
+        <Image
           src={imagen}
           alt={propiedad.titulo}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
       <div className="flex items-start justify-between gap-4">
