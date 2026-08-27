@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { SlideInLeft, SlideInRight } from "@/components/ui/AnimateOnScroll";
 import PatagoniaGallery from "@/components/marketing/PatagoniaGallery";
@@ -194,26 +195,40 @@ export default function Nosotros() {
             <span className="eyebrow">La profesional detrás de Altum</span>
           </motion.div>
 
-          <div className="max-w-3xl">
-            {/* Contenido */}
-            <SlideInRight delay={0.15}>
-              {/* Nombre + título */}
-              <div className="mb-10">
-                <h2
-                  ref={estelaRef}
-                  className="font-display text-tierra font-medium leading-[1.05] mb-3 opacity-0"
-                  style={{
-                    fontSize: "clamp(2.6rem, 5vw, 4rem)",
-                    letterSpacing: "0.015em",
-                  }}
-                >
-                  Estela Mari{" "}
-                  <em className="not-italic italic text-dorado">Rojas</em>
-                </h2>
-                <p className="font-body text-tierra/45 text-[13px] tracking-[0.18em] uppercase">
-                  Martillera y Corredora Pública
-                </p>
+          <div className="max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            {/* Foto Real de Estela */}
+            <div className="md:col-span-4 flex justify-center md:justify-start">
+              <div className="relative w-44 h-44 lg:w-52 lg:h-52 rounded-full overflow-hidden border-2 border-dorado shadow-2xl">
+                <Image
+                  src="/estela.jpg"
+                  alt="Estela Mari Rojas — Martillera Colegiada"
+                  fill
+                  sizes="(max-width: 768px) 180px, 220px"
+                  className="object-cover"
+                />
               </div>
+            </div>
+
+            {/* Contenido */}
+            <div className="md:col-span-8">
+              <SlideInRight delay={0.15}>
+                {/* Nombre + título */}
+                <div className="mb-8">
+                  <h2
+                    ref={estelaRef}
+                    className="font-display text-tierra font-medium leading-[1.05] mb-2 opacity-0"
+                    style={{
+                      fontSize: "clamp(2.4rem, 4.5vw, 3.6rem)",
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    Estela Mari{" "}
+                    <em className="not-italic italic text-dorado">Rojas</em>
+                  </h2>
+                  <p className="font-body text-tierra/55 text-xs tracking-[0.2em] uppercase font-semibold">
+                    Martillera y Corredora Pública Colegiada
+                  </p>
+                </div>
 
               {/* Credenciales */}
               <div className="space-y-6 mb-10">
@@ -289,6 +304,7 @@ export default function Nosotros() {
           </div>
         </div>
       </div>
+    </div>
 
       {/* ── Valores strip ────────────────────────────────────────────── */}
       <div className="border-t border-arena overflow-hidden">

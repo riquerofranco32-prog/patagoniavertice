@@ -1,70 +1,66 @@
-/* ── Sistema tipográfico Altum (Sprint 1) ─────────────────────
-   H1 56px · H2 36px · H3 28px · body 16px · small 14px
-   Headings: Cormorant Garamond, +1% tracking
-   Body:     Inter, +0.5% tracking
-   Accent:   Sohne (sustituto libre: Hanken Grotesk)
-──────────────────────────────────────────────────────────────── */
+/* ── Sistema tipográfico Ultra-Modern Luxury Minimalist ────────────────
+   Headings / Display: Outfit (-0.02em tracking, moderno, arquitectónico)
+   Body / UI:           Plus Jakarta Sans (+0.01em tracking, ultra-legible)
+──────────────────────────────────────────────────────────────────────── */
 
 .type-h1 {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-size: clamp(2.75rem, 5.5vw, var(--text-h1)); /* 44 → 64px */
-  font-weight: 600;
-  letter-spacing: 0.015em;
-  line-height: 1.05;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
 }
 
 .type-h2 {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-size: clamp(2rem, 3.8vw, var(--text-h2)); /* 32 → 44px */
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
   font-weight: 600;
-  letter-spacing: 0.015em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .type-h3 {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-size: clamp(1.6rem, 2.75vw, var(--text-h3)); /* 26 → 32px */
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
   font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 1.18;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
 }
 
 .type-body {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: var(--text-body); /* 16px */
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.005em;
-  line-height: 1.65;
+  line-height: 1.68;
 }
 
 .type-small {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: var(--text-small); /* 14px */
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+  font-size: 0.875rem;
   font-weight: 400;
-  letter-spacing: 0.005em;
-  line-height: 1.55;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
 }
 
 .type-accent {
-  font-family: var(--font-sohne), system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
   font-weight: 600;
   color: var(--gold);
 }
 
-/* Cita destacada (Manifiesto / testimonios) */
 .type-quote {
-  font-family: var(--font-sohne), system-ui, sans-serif;
-  font-size: clamp(1.5rem, 2.5vw, 2rem); /* 24 → 32px */
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
   font-weight: 400;
-  line-height: 1.55;
-  letter-spacing: 0.008em;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
 }
 
-/* Título display grande — hero / secciones principales */
 .type-display {
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1.0;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
 }

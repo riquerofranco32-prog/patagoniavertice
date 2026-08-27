@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Hanken_Grotesk } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import "./styles/typography.css";
 import Navbar from "@/components/marketing/Navbar";
@@ -9,23 +9,19 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 
-const cormorant = Cormorant_Garamond({
+// ── Tipografías Ultra-Modern Luxury Minimalist ──────────────────────────────
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-outfit",
+  display: "swap",
 });
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
-});
-
-// Sohne es comercial (Klim Type Foundry); Hanken Grotesk es el sustituto libre
-const sohne = Hanken_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-sohne",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://altumsci.com.ar";
@@ -260,7 +256,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${cormorant.variable} ${inter.variable} ${sohne.variable}`}
+      className={`${outfit.variable} ${plusJakarta.variable}`}
     >
       <head>
         {/* Preconnect a dominios externos para mejorar LCP */}
