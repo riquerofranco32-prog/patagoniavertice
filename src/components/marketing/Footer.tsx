@@ -177,6 +177,19 @@ export default function Footer() {
           <p className="font-body text-crema/20 text-xs tracking-wider">
             © 2026 Altum Inmobiliaria. Todos los derechos reservados.
           </p>
+
+          <div className="flex items-center gap-2 font-body text-xs tracking-wider text-crema/30">
+            <span>Hecho por</span>
+            <span className="inline-flex items-center gap-1.5 text-crema/60 hover:text-dorado transition-colors duration-200">
+              <img
+                src="/se7en-logo.png"
+                alt="se7en studios logo"
+                className="h-4 w-auto object-contain inline-block"
+              />
+              <span className="font-medium text-crema/50">se7en studios</span>
+            </span>
+          </div>
+
           <div className="flex items-center gap-6">
             <Link
               href="/contacto"
