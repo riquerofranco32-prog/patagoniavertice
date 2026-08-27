@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import FormularioContacto from "@/components/marketing/FormularioContacto";
 import { WHATSAPP_URL } from "@/lib/constants";
@@ -177,11 +178,9 @@ export default function ContactoPage() {
             ¿Tenés una{" "}
             <em className="not-italic italic text-dorado">consulta?</em>
           </h2>
-          <p className="font-body text-tierra/45 text-[14px] leading-relaxed mb-10">
-            Completá el formulario y nos comunicamos a la brevedad.
-          </p>
-
-          <FormularioContacto />
+          <Suspense fallback={<div className="p-8 text-tierra/40 font-body text-xs">Cargando formulario...</div>}>
+            <FormularioContacto />
+          </Suspense>
 
           {/* WhatsApp alternativo */}
           <div className="mt-10 pt-8 border-t border-arena">

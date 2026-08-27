@@ -130,10 +130,11 @@ function Toast({ toast, onClose }: { toast: ToastState; onClose: () => void }) {
   );
 }
 
-/* ── Formulario ──────────────────────────────────────────────────────────── */
+import { useSearchParams } from "next/navigation";
 
 export default function FormularioContacto() {
   const [toast, setToast] = useState<ToastState>(null);
+  const searchParams = useSearchParams();
 
   const {
     register,
@@ -144,7 +145,23 @@ export default function FormularioContacto() {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      tipo_consulta: "venta",
+    },
   });
+
+  const propiedadQuery = searchParams.get("propiedad");
+
+  useEffect(() => {
+    if (propiedadQuery) {
+      setValue(
+        "mensaje",
+        `Hola, quisiera recibir más información y coordinar una visita para la propiedad: ${propiedadQuery}.`,
+        { shouldValidate: true }
+      );
+      setValue("tipo_consulta", "venta", { shouldValidate: true });
+    }
+  }, [propiedadQuery, setValue]);
 
   const tipoSeleccionado = watch("tipo_consulta");
 
@@ -173,6 +190,16 @@ export default function FormularioContacto() {
 
   return (
     <>
+      {propiedadQuery && (
+        <div className="mb-6 p-4 border border-dorado/40 bg-dorado/10 text-tierra font-body text-xs flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-dorado font-bold">✦</span>
+            <span>
+              Consultando sobre: <strong>{propiedadQuery}</strong>
+            </span>
+          </div>
+        </div>
+      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
