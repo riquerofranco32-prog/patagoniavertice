@@ -1,156 +1,480 @@
-import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Propiedad } from "@/lib/supabase/types";
+import { WHATSAPP_NUMBER } from "@/lib/constants";
 
 const tipoLabel: Record<string, string> = {
   venta: "Venta",
   alquiler: "Alquiler",
   desarrollo: "Desarrollo",
-  lote: "Lote",
+  lote: "Lote / Terreno",
+  chacra: "Chacra",
 };
 
 const estadoLabel: Record<string, string> = {
-  disponible: "Disponible",
-  reservado: "Reservado",
-  vendido: "Vendido",
-  en_construccion: "En construcción",
+  disponible: "Disponible para Operación",
+  reservado: "En proceso de Reserva",
+  vendido: "Vendido / Entregado",
+  en_construccion: "A Estrenar / En Pozo",
 };
 
-export default async function PropiedadPage({
+interface DemoPropiedad {
+  id: string;
+  titulo: string;
+  barrio?: string;
+  ciudad: string;
+  tipo: string;
+  estado: string;
+  superficie_m2?: number;
+  ambientes?: string;
+  dormitorios?: number;
+  banos?: number;
+  imagenes: string[];
+  descripcion: string;
+  precio: number | null;
+  moneda: string;
+  ubicacion?: string;
+  caracteristicas?: string[];
+}
+
+const demos: Record<string, DemoPropiedad> = {
+  "casa-quinta-los-tilos-cipolletti": {
+    id: "casa-quinta-los-tilos-cipolletti",
+    titulo: "Residencia Exclusiva con Parque & Piscina",
+    barrio: "Los Tilos",
+    ciudad: "Cipolletti",
+    tipo: "venta",
+    estado: "disponible",
+    superficie_m2: 420,
+    ambientes: "5 ambientes",
+    dormitorios: 3,
+    banos: 3,
+    imagenes: [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000&q=85",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&q=85",
+    ],
+    descripcion:
+      "Magnífica residencia situada en una de las zonas residenciales más codiciadas de Cipolletti. Diseñada con un concepto arquitectónico contemporáneo que prioriza la luminosidad, la integración con los espacios verdes y la privacidad familiar.\n\nCuenta con un amplio living comedor con techos en doble altura, cocina de alta gama con isla, quincho cerrado climatizado con parrilla y parque parquizado con piscina.\n\nDocumentación y títulos en regla listos para escriturar.",
+    precio: 185000,
+    moneda: "USD",
+    ubicacion: "Barrio Residencial Los Tilos, Cipolletti, Río Negro",
+    caracteristicas: [
+      "Piscina climatizada con solárium",
+      "Quincho con parrilla y horno",
+      "Suite principal con vestidor e hidromasaje",
+      "Cochera cubierta para 2 vehículos",
+      "Calefacción por losa radiante",
+      "Seguridad perimetral y alarma",
+    ],
+  },
+  "lote-panoramico-paso-cordoba-roca": {
+    id: "lote-panoramico-paso-cordoba-roca",
+    titulo: "Lote Panorámico con Costa de Río",
+    barrio: "Paso Córdoba / Ribera",
+    ciudad: "General Roca",
+    tipo: "lote",
+    estado: "disponible",
+    superficie_m2: 1500,
+    ambientes: "Lote residencial",
+    imagenes: [
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=85",
+      "https://images.unsplash.com/photo-1500076656116-558758c991c1?w=1000&q=85",
+    ],
+    descripcion:
+      "Oportunidad única de adquirir una fracción de tierra virgen con frente sobre el río y vistas abiertas e ininterrumpidas a las bardas patagónicas.\n\nIdeal para desarrollo de casa quinta de descanso o proyecto turístico sustentable. Zona de creciente revalorización y contacto pleno con la naturaleza.",
+    precio: 45000,
+    moneda: "USD",
+    ubicacion: "Paso Córdoba, General Roca, Río Negro",
+    caracteristicas: [
+      "Costa directa sobre el río",
+      "Escritura y mensura inmediata",
+      "Acceso consolidado todo el año",
+      "Excelente orientación solar",
+      "Entorno natural protegido",
+    ],
+  },
+  "semipiso-centro-catriel": {
+    id: "semipiso-centro-catriel",
+    titulo: "Semipiso Moderno a Estrenar con Balcón Terraza",
+    barrio: "Centro Urbano",
+    ciudad: "Catriel",
+    tipo: "venta",
+    estado: "en_construccion",
+    superficie_m2: 85,
+    ambientes: "3 ambientes",
+    dormitorios: 2,
+    banos: 2,
+    imagenes: [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=85",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1000&q=85",
+    ],
+    descripcion:
+      "Departamento de categoría premium a estrenar en el corazón de Catriel. Excelente distribución, aberturas de aluminio con doble vidriado hermético (DVH), cocina equipada y balcón aterrazado con parrilla propia.\n\nInmejorable opción tanto para vivienda familiar como para inversión con renta corporativa de alto rendimiento para el sector energético.",
+    precio: 78000,
+    moneda: "USD",
+    ubicacion: "Centro, Catriel, Río Negro",
+    caracteristicas: [
+      "Balcón terraza con parrilla propia",
+      "Cochera cubierta en subsuelo",
+      "Aberturas de aluminio con DVH",
+      "Caldera dual y radiadores instalados",
+      "Edificio con ascensor de última generación",
+    ],
+  },
+  "casa-rincon-lindo-cipolletti": {
+    id: "casa-rincon-lindo-cipolletti",
+    titulo: "Casa Minimalista en Barrio Privado",
+    barrio: "Rincón Lindo",
+    ciudad: "Cipolletti",
+    tipo: "venta",
+    estado: "disponible",
+    superficie_m2: 290,
+    ambientes: "5 ambientes",
+    dormitorios: 4,
+    banos: 3,
+    imagenes: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=85",
+    ],
+    descripcion:
+      "Diseño vanguardista sobre lote de 550 m² en barrio privado consolidado con seguridad las 24 horas. Estar comedor con doble altura, cocina integrada con isla de cuarzo y master suite con vestidor.",
+    precio: 210000,
+    moneda: "USD",
+    ubicacion: "Rincón Lindo, Cipolletti, Río Negro",
+    caracteristicas: [
+      "Seguridad privada 24 hs",
+      "Galería techada con asador",
+      "Piscina con iluminación LED",
+      "Riego por aspersión computarizado",
+    ],
+  },
+  "chacra-productiva-valle-roca": {
+    id: "chacra-productiva-valle-roca",
+    titulo: "Chacra Productiva con Vivienda Patronal",
+    barrio: "Alto Valle",
+    ciudad: "General Roca",
+    tipo: "chacra",
+    estado: "disponible",
+    superficie_m2: 45000,
+    ambientes: "Chacra con casa",
+    dormitorios: 3,
+    banos: 2,
+    imagenes: [
+      "https://images.unsplash.com/photo-1500076656116-558758c991c1?w=1200&q=85",
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1000&q=85",
+    ],
+    descripcion:
+      "4,5 Hectáreas productivas con riego sistematizado y vivienda patronal en impecable estado de conservación en el Alto Valle de Río Negro. Ideal para desarrollo agropecuario o vivienda permanente de campo.",
+    precio: 160000,
+    moneda: "USD",
+    ubicacion: "Alto Valle, General Roca, Río Negro",
+    caracteristicas: [
+      "4,5 Hectáreas niveladas",
+      "Derecho de riego definitivo",
+      "Casa patronal de 180 m²",
+      "Galpón de herramientas y maquinaria",
+    ],
+  },
+  "chalet-lago-nahuel-huapi-bariloche": {
+    id: "chalet-lago-nahuel-huapi-bariloche",
+    titulo: "Chalet de Montaña con Vista al Lago",
+    barrio: "Av. Bustillo Km 7",
+    ciudad: "Bariloche",
+    tipo: "venta",
+    estado: "disponible",
+    superficie_m2: 310,
+    ambientes: "6 ambientes",
+    dormitorios: 4,
+    banos: 4,
+    imagenes: [
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=85",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1000&q=85",
+    ],
+    descripcion:
+      "Exclusivo chalet patagónico construido en piedra y madera noble con impactante vista panorámica al lago Nahuel Huapi y la cordillera. Parque forestado con árboles autóctonos y habilitación para renta turística en dólares.",
+    precio: 320000,
+    moneda: "USD",
+    ubicacion: "Av. Bustillo Km 7, San Carlos de Bariloche, Río Negro",
+    caracteristicas: [
+      "Vista frontal ininterrumpida al lago",
+      "Hogar a leña en piedra",
+      "Parque forestado de 1.200 m²",
+      "Deck exterior con vista panorámica",
+      "Apto para alquiler turístico",
+    ],
+  },
+};
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const item = demos[params.id];
+  if (item) {
+    return {
+      title: `${item.titulo} — Altum Inmobiliaria`,
+      description: item.descripcion.slice(0, 160),
+    };
+  }
+  return {
+    title: "Propiedad — Altum Inmobiliaria",
+    description: "Detalle de propiedad en Río Negro y la Patagonia.",
+  };
+}
+
+export default async function PropiedadDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const supabase = createClient();
-  const { data } = await supabase
-    .from("propiedades")
-    .select("*")
-    .eq("id", params.id)
-    .eq("publicado", true)
-    .single();
+  let propiedad: DemoPropiedad | null = demos[params.id] ?? null;
 
-  if (!data) notFound();
+  if (!propiedad) {
+    try {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from("propiedades")
+        .select("*")
+        .eq("id", params.id)
+        .eq("publicado", true)
+        .single();
+      if (data) {
+        propiedad = data as unknown as DemoPropiedad;
+      }
+    } catch {
+      /* Supabase error handling */
+    }
+  }
 
-  const propiedad = data as Propiedad;
+  if (!propiedad) notFound();
+
   const imagenes = propiedad.imagenes?.length
     ? propiedad.imagenes
     : [
-        `https://placehold.co/1200x800/1C1A17/B8965A?text=${encodeURIComponent(propiedad.titulo)}`,
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85",
       ];
 
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    `Hola Altum Inmobiliaria, quisiera consultar información detallada y coordinar una visita para la propiedad: ${propiedad.titulo} (${propiedad.ciudad} - USD ${propiedad.precio?.toLocaleString("es-AR") || "Consultar"})`
+  )}`;
+
   return (
-    <>
-      {/* Hero image */}
-      <div className="relative h-[60vh] bg-tierra">
-        <img
+    <main className="bg-crema min-h-screen">
+      {/* ── Hero Gallery ─────────────────────────────────────────────────── */}
+      <section className="relative h-[65vh] md:h-[75vh] bg-navy-950 overflow-hidden">
+        <Image
           src={imagenes[0]}
           alt={propiedad.titulo}
-          className="w-full h-full object-cover opacity-70"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-tierra/80 to-transparent" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-black/30" />
 
-      <div className="bg-crema">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
-          <Link
-            href="/proyectos"
-            className="font-body text-tierra/40 text-xs tracking-widest uppercase hover:text-dorado transition-colors mb-10 block"
-          >
-            ← Volver a proyectos
-          </Link>
+        {/* Back link & Top Badge */}
+        <div className="absolute top-32 left-0 right-0 z-10">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+            <Link
+              href="/proyectos"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-navy-950/80 backdrop-blur-md border border-crema/20 text-crema font-body text-[11px] tracking-[0.18em] uppercase hover:border-dorado hover:text-dorado transition-colors"
+            >
+              <span>←</span>
+              <span>Volver al Catálogo</span>
+            </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {/* Main info */}
-            <div className="lg:col-span-2">
-              <div className="font-body text-dorado text-xs tracking-widest uppercase mb-4">
-                {propiedad.tipo ? tipoLabel[propiedad.tipo] : ""} ·{" "}
-                {propiedad.ciudad}
-                {propiedad.barrio && ` · ${propiedad.barrio}`}
+            <span className="px-3.5 py-1.5 bg-dorado text-tierra font-body text-[10px] font-semibold tracking-[0.2em] uppercase shadow-md">
+              {propiedad.tipo ? tipoLabel[propiedad.tipo] : "Propiedad"}
+            </span>
+          </div>
+        </div>
+
+        {/* Hero Title info bottom */}
+        <div className="absolute bottom-10 left-0 right-0 z-10 text-crema">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="flex items-center gap-3 mb-2 font-body text-dorado text-xs tracking-[0.25em] uppercase font-medium">
+              <span>{propiedad.ciudad}</span>
+              {propiedad.barrio && <span>· {propiedad.barrio}</span>}
+            </div>
+            <h1
+              className="font-display font-medium text-crema leading-[1.05] max-w-4xl"
+              style={{
+                fontSize: "clamp(2.2rem, 4.5vw, 4rem)",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {propiedad.titulo}
+            </h1>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Main Content Grid ────────────────────────────────────────────── */}
+      <section className="py-16 lg:py-24 bg-crema">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            {/* Left Column: Details & Extra Photos */}
+            <div className="lg:col-span-8 space-y-12">
+              {/* Quick Specs Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-white border border-tierra/10 shadow-sm text-center">
+                {propiedad.superficie_m2 && (
+                  <div className="space-y-1">
+                    <span className="font-body text-tierra/40 text-[10px] uppercase tracking-wider block">
+                      Superficie
+                    </span>
+                    <span className="font-display text-tierra text-xl font-medium">
+                      {propiedad.superficie_m2} m²
+                    </span>
+                  </div>
+                )}
+                {propiedad.dormitorios && (
+                  <div className="space-y-1">
+                    <span className="font-body text-tierra/40 text-[10px] uppercase tracking-wider block">
+                      Dormitorios
+                    </span>
+                    <span className="font-display text-tierra text-xl font-medium">
+                      {propiedad.dormitorios}
+                    </span>
+                  </div>
+                )}
+                {propiedad.banos && (
+                  <div className="space-y-1">
+                    <span className="font-body text-tierra/40 text-[10px] uppercase tracking-wider block">
+                      Baños
+                    </span>
+                    <span className="font-display text-tierra text-xl font-medium">
+                      {propiedad.banos}
+                    </span>
+                  </div>
+                )}
+                <div className="space-y-1">
+                  <span className="font-body text-tierra/40 text-[10px] uppercase tracking-wider block">
+                    Estado
+                  </span>
+                  <span className="font-body text-dorado text-xs font-semibold uppercase tracking-wider">
+                    {propiedad.estado ? estadoLabel[propiedad.estado] : "Disponible"}
+                  </span>
+                </div>
               </div>
-              <h1 className="font-display text-tierra text-5xl lg:text-6xl font-medium leading-[1.1] mb-8">
-                {propiedad.titulo}
-              </h1>
-              {propiedad.descripcion && (
-                <div className="font-body text-tierra/60 leading-relaxed whitespace-pre-line">
+
+              {/* Descripción */}
+              <div className="space-y-6">
+                <h2 className="font-display text-tierra text-2xl lg:text-3xl font-medium">
+                  Descripción de la Propiedad
+                </h2>
+                <div className="font-body text-tierra/70 text-sm lg:text-base leading-relaxed whitespace-pre-line space-y-4">
                   {propiedad.descripcion}
+                </div>
+              </div>
+
+              {/* Características & Amenities */}
+              {propiedad.caracteristicas && propiedad.caracteristicas.length > 0 && (
+                <div className="space-y-6 pt-6 border-t border-tierra/10">
+                  <h3 className="font-display text-tierra text-xl lg:text-2xl font-medium">
+                    Prestaciones & Comodidades
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {propiedad.caracteristicas.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-3 p-3.5 bg-white border border-tierra/10 text-xs font-body text-tierra/85"
+                      >
+                        <span className="text-dorado font-bold">✦</span>
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
 
-              {/* Extra images */}
+              {/* Galería adicional de fotos */}
               {imagenes.length > 1 && (
-                <div className="mt-12 grid grid-cols-2 gap-4">
-                  {imagenes.slice(1).map((img, i) => (
-                    <img
-                      key={i}
-                      src={img}
-                      alt={`${propiedad.titulo} ${i + 2}`}
-                      className="w-full aspect-[4/3] object-cover"
-                      loading="lazy"
-                    />
-                  ))}
+                <div className="space-y-6 pt-6 border-t border-tierra/10">
+                  <h3 className="font-display text-tierra text-xl lg:text-2xl font-medium">
+                    Galería de Imágenes
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {imagenes.slice(1).map((img, i) => (
+                      <div
+                        key={i}
+                        className="relative aspect-[4/3] overflow-hidden border border-tierra/10 shadow-sm"
+                      >
+                        <Image
+                          src={img}
+                          alt={`${propiedad?.titulo} ${i + 2}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Sidebar */}
-            <div>
-              <div className="bg-tierra p-8 sticky top-28">
-                {propiedad.precio && (
-                  <div className="mb-6 pb-6 border-b border-crema/10">
-                    <div className="font-body text-crema/40 text-xs mb-1">
-                      {propiedad.moneda}
-                    </div>
-                    <div className="font-display text-crema text-4xl font-medium">
-                      {propiedad.precio.toLocaleString("es-AR")}
-                    </div>
-                  </div>
-                )}
-
-                <div className="space-y-4 mb-8">
-                  {propiedad.estado && (
-                    <div className="flex justify-between">
-                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">
-                        Estado
-                      </span>
-                      <span className="font-body text-crema text-sm">
-                        {estadoLabel[propiedad.estado]}
-                      </span>
-                    </div>
-                  )}
-                  {propiedad.superficie_m2 && (
-                    <div className="flex justify-between">
-                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">
-                        Superficie
-                      </span>
-                      <span className="font-body text-crema text-sm">
-                        {propiedad.superficie_m2} m²
-                      </span>
-                    </div>
-                  )}
-                  {propiedad.ubicacion && (
-                    <div className="flex justify-between">
-                      <span className="font-body text-crema/40 text-xs uppercase tracking-wider">
-                        Ubicación
-                      </span>
-                      <span className="font-body text-crema text-sm">
-                        {propiedad.ubicacion}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <Link
-                  href={`/contacto`}
-                  className="block w-full py-4 bg-dorado text-tierra text-center font-body text-sm tracking-widest uppercase hover:bg-dorado/90 transition-colors"
+            {/* Right Column: Sticky Pricing & Contact Card */}
+            <div className="lg:col-span-4">
+              <div className="sticky top-28 space-y-6">
+                <div
+                  className="p-8 bg-navy-950 text-crema border border-dorado/35 shadow-2xl space-y-6"
+                  style={{ background: "#080E1A" }}
                 >
-                  Consultar
-                </Link>
+                  {/* Precio */}
+                  <div className="border-b border-crema/10 pb-6">
+                    <span className="font-body text-dorado text-[10px] tracking-[0.2em] uppercase block mb-1">
+                      Valor de Publicación
+                    </span>
+                    <div className="font-display text-3xl lg:text-4xl text-crema font-semibold">
+                      {propiedad.precio
+                        ? `${propiedad.moneda} ${propiedad.precio.toLocaleString("es-AR")}`
+                        : "Consultar Precio"}
+                    </div>
+                    {propiedad.ubicacion && (
+                      <p className="font-body text-crema/40 text-xs mt-2">
+                        📍 {propiedad.ubicacion}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Actions */}
+                  <div className="space-y-3.5">
+                    <a
+                      href={waLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-3 py-4 px-6 bg-dorado text-tierra font-body text-xs font-semibold tracking-[0.18em] uppercase hover:bg-dorado-light transition-all shadow-lg text-center"
+                    >
+                      <span>Consultar por WhatsApp</span>
+                      <span>→</span>
+                    </a>
+
+                    <Link
+                      href={`/contacto?propiedad=${encodeURIComponent(propiedad.titulo)}`}
+                      className="w-full inline-flex items-center justify-center py-3.5 px-6 border border-crema/20 text-crema/80 font-body text-xs tracking-[0.14em] uppercase hover:border-dorado hover:text-dorado transition-colors text-center"
+                    >
+                      Agendar Visita Presencial
+                    </Link>
+                  </div>
+
+                  {/* Trust badge */}
+                  <div className="pt-4 border-t border-crema/10 text-center space-y-1">
+                    <p className="font-body text-crema/40 text-[10px] tracking-wider uppercase">
+                      Supervisión Profesional
+                    </p>
+                    <p className="font-body text-dorado/80 text-xs font-medium">
+                      Estela Mari Rojas · Mat. 35 RP 2026
+                    </p>
+                    <p className="font-body text-crema/30 text-[10px]">
+                      Colegio de Martilleros de Río Negro (IV Circ.)
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }
