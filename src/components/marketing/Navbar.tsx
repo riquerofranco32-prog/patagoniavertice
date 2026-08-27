@@ -8,8 +8,9 @@ import { WHATSAPP_URL } from "@/lib/constants";
 
 const links = [
   { href: "/", label: "Inicio" },
+  { href: "/proyectos", label: "Propiedades" },
   { href: "/servicios", label: "Servicios" },
-  { href: "/proyectos", label: "Proyectos" },
+  { href: "/#tasador-express", label: "Tasaciones" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
