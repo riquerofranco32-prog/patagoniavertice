@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import type { Propiedad } from "@/lib/supabase/types";
 import { WHATSAPP_NUMBER } from "@/lib/constants";
 
 const tipoLabel: Record<string, string> = {

@@ -46,6 +46,9 @@ const TasadorExpress = dynamic(
 const ZonasInteractivas = dynamic(
   () => import("@/components/marketing/ZonasInteractivas"),
 );
+const CalculadoraRentabilidad = dynamic(
+  () => import("@/components/marketing/CalculadoraRentabilidad"),
+);
 const PorQueElegirnos = dynamic(
   () => import("@/components/marketing/BentoDiferenciadores"),
 );
@@ -78,6 +81,9 @@ export default function HomePage() {
 
       {/* Exploración territorial y análisis de mercado por zona */}
       <ZonasInteractivas />
+
+      {/* Calculadora interactiva de rentabilidad & inversión */}
+      <CalculadoraRentabilidad />
 
       {/* Servicios + video institucional */}
       <Servicios />

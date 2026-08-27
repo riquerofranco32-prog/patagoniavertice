@@ -3,198 +3,214 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/**
- * FAQ Section — inspirado en 21st.dev (ruixenui/faqsection + ui-layouts/multi-accordion)
- * Adaptado al sistema de diseño Altum: navy/dorado/crema
- * Incluye FAQPage JSON-LD embebido via useEffect para rich snippets
- */
+interface FAQData {
+  categoria: "Comprar & Invertir" | "Venta & Tasaciones" | "Alquileres" | "Marco Legal";
+  pregunta: string;
+  respuesta: string;
+}
 
-const faqs = [
+const faqs: FAQData[] = [
   {
-    pregunta: "¿Cuáles son las zonas donde operan?",
+    categoria: "Comprar & Invertir",
+    pregunta: "¿Cuáles son las zonas donde opera Altum Inmobiliaria?",
     respuesta:
-      "Trabajamos principalmente en Río Negro: Cipoletti, Catriel, General Roca, Viedma y localidades intermedias. También asesoramos operaciones en Neuquén capital y zonas limítrofes de la Patagonia. Si tenés una propiedad o interés fuera de estas áreas, consultanos de todas formas — evaluamos cada caso.",
+      "Trabajamos activamente en todo el Alto Valle y la provincia de Río Negro: Cipolletti, Catriel, General Roca, Viedma y San Carlos de Bariloche. También asesoramos en Neuquén capital y zonas limítrofes. Si tenés interés en otra localidad patagónica, evaluamos cada caso de forma personalizada.",
   },
   {
-    pregunta: "¿Cuánto cuesta vender una propiedad con Altum?",
+    categoria: "Comprar & Invertir",
+    pregunta: "¿Puedo comprar una propiedad en la Patagonia si resido en otra ciudad o país?",
     respuesta:
-      "La comisión de venta es un porcentaje estándar sobre el precio de cierre, acordado antes de iniciar cualquier operación. No hay costos ocultos ni cargos previos. Solo cobramos si concretamos la venta. Contactanos para recibir una propuesta detallada según tu propiedad.",
+      "Sí, contamos con un protocolo especializado para compradores e inversores no residentes. Gestionamos visitas virtuales en alta definición, revisión dominial notarial, poderes de representación y firma remota para que puedas operar desde Buenos Aires, el exterior o cualquier punto del país con total seguridad jurídica.",
   },
   {
-    pregunta: "¿Qué incluye el servicio de administración de alquileres?",
+    categoria: "Venta & Tasaciones",
+    pregunta: "¿Cómo se determina el valor de tasación de un inmueble?",
     respuesta:
-      "Gestionamos todo el ciclo: búsqueda y selección de inquilinos, firma y seguimiento del contrato, cobro mensual del alquiler, atención de reclamos y coordinación de mantenimiento. Vos recibís el dinero y nosotros manejamos el operativo.",
+      "Nuestras tasaciones están a cargo de la Martillera Colegiada Estela Mari Rojas (Mat. 35 RP 2026). Realizamos un Análisis Comparativo de Mercado (ACM) basado en valores de cierre reales de operaciones efectivas en la zona, estado constructivo, ubicación y potencial de plusvalía.",
   },
   {
-    pregunta: "¿Puedo comprar una propiedad si estoy en otro país o ciudad?",
+    categoria: "Venta & Tasaciones",
+    pregunta: "¿Cuánto tiempo demora en promedio concretar una venta?",
     respuesta:
-      "Sí, trabajamos con compradores no residentes. Coordinamos visitas virtuales, gestionamos poderes notariales si es necesario y te acompañamos en cada paso remoto. Varios de nuestros clientes han cerrado operaciones desde Buenos Aires, Europa y otros países.",
+      "En propiedades con documentación en regla y tasación ajustada a mercado, el plazo promedio de reserva y cierre se sitúa entre 30 y 60 días. Contamos con una base activa de compradores calificados e inversores corporativos en Río Negro.",
   },
   {
-    pregunta: "¿Cómo funciona la valuación de una propiedad?",
+    categoria: "Alquileres",
+    pregunta: "¿Qué incluye la Administración Integral de Alquileres de Altum?",
     respuesta:
-      "Realizamos un análisis comparativo de mercado (CMA) basado en propiedades similares vendidas recientemente en la zona, estado del inmueble, metraje y características diferenciales. La valuación es gratuita para propietarios que decidan trabajar con nosotros.",
+      "Brindamos un servicio 'llave en mano': rigurosa evaluación crediticia y laboral de los inquilinos, redacción del contrato conforme a la ley, cobro mensual puntual, liquidación bancaria, atención de reclamos y supervisión periódica del estado del inmueble.",
   },
   {
-    pregunta: "¿Cuánto tiempo tarda en promedio cerrar una venta?",
+    categoria: "Marco Legal",
+    pregunta: "¿Qué documentación necesito para poner en venta mi propiedad?",
     respuesta:
-      "El tiempo promedio de cierre en Río Negro y la Patagonia varía entre 45 y 90 días desde la firma de la seña, según complejidad documental. En propiedades con documentación en orden y comprador pre-calificado, hemos cerrado en menos de 30 días.",
+      "Para iniciar la comercialización solicitamos: copia de la escritura de dominio o boleto sellado, plano de mensura / subdivisión aprobado, estado parcelario y libre deuda de impuestos provinciales y municipales. Nuestro equipo te asiste en caso de faltar algún certificado.",
+  },
+  {
+    categoria: "Marco Legal",
+    pregunta: "¿Los contratos cuentan con respaldo colegiado en Río Negro?",
+    respuesta:
+      "Absolutamente. Cada contrato, reserva y boleto de compraventa es redactado y auditado bajo la supervisión de martillera matriculada en el Colegio de Martilleros y Corredores Públicos de Río Negro (IV Circunscripción), garantizando cláusulas transparentes y sin sorpresas.",
   },
 ];
 
-function FAQItem({
-  faq,
-  index,
-  isOpen,
-  onToggle,
-}: {
-  faq: (typeof faqs)[number];
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      className="border-b border-crema/[0.08] last:border-b-0"
-    >
-      <button
-        onClick={onToggle}
-        className="w-full flex items-start justify-between gap-6 py-6 lg:py-7 text-left group"
-        aria-expanded={isOpen}
-      >
-        {/* Número */}
-        <span
-          className="font-body text-[10px] text-dorado/40 tracking-[0.2em] uppercase shrink-0 mt-1 w-6"
-          aria-hidden="true"
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
-
-        {/* Pregunta */}
-        <span
-          className="flex-1 font-display font-medium text-crema leading-snug group-hover:text-dorado transition-colors duration-300"
-          style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", letterSpacing: "0.01em" }}
-        >
-          {faq.pregunta}
-        </span>
-
-        {/* Chevron */}
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="shrink-0 mt-1 w-5 h-5 flex items-center justify-center text-dorado/50 group-hover:text-dorado transition-colors duration-300"
-          aria-hidden="true"
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-              d="M7 1v12M1 7h12"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        </motion.span>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="pl-12 pb-7 font-body text-[15px] text-crema/45 leading-relaxed max-w-2xl">
-              {faq.respuesta}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
+const categorias = ["Todas", "Comprar & Invertir", "Venta & Tasaciones", "Alquileres", "Marco Legal"] as const;
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [categoriaActiva, setCategoriaActiva] = useState<(typeof categorias)[number]>("Todas");
+  const [busqueda, setBusqueda] = useState("");
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const filtradas = faqs.filter((faq) => {
+    const matchCat = categoriaActiva === "Todas" || faq.categoria === categoriaActiva;
+    const matchText =
+      busqueda.trim() === "" ||
+      faq.pregunta.toLowerCase().includes(busqueda.toLowerCase()) ||
+      faq.respuesta.toLowerCase().includes(busqueda.toLowerCase());
+    return matchCat && matchText;
+  });
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
   return (
     <section
-      className="py-24 lg:py-32 bg-navy-900 relative overflow-hidden"
+      className="py-24 lg:py-36 bg-navy-900 relative overflow-hidden text-crema"
+      style={{ background: "#080E1A" }}
       aria-labelledby="faq-heading"
       id="faq"
     >
-      {/* Subtle grain */}
+      {/* Subtle background grain */}
       <div className="absolute inset-0 grain-overlay opacity-[0.03] pointer-events-none" />
 
-      {/* Decorative large text */}
-      <div
-        className="absolute right-0 bottom-0 font-display text-crema/[0.02] font-medium leading-none select-none pointer-events-none"
-        style={{ fontSize: "clamp(6rem, 20vw, 16rem)", letterSpacing: "-0.06em" }}
-        aria-hidden="true"
-      >
-        FAQ
-      </div>
-
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Two-column layout — header left, accordion right */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-16 lg:gap-24">
-          {/* Left: header */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:sticky lg:top-32 lg:self-start"
-          >
-            <div className="flex items-center gap-4 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left: Sticky Header & Search */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32 lg:self-start space-y-6">
+            <div className="flex items-center gap-4">
               <div className="h-px w-10 bg-dorado" />
-              <span className="eyebrow">Preguntas frecuentes</span>
+              <span className="eyebrow">Dudas & Asesoramiento</span>
             </div>
 
             <h2
               id="faq-heading"
-              className="font-display font-medium text-crema leading-[1.0] mb-6"
-              style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
+              className="font-display font-medium text-crema leading-[1.05]"
+              style={{
+                fontSize: "clamp(2.3rem, 4.2vw, 3.6rem)",
+                letterSpacing: "-0.02em",
+              }}
             >
-              Todo lo que{" "}
-              <em className="not-italic italic text-dorado">necesitás saber</em>
+              Preguntas{" "}
+              <em className="not-italic italic text-dorado font-normal">frecuentes</em>
             </h2>
 
-            <p className="font-body text-crema/35 text-[15px] leading-relaxed mb-10">
-              Respondemos las dudas más comunes sobre compra, venta, alquileres y
-              nuestros servicios en Río Negro y la Patagonia.
+            <p className="font-body text-crema/45 text-sm lg:text-base leading-relaxed">
+              Resolvemos tus inquietudes sobre trámites de compraventa, tasaciones, contratos y gestión de alquileres en Río Negro.
             </p>
 
-            <a
-              href="https://wa.me/5492996095742?text=Hola%2C%20tengo%20una%20consulta%20para%20Altum%20Inmobiliaria"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-body text-[11px] tracking-[0.18em] uppercase text-dorado/60 hover:text-dorado transition-colors duration-200"
-            >
-              ¿Otra pregunta?
-              <span className="text-base">→</span>
-            </a>
-          </motion.div>
-
-          {/* Right: accordion */}
-          <div className="divide-y-0">
-            {faqs.map((faq, i) => (
-              <FAQItem
-                key={faq.pregunta}
-                faq={faq}
-                index={i}
-                isOpen={openIndex === i}
-                onToggle={() => toggle(i)}
+            {/* Buscador de preguntas */}
+            <div className="relative">
+              <input
+                type="text"
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+                placeholder="Buscar duda o tema (ej: tasación, escritura)..."
+                className="w-full bg-navy-950/80 border border-crema/15 px-4 py-3 text-xs font-body text-crema placeholder:text-crema/30 focus:outline-none focus:border-dorado transition-colors"
               />
-            ))}
+              {busqueda && (
+                <button
+                  onClick={() => setBusqueda("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-crema/40 hover:text-crema text-xs"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Direct Contact Button */}
+            <div className="pt-4">
+              <a
+                href="https://wa.me/5492996095742?text=Hola%20Altum%2C%20tengo%20una%20consulta%20que%20no%20figura%20en%20las%20preguntas%20frecuentes."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 font-body text-dorado text-xs tracking-[0.18em] uppercase hover:underline"
+              >
+                <span>¿Tenés una consulta específica? Hablá con nosotros</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Category filters & Accordion List */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-2 pb-4 border-b border-crema/10">
+              {categorias.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setCategoriaActiva(cat);
+                    setOpenIndex(0);
+                  }}
+                  className={`font-body text-[10px] tracking-[0.16em] uppercase px-3.5 py-2 border transition-all ${
+                    categoriaActiva === cat
+                      ? "border-dorado bg-dorado text-tierra font-semibold shadow-sm"
+                      : "border-crema/10 bg-navy-950/40 text-crema/50 hover:text-crema hover:border-crema/30"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* FAQ Items */}
+            <div className="divide-y divide-crema/8">
+              {filtradas.length > 0 ? (
+                filtradas.map((faq, i) => {
+                  const isOpen = openIndex === i;
+                  return (
+                    <div key={faq.pregunta} className="py-5">
+                      <button
+                        onClick={() => toggle(i)}
+                        className="w-full flex items-start justify-between gap-4 text-left group"
+                        aria-expanded={isOpen}
+                      >
+                        <span className="font-display font-medium text-crema group-hover:text-dorado transition-colors text-lg lg:text-xl leading-snug">
+                          {faq.pregunta}
+                        </span>
+
+                        <span
+                          className={`shrink-0 w-6 h-6 flex items-center justify-center border border-crema/15 text-dorado text-xs transition-transform duration-300 ${
+                            isOpen ? "rotate-45 border-dorado" : ""
+                          }`}
+                        >
+                          +
+                        </span>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <p className="pt-4 font-body text-sm text-crema/55 leading-relaxed">
+                              {faq.respuesta}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="py-12 text-center text-crema/40 font-body text-sm">
+                  No se encontraron preguntas con el término ingresado.
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
