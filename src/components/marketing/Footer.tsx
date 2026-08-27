@@ -180,14 +180,18 @@ export default function Footer() {
 
           <div className="flex items-center gap-2 font-body text-xs tracking-wider text-crema/30">
             <span>Hecho por</span>
-            <span className="inline-flex items-center gap-1.5 text-crema/60 hover:text-dorado transition-colors duration-200">
+            <a
+              href="https://se7endev.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-all duration-200 group"
+            >
               <img
                 src="/se7en-logo.png"
-                alt="se7en studios logo"
-                className="h-4 w-auto object-contain inline-block"
+                alt="se7en studios"
+                className="h-4.5 w-auto object-contain inline-block group-hover:brightness-110 transition-all duration-200"
               />
-              <span className="font-medium text-crema/50">se7en studios</span>
-            </span>
+            </a>
           </div>
 
           <div className="flex items-center gap-6">

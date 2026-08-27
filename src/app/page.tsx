@@ -43,6 +43,9 @@ const PropiedadesDestacadasHome = dynamic(
 const PorQueElegirnos = dynamic(
   () => import("@/components/marketing/BentoDiferenciadores"),
 );
+const TestimoniosReales = dynamic(
+  () => import("@/components/marketing/TestimoniosReales"),
+);
 const FAQ = dynamic(() => import("@/components/marketing/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/marketing/CTAFinal"));
 const SpotlightCursor = dynamic(
@@ -73,8 +76,11 @@ export default function HomePage() {
       {/* Propiedades destacadas */}
       <PropiedadesDestacadasHome />
 
-      {/* Diferenciadores "Por qué elegirnos" */}
+      {/* Diferenciadores "Por qué elegirnos" (Bento Grid) */}
       <PorQueElegirnos />
+
+      {/* Testimonios reales (Social Proof / Marquee) */}
+      <TestimoniosReales />
 
       {/* FAQ — preguntas frecuentes (rich snippet) */}
       <FAQ />
