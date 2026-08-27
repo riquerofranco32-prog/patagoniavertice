@@ -40,6 +40,12 @@ const Proceso = dynamic(() => import("@/components/marketing/Proceso"));
 const PropiedadesDestacadasHome = dynamic(
   () => import("@/components/marketing/PropiedadesDestacadasHome"),
 );
+const TasadorExpress = dynamic(
+  () => import("@/components/marketing/TasadorExpress"),
+);
+const ZonasInteractivas = dynamic(
+  () => import("@/components/marketing/ZonasInteractivas"),
+);
 const PorQueElegirnos = dynamic(
   () => import("@/components/marketing/BentoDiferenciadores"),
 );
@@ -61,8 +67,17 @@ export default function HomePage() {
       <Hero />
       <Manifiesto />
 
+      {/* Propiedades destacadas (Portfolio de primer nivel) */}
+      <PropiedadesDestacadasHome />
+
+      {/* Tasador Express & Valuación Certificada */}
+      <TasadorExpress />
+
       {/* Quiénes somos */}
       <Nosotros />
+
+      {/* Exploración territorial y análisis de mercado por zona */}
+      <ZonasInteractivas />
 
       {/* Servicios + video institucional */}
       <Servicios />
@@ -72,9 +87,6 @@ export default function HomePage() {
 
       {/* Proceso de trabajo */}
       <Proceso />
-
-      {/* Propiedades destacadas */}
-      <PropiedadesDestacadasHome />
 
       {/* Diferenciadores "Por qué elegirnos" (Bento Grid) */}
       <PorQueElegirnos />

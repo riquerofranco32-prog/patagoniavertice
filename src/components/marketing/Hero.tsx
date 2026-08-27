@@ -230,7 +230,7 @@ export default function Hero() {
         </div>
 
         {/* CTAs — GSAP 1.2s, glow oro */}
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 mb-10">
           {/* Primary — Ver Servicios */}
           <Link
             href="/servicios"
@@ -263,14 +263,105 @@ export default function Hero() {
             Consultar por WhatsApp
           </a>
 
-          {/* Terciario — Email */}
+          {/* Terciario — Tasador Online */}
           <a
-            href="mailto:altumsci@gmail.com?subject=Consulta%20Altum%20Inmobiliaria"
-            className="hero-cta opacity-0 cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 border border-crema/15 text-crema/70 font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:border-dorado hover:text-dorado transition-colors duration-300"
+            href="#tasador-express"
+            className="hero-cta opacity-0 cta-glow inline-flex items-center justify-center gap-3 px-9 py-4 border border-dorado/40 text-dorado font-body text-[11px] font-medium tracking-[0.15em] uppercase hover:bg-dorado hover:text-tierra transition-all duration-300"
           >
-            <MailIcon />
-            Enviar email
+            ✦ Tasar mi propiedad
           </a>
+        </div>
+
+        {/* ── Luxury Quick Search Bar ── */}
+        <div className="hero-cta opacity-0 max-w-4xl w-full p-4 lg:p-6 bg-navy-950/80 backdrop-blur-xl border border-dorado/30 shadow-2xl">
+          <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+            {/* Tipo Inmueble */}
+            <div className="flex-1 bg-navy-900/90 border border-crema/15 px-4 py-2.5">
+              <label className="block font-body text-[9px] tracking-[0.2em] uppercase text-dorado/80 mb-0.5">
+                Tipo de Inmueble
+              </label>
+              <select
+                aria-label="Tipo de Inmueble"
+                className="w-full bg-transparent text-crema font-body text-xs font-medium focus:outline-none cursor-pointer"
+                defaultValue="todos"
+              >
+                <option value="todos" className="bg-navy-950 text-crema">
+                  Todos los tipos
+                </option>
+                <option value="casas" className="bg-navy-950 text-crema">
+                  Casas & Residencias
+                </option>
+                <option value="deptos" className="bg-navy-950 text-crema">
+                  Departamentos
+                </option>
+                <option value="lotes" className="bg-navy-950 text-crema">
+                  Lotes & Terrenos
+                </option>
+                <option value="chacras" className="bg-navy-950 text-crema">
+                  Chacras & Campos
+                </option>
+              </select>
+            </div>
+
+            {/* Ubicación */}
+            <div className="flex-1 bg-navy-900/90 border border-crema/15 px-4 py-2.5">
+              <label className="block font-body text-[9px] tracking-[0.2em] uppercase text-dorado/80 mb-0.5">
+                Ubicación / Región
+              </label>
+              <select
+                aria-label="Ubicación o Región"
+                className="w-full bg-transparent text-crema font-body text-xs font-medium focus:outline-none cursor-pointer"
+                defaultValue="todas"
+              >
+                <option value="todas" className="bg-navy-950 text-crema">
+                  Toda la Patagonia
+                </option>
+                <option value="cipolletti" className="bg-navy-950 text-crema">
+                  Cipolletti (Río Negro)
+                </option>
+                <option value="catriel" className="bg-navy-950 text-crema">
+                  Catriel (Río Negro)
+                </option>
+                <option value="roca" className="bg-navy-950 text-crema">
+                  General Roca (Río Negro)
+                </option>
+                <option value="bariloche" className="bg-navy-950 text-crema">
+                  Bariloche (Río Negro)
+                </option>
+              </select>
+            </div>
+
+            {/* Operación */}
+            <div className="flex-1 bg-navy-900/90 border border-crema/15 px-4 py-2.5">
+              <label className="block font-body text-[9px] tracking-[0.2em] uppercase text-dorado/80 mb-0.5">
+                Operación
+              </label>
+              <select
+                aria-label="Tipo de Operación"
+                className="w-full bg-transparent text-crema font-body text-xs font-medium focus:outline-none cursor-pointer"
+                defaultValue="venta"
+              >
+                <option value="venta" className="bg-navy-950 text-crema">
+                  Comprar / Venta
+                </option>
+                <option value="alquiler" className="bg-navy-950 text-crema">
+                  Alquiler
+                </option>
+                <option value="inversion" className="bg-navy-950 text-crema">
+                  Inversión Estratégica
+                </option>
+              </select>
+            </div>
+
+            {/* Botón Buscar */}
+            <Link
+              href="/proyectos"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-dorado text-tierra font-body text-[11px] font-semibold tracking-[0.16em] uppercase hover:bg-dorado-light transition-all shadow-md shrink-0"
+            >
+              <span>Buscar</span>
+              <span>→</span>
+            </Link>
+          </div>
         </div>
       </motion.div>
 
@@ -343,23 +434,7 @@ export default function Hero() {
   );
 }
 
-function MailIcon() {
-  return (
-    <svg
-      className="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-      />
-    </svg>
-  );
-}
+
 
 function WaIcon() {
   return (
